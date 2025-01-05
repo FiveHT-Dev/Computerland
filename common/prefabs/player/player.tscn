@@ -1,0 +1,94 @@
+[gd_scene load_steps=15 format=3 uid="uid://cj035y80rjm2x"]
+
+[ext_resource type="Script" path="res://common/prefabs/player/player.gd" id="1_o3yjg"]
+[ext_resource type="PackedScene" uid="uid://b1ewwflgpr305" path="res://common/characters/player_char/player_char.tscn" id="2_77dml"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ty0ph"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gpear"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jvbnd"]
+animation = &"run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nwk6a"]
+animation = &"walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_i4roa"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qho0q"]
+xfade_time = 0.4
+advance_mode = 2
+advance_expression = "moving == true && running == false"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v3hwq"]
+xfade_time = 0.4
+advance_mode = 2
+advance_expression = "moving == false"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ca6ew"]
+xfade_time = 0.4
+advance_mode = 2
+advance_expression = "moving == true && running == true"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v0s20"]
+xfade_time = 0.4
+advance_mode = 2
+advance_expression = "moving == false"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6f236"]
+xfade_time = 0.4
+advance_mode = 2
+advance_expression = "running == true"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_l5j86"]
+xfade_time = 0.4
+advance_mode = 2
+advance_expression = "running == false"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_oexxy"]
+states/idle/node = SubResource("AnimationNodeAnimation_gpear")
+states/idle/position = Vector2(429, 100)
+states/run/node = SubResource("AnimationNodeAnimation_jvbnd")
+states/run/position = Vector2(578, 201)
+states/walk/node = SubResource("AnimationNodeAnimation_nwk6a")
+states/walk/position = Vector2(578, 94)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_i4roa"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_qho0q"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_v3hwq"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_ca6ew"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_v0s20"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_6f236"), "run", "walk", SubResource("AnimationNodeStateMachineTransition_l5j86")]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_o3yjg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_ty0ph")
+
+[node name="cam_follow_transform_0" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.939692, 0.34202, 0, -0.34202, 0.939692, 0, 1, 2)
+gizmo_extents = 1.0
+
+[node name="cam_follow_transform_1" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 2.5, 2.5)
+gizmo_extents = 1.0
+
+[node name="cam_follow_transform_2" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707106, 0.707106, 0, -0.707106, 0.707106, 0, 4, 3.5)
+gizmo_extents = 1.0
+
+[node name="char_pivot" type="Node3D" parent="."]
+transform = Transform3D(0.335533, 0, 0, 0, 0.335533, 0, 0, 0, 0.335533, 0, 0, 0)
+
+[node name="player_char" parent="char_pivot" instance=ExtResource("2_77dml")]
+
+[node name="Arm_L" parent="char_pivot/player_char/Torso" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.904864, 0.425701, 0, -0.425702, 0.904863, 0, 0.829745, 0.51024)
+
+[node name="Arm_R" parent="char_pivot/player_char/Torso" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.904863, -0.425701, 0, 0.425701, 0.904863, 0, 0.829745, -0.51024)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../char_pivot/player_char")
+tree_root = SubResource("AnimationNodeStateMachine_oexxy")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../char_pivot/player_char/AnimationPlayer")
+
+[editable path="char_pivot/player_char"]

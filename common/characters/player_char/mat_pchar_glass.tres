@@ -1,0 +1,17 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://xpjpy3dl7lhv"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3noqs"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_japa2"]
+seamless = true
+noise = SubResource("FastNoiseLite_3noqs")
+
+[resource]
+transparency = 1
+albedo_color = Color(0.81, 0.981, 1, 0.231373)
+metallic_specular = 0.7
+roughness = 0.2
+refraction_enabled = true
+refraction_scale = 0.08
+refraction_texture = SubResource("NoiseTexture2D_japa2")
+uv1_triplanar = true

@@ -1,3 +1,41 @@
-[gd_scene format=3 uid="uid://bac38xeb4mxne"]
+[gd_scene load_steps=7 format=3 uid="uid://bac38xeb4mxne"]
+
+[ext_resource type="Script" path="res://common/scripts/room.gd" id="1_po6oe"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vi8tc"]
+size = Vector2(10, 10)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_bcqi2"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k3s3f"]
+sky_top_color = Color(1, 1, 1, 1)
+sky_horizon_color = Color(0.537011, 0.537011, 0.537011, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0.537255, 0.537255, 0.537255, 1)
+
+[sub_resource type="Sky" id="Sky_im4qi"]
+sky_material = SubResource("ProceduralSkyMaterial_k3s3f")
+
+[sub_resource type="Environment" id="Environment_q34is"]
+background_mode = 2
+sky = SubResource("Sky_im4qi")
+fog_enabled = true
+fog_light_color = Color(1, 1, 1, 1)
+fog_aerial_perspective = 1.0
 
 [node name="Devroom" type="Node3D"]
+script = ExtResource("1_po6oe")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_vi8tc")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_bcqi2")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_q34is")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(0.705179, 0.709029, 0, -0.394584, 0.392441, 0.830839, 0.589089, -0.58589, 0.556513, 0, 0, 0)
