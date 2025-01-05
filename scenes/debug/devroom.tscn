@@ -1,6 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://bac38xeb4mxne"]
+[gd_scene load_steps=15 format=3 uid="uid://bac38xeb4mxne"]
 
 [ext_resource type="Script" path="res://common/scripts/room.gd" id="1_po6oe"]
+[ext_resource type="PackedScene" uid="uid://tv0im8eeplcd" path="res://common/prefabs/cam/cam_follow_area.tscn" id="2_re5cu"]
+[ext_resource type="Script" path="res://common/resources/loaded_scenes/post_process_list.gd" id="2_vdq52"]
+
+[sub_resource type="Resource" id="Resource_0whd2"]
+script = ExtResource("2_vdq52")
+paths = ["res://ui/post_processing/crt_filter.tscn"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_vi8tc"]
 size = Vector2(10, 10)
@@ -23,8 +29,28 @@ fog_enabled = true
 fog_light_color = Color(1, 1, 1, 1)
 fog_aerial_perspective = 1.0
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_km87u"]
+size = Vector3(10.0963, 1, 9.98474)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vsh7d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_65egx"]
+albedo_color = Color(1, 0.4, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_nguh0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0df86"]
+albedo_color = Color(1, 0, 0, 1)
+
 [node name="Devroom" type="Node3D"]
 script = ExtResource("1_po6oe")
+post_process_list = SubResource("Resource_0whd2")
+
+[node name="utilities" type="Node" parent="."]
+
+[node name="camera" type="Node" parent="."]
+
+[node name="audio" type="Node" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_vi8tc")
@@ -39,3 +65,32 @@ environment = SubResource("Environment_q34is")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
 transform = Transform3D(0.705179, 0.709029, 0, -0.394584, 0.392441, 0.830839, 0.589089, -0.58589, 0.556513, 0, 0, 0)
+
+[node name="CamFollowArea" parent="." instance=ExtResource("2_re5cu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.239109, 0, 0.99922)
+
+[node name="CollisionShape3D" parent="CamFollowArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.238556, 0, -1.02374)
+shape = SubResource("BoxShape3D_km87u")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.39406, 0.532632, -1.12511)
+mesh = SubResource("BoxMesh_vsh7d")
+surface_material_override/0 = SubResource("StandardMaterial3D_65egx")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.1991, 0, 0, 0, 2.97054, 0, 0, 0, 1, 3.4011, 0.532632, -3.45683)
+mesh = SubResource("BoxMesh_vsh7d")
+surface_material_override/0 = SubResource("StandardMaterial3D_65egx")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.779441, 0, 0.27824, 0, 2.97054, 0, -0.309201, 0, 0.701394, -3.45749, 0.532633, 2.57371)
+mesh = SubResource("BoxMesh_vsh7d")
+surface_material_override/0 = SubResource("StandardMaterial3D_65egx")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.41199, 0)
+mesh = SubResource("SphereMesh_nguh0")
+surface_material_override/0 = SubResource("StandardMaterial3D_0df86")
+
+[editable path="CamFollowArea"]

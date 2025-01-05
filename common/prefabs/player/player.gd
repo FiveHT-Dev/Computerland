@@ -12,6 +12,8 @@ extends CharacterBody3D
 @onready var character : Node3D = $char_pivot/player_char
 @onready var current_cam_follow_transform : Node3D = $cam_follow_transform_0
 
+var current_triggers : Dictionary = {}
+
 var char_angle : float = 0.0
 var input_dir : Vector2
 var moving : bool
@@ -41,6 +43,17 @@ func _process(delta):
 			cft_index = 1
 			cft_increment = 1
 		current_cam_follow_transform = cam_follow_transforms[cft_index]
+
+func add_trigger(t : Trigger):
+	var id = t.get_instance_id()
+	if !current_triggers.has(id):
+		current_triggers[id] = t
+
+func remove_trigger(t : Trigger):
+	var id = t.get_instance_id()
+	if current_triggers.has(id):
+		current_triggers.erase(id)
+
 
 func _physics_process(delta):
 	# Add the gravity.

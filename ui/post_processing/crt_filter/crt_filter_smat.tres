@@ -1,0 +1,35 @@
+[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://cimxcc1lrlmuu"]
+
+[ext_resource type="Shader" path="res://ui/post_processing/crt_filter/crt_filter.gdshader" id="1_t4nkh"]
+[ext_resource type="Texture2D" uid="uid://bx4plxu2rwgk8" path="res://ui/post_processing/crt_filter/scanline_tex.png" id="2_oycbk"]
+
+[sub_resource type="Gradient" id="Gradient_3yd1f"]
+offsets = PackedFloat32Array(0, 0.140625, 0.223958, 0.364583, 0.447917, 0.567708, 0.666667, 0.8125, 0.911458, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.78, 0.3198, 0.3198, 1, 1, 1, 1, 1, 4.81308e-06, 0.684488, 0.75922, 1, 0.75, 0.7295, 0.135, 1, 0.3192, 0.84, 0.51016, 1, 0.5, 0.19, 0.407, 1, 0, 0, 0, 1, 0.529412, 0, 0.529412, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dxg1x"]
+noise_type = 5
+frequency = 1.0
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jbb0o"]
+width = 448
+height = 256
+color_ramp = SubResource("Gradient_3yd1f")
+noise = SubResource("FastNoiseLite_dxg1x")
+
+[sub_resource type="Gradient" id="Gradient_p756o"]
+offsets = PackedFloat32Array(0, 0.208333, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.83, 0.83, 0.83, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_avmh8"]
+gradient = SubResource("Gradient_p756o")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.269231, 0.15812)
+
+[resource]
+shader = ExtResource("1_t4nkh")
+shader_parameter/scanline_tex = ExtResource("2_oycbk")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_jbb0o")
+shader_parameter/scaling_correction_tex = SubResource("GradientTexture2D_avmh8")

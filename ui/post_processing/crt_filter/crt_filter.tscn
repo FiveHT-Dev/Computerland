@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bw0n6udouxib0"]
+
+[ext_resource type="Script" path="res://ui/post_processing/post_process_layer.gd" id="1_3jqqc"]
+[ext_resource type="Material" uid="uid://cimxcc1lrlmuu" path="res://ui/post_processing/crt_filter/crt_filter_smat.tres" id="2_5pxu8"]
+
+[node name="CRTFilter" type="CanvasLayer"]
+script = ExtResource("1_3jqqc")
+below_ui = false
+always_show = true
+self_path = "res://ui/post_processing/crt_filter/crt_filter.tscn"
+
+[node name="TextureRect" type="ColorRect" parent="."]
+material = ExtResource("2_5pxu8")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

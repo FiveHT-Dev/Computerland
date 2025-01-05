@@ -4,6 +4,7 @@ extends Node3D
 const IN_GAME_UI = preload("res://ui/scenes/in_game_ui/in_game_ui.tscn")
 const PLAYER = preload("res://common/prefabs/player/player.tscn")
 const CAM = preload("res://common/prefabs/cam/cam.tscn")
+const CRT_FILTER = preload("res://ui/post_processing/crt_filter/crt_filter.tscn")
 
 var loaded_scenes : LoadedScenes
 var current_room : Room

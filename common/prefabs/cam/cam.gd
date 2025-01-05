@@ -7,16 +7,34 @@ var follow_transform : Node3D
 var player : Player
 var cam_speed : float
 
+var follow_player : bool = true
+
+var follow_object : Node3D
+
 func _ready():
 	player = Manager.game.player
 	follow_transform = player.current_cam_follow_transform
 
+func change_follow_type(type : CamFollowArea.FollowType, object : Node3D):
+	if type == CamFollowArea.FollowType.PLAYER:
+		follow_player = true
+	elif type == CamFollowArea.FollowType.OBJECT:
+		follow_player = false
+		follow_object = object
+	else:
+		follow_player = false
+		follow_object = null
+
 func _process(delta):
-	follow_transform = player.current_cam_follow_transform
+	if follow_player:
+		follow_transform = player.current_cam_follow_transform
+		cam_speed = player.speed
+	else:
+		follow_transform = follow_object
+		cam_speed = 5.0
 
 func _physics_process(delta):
 	if follow_transform != null:
-		cam_speed = player.speed
 		global_basis = global_basis.slerp(follow_transform.global_basis, 0.2)
 		var dist : float = clampf(global_position.distance_to(follow_transform.global_position), 0.0, 1.0)
 		velocity = velocity.lerp(player.velocity + (global_position.direction_to(follow_transform.global_position) * cam_speed * dist), 0.2)
