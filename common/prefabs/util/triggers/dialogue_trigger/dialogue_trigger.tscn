@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1x3m7qad36kx"]
+
+[ext_resource type="Script" path="res://common/prefabs/util/triggers/dialogue_trigger/dialogue_trigger.gd" id="1_304vf"]
+[ext_resource type="Script" path="res://common/prefabs/util/dialogue/dialogue_agent.gd" id="2_uwbuk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oy7m3"]
+
+[node name="dialogue_trigger" type="Area3D"]
+script = ExtResource("1_304vf")
+has_to_interact = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_oy7m3")
+
+[node name="dialogue_agent" type="Node" parent="." node_paths=PackedStringArray("graph_start_node")]
+script = ExtResource("2_uwbuk")
+graph_start_node = NodePath("")

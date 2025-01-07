@@ -2,7 +2,11 @@ class_name InGameUI
 extends Control
 
 @onready var player_stopping_ui_elements : Array = [
-	
+	$main_textbox
+]
+
+@onready var textboxes : Array = [
+	$main_textbox
 ]
 
 @onready var interact_panel : Control = $interact_panel
@@ -10,8 +14,10 @@ extends Control
 @onready var post_process_below_ui : Control = $post_process_below_ui
 @onready var post_process_above_ui : Control = $post_process_above_ui
 
+
 var player : Player
 var post_process_layers : Dictionary = {}
+var can_player_move : bool
 
 func _ready():
 	interact_panel.self_modulate.a = 0.0
@@ -23,6 +29,7 @@ func _process(delta):
 		player = Manager.game.player
 	else:
 		show_interact(player.current_triggers.is_empty())
+	can_player_move = check_if_player_can_move()
 
 func add_post_process_layer(path : String, below_ui : bool):
 	if post_process_layers.has(path):
@@ -48,6 +55,9 @@ func reload_post_process_layers(list : PostProcessList):
 			post_process_below_ui.add_child(layer)
 		else:
 			post_process_above_ui.add_child(layer)
+
+func open_textbox(dialogue_graph_start_node : DialogueGraphNode, textbox_to_open_index : int):
+	textboxes[textbox_to_open_index].open(dialogue_graph_start_node)
 
 func show_interact(val : bool):
 	if val:

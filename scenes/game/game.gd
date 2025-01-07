@@ -6,6 +6,9 @@ const PLAYER = preload("res://common/prefabs/player/player.tscn")
 const CAM = preload("res://common/prefabs/cam/cam.tscn")
 const CRT_FILTER = preload("res://ui/post_processing/crt_filter/crt_filter.tscn")
 
+@export var override_room : bool
+@export var override_room_path : String
+
 var loaded_scenes : LoadedScenes
 var current_room : Room
 var in_game_ui : InGameUI
@@ -20,7 +23,8 @@ func _ready():
 	player = PLAYER.instantiate()
 	in_game_ui = IN_GAME_UI.instantiate()
 	cam = CAM.instantiate()
-	switch_rooms("res://scenes/debug/devroom.tscn")
+	if override_room:
+		switch_rooms(override_room_path)
 
 # delte current room and load next room using path.
 func switch_rooms(path : String):

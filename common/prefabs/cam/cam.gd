@@ -10,6 +10,7 @@ var cam_speed : float
 var follow_player : bool = true
 
 var follow_object : Node3D
+var override_focus_object : Node3D
 
 func _ready():
 	player = Manager.game.player
@@ -26,12 +27,21 @@ func change_follow_type(type : CamFollowArea.FollowType, object : Node3D):
 		follow_object = null
 
 func _process(delta):
-	if follow_player:
-		follow_transform = player.current_cam_follow_transform
-		cam_speed = player.speed
+	if override_focus_object != null:
+		follow_transform = override_focus_object
 	else:
-		follow_transform = follow_object
-		cam_speed = 5.0
+		if follow_player:
+			follow_transform = player.current_cam_follow_transform
+			cam_speed = player.speed
+		else:
+			follow_transform = follow_object
+			cam_speed = 5.0
+
+func add_override_focus(focus : Node3D):
+	override_focus_object = focus
+
+func remove_override_focus():
+	override_focus_object = null
 
 func _physics_process(delta):
 	if follow_transform != null:

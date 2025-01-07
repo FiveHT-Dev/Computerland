@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://om7g64r4103s"]
+
+[ext_resource type="Script" path="res://common/prefabs/util/save_interface/save_interface.gd" id="1_01eg6"]
+
+[node name="SaveInterface" type="Node"]
+script = ExtResource("1_01eg6")

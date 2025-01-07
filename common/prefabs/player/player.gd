@@ -24,15 +24,21 @@ var running : bool
 var cft_index : int = 0
 var cft_increment = 1
 
+
 func _process(delta):
-	input_dir = Input.get_vector("left", "right", "forward", "backward")
-	moving = velocity.length() > 0.1
-	if Input.is_action_pressed("run"):
-		running = true
-		speed = run_speed
-	else:
+	if !Manager.game.in_game_ui.can_player_move:
+		speed = 0
 		running = false
-		speed = walk_speed
+		moving = false
+	else:
+		input_dir = Input.get_vector("left", "right", "forward", "backward")
+		moving = velocity.length() > 0.1
+		if Input.is_action_pressed("run"):
+			running = true
+			speed = run_speed
+		else:
+			running = false
+			speed = walk_speed
 	
 	if Input.is_action_just_pressed("change_cam_view"):
 		cft_index += cft_increment

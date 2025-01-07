@@ -4,3 +4,5 @@
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_4k21e")
+override_room = true
+override_room_path = "res://scenes/debug/devroom.tscn"

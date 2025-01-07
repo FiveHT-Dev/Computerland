@@ -50,15 +50,17 @@ void fragment() {
 	
 	float offset = floor((sin(TIME * 80.0f) + 2.0f) -1.0f);
 	vec3 scanlines = texture(scanline_tex, SCREEN_UV + vec2(0.0f, offset * SCREEN_PIXEL_SIZE.y)).rgb;
-	float scaling_correction_factor = 1.0f + (texture(scaling_correction_tex, SCREEN_UV).r * 8.0f);
-	vec2 scanline_uv = vec2(((SCREEN_UV.x - 0.5f) * (1.0f + (scanlines.r * (0.003f * scaling_correction_factor)))) + 0.5f, SCREEN_UV.y);
+	//float scaling_correction_factor = 1.0f + (texture(scaling_correction_tex, SCREEN_UV).r * 8.0f);
+	//vec2 scanline_uv = vec2(((SCREEN_UV.x - 0.5f) * (1.0f + (scanlines.r * (0.003 * scaling_correction_factor)))) + 0.5f, SCREEN_UV.y);
+	vec2 scanline_uv = vec2(SCREEN_UV.x - floor(sin((TIME + FRAGCOORD.x * 2.0f) * 80.0f) * scanlines.r) * 0.002f, SCREEN_UV.y);
 	vec3 scanline_screen = texture(screen_texture, scanline_uv).rgb;
 	
 	vec3 noise = texture(noise_tex, SCREEN_UV + (sin(TIME * 80.0f) * 100.0f)).rgb * 0.04f;
-	vec3 ofs_screen_0 = texture(screen_texture, SCREEN_UV + vec2(0.005f, 0.0f)).rgb;
-	vec3 ofs_screen_1 = texture(screen_texture, SCREEN_UV - vec2(0.005f, 0.0f)).rgb;
-	vec3 screen = mix(mix(texture(screen_texture, SCREEN_UV).rgb, ofs_screen_0, 0.15f), ofs_screen_1, 0.15f);
-	
-	COLOR.rgb = mix(screen, scanline_screen, 0.55f) - (scanlines * 0.01f) - noise;
-	//COLOR.rgb = vec3(scaling_correction_factor);
+	//vec3 ofs_screen_0 = texture(screen_texture, SCREEN_UV + vec2(0.005f, 0.0f)).rgb;
+	//vec3 ofs_screen_1 = texture(screen_texture, SCREEN_UV - vec2(0.005f, 0.0f)).rgb;
+	vec3 screen = texture(screen_texture, SCREEN_UV).rgb;
+	float brightness = max(screen.r, max(screen.g,screen.b));
+	brightness = clamp(brightness, 0.0f, 0.55f);
+	COLOR.rgb = mix(screen, scanline_screen, brightness) - (scanlines * 0.01f) - noise;
+	//COLOR.rgb = vec3(1.0f - scaling_correction_factor / 8.0f);
 }

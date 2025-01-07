@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bdpbfylxw4i66"]
+[gd_scene load_steps=7 format=3 uid="uid://bdpbfylxw4i66"]
 
 [ext_resource type="Script" path="res://ui/scenes/in_game_ui/in_game_ui.gd" id="1_kejvp"]
+[ext_resource type="Script" path="res://ui/scenes/in_game_ui/textbox.gd" id="2_oivwo"]
 [ext_resource type="PackedScene" uid="uid://bw0n6udouxib0" path="res://ui/post_processing/crt_filter/crt_filter.tscn" id="2_yadkv"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_6grh2"]
@@ -12,6 +13,18 @@ cellular_return_type = 0
 width = 448
 height = 256
 noise = SubResource("FastNoiseLite_6grh2")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e4irp"]
+bg_color = Color(0.5307, 0.61, 0.598105, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.733416, 0.795717, 0.97574, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [node name="InGameUi" type="Control"]
 layout_mode = 3
@@ -64,9 +77,81 @@ text = "[E] Interact"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="main_textbox" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 293.0
+offset_top = 3.0
+offset_right = 445.0
+offset_bottom = 70.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_e4irp")
+script = ExtResource("2_oivwo")
+
+[node name="text_buffer" type="RichTextLabel" parent="main_textbox"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 148.0
+offset_bottom = 63.0
+theme_override_font_sizes/bold_italics_font_size = 10
+theme_override_font_sizes/italics_font_size = 10
+theme_override_font_sizes/mono_font_size = 10
+theme_override_font_sizes/normal_font_size = 10
+theme_override_font_sizes/bold_font_size = 10
+
+[node name="char_print_timer" type="Timer" parent="main_textbox"]
+one_shot = true
+
+[node name="option_0" type="Button" parent="main_textbox"]
+visible = false
+layout_mode = 0
+offset_left = 9.0
+offset_top = 7.0
+offset_right = 57.0
+offset_bottom = 29.0
+theme_override_font_sizes/font_size = 10
+text = "test text"
+
+[node name="option_1" type="Button" parent="main_textbox"]
+visible = false
+layout_mode = 0
+offset_left = 9.0
+offset_top = 37.0
+offset_right = 57.0
+offset_bottom = 59.0
+theme_override_font_sizes/font_size = 10
+text = "test text"
+
+[node name="option_2" type="Button" parent="main_textbox"]
+visible = false
+layout_mode = 0
+offset_left = 80.0
+offset_top = 7.0
+offset_right = 129.0
+offset_bottom = 29.0
+theme_override_font_sizes/font_size = 10
+text = "test text"
+
+[node name="option_3" type="Button" parent="main_textbox"]
+visible = false
+layout_mode = 0
+offset_left = 80.0
+offset_top = 37.0
+offset_right = 129.0
+offset_bottom = 59.0
+theme_override_font_sizes/font_size = 10
+text = "test text"
+alignment = 2
+
 [node name="post_process_above_ui" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="CRTFilter" parent="post_process_above_ui" instance=ExtResource("2_yadkv")]
+
+[connection signal="timeout" from="main_textbox/char_print_timer" to="main_textbox" method="_on_char_print_timer_timeout"]
+[connection signal="button_up" from="main_textbox/option_0" to="main_textbox" method="_on_option_0_button_up"]
+[connection signal="button_up" from="main_textbox/option_1" to="main_textbox" method="_on_option_1_button_up"]
+[connection signal="button_up" from="main_textbox/option_2" to="main_textbox" method="_on_option_2_button_up"]
+[connection signal="button_up" from="main_textbox/option_3" to="main_textbox" method="_on_option_3_button_up"]

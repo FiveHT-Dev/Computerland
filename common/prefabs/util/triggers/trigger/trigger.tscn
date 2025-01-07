@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cvb0uxaocc04u"]
 
-[ext_resource type="Script" path="res://common/prefabs/triggers/trigger/trigger.gd" id="1_5s1wr"]
+[ext_resource type="Script" path="res://common/prefabs/util/triggers/trigger/trigger.gd" id="1_5s1wr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oy7m3"]
 
