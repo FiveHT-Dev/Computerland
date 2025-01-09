@@ -12,6 +12,5 @@ has_to_interact = true
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_oy7m3")
 
-[node name="dialogue_agent" type="Node" parent="." node_paths=PackedStringArray("graph_start_node")]
+[node name="dialogue_agent" type="Node" parent="."]
 script = ExtResource("2_uwbuk")
-graph_start_node = NodePath("")

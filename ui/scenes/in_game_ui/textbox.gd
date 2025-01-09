@@ -8,6 +8,11 @@ extends Control
 	$option_2,
 	$option_3
 ]
+@onready var text_print_player : AudioStreamPlayer = $text_print_player
+@onready var open_player : AudioStreamPlayer = $open_player
+@onready var close_player : AudioStreamPlayer = $close_player
+@onready var open_timer : Timer = $open_timer
+@onready var start_pos = position
 
 
 var current_dialogue_graph_node : DialogueGraphNode
@@ -22,7 +27,8 @@ func open(dialogue_graph_start_node : DialogueGraphNode):
 		current_dialogue_graph_node = dialogue_graph_start_node
 		reset()
 		visible = true
-		start_printing_graph_node()
+		open_player.play()
+		open_timer.start()
 	
 
 func _unhandled_input(event):
@@ -47,14 +53,24 @@ func _unhandled_input(event):
 			if Input.is_action_just_pressed("textbox_advance"):
 				display_whole_line()
 
+func _process(delta):
+	if visible:
+		self_modulate.a = lerpf(self_modulate.a, 1.0, 0.1)
+		position = position.lerp(start_pos, 0.1)
+	else:
+		self_modulate.a = 0.0
+		position = Vector2(start_pos.x * 1.5, start_pos.y)
+
 func display_whole_line():
-	char_index = current_dialogue_graph_node.text_lines[line_index].length() - 1
-	text_buffer.clear()
-	text_buffer.add_text(current_dialogue_graph_node.text_lines[line_index])
-	waiting_for_input = true
+	if current_dialogue_graph_node != null:
+		char_index = current_dialogue_graph_node.text_lines[line_index].length() - 1
+		text_buffer.clear()
+		text_buffer.add_text(current_dialogue_graph_node.text_lines[line_index])
+		waiting_for_input = true
 
 func start_printing_graph_node():
 	reset()
+	text_print_player.stream = current_dialogue_graph_node.print_sfx
 	char_print_timer.wait_time = current_dialogue_graph_node.print_speed
 	char_print_timer.start()
 
@@ -95,6 +111,7 @@ func call_option(index : int):
 
 func close():
 	reset()
+	close_player.play()
 	current_dialogue_graph_node = null
 	visible = false
 	Manager.game.cam.remove_override_focus()
@@ -115,6 +132,7 @@ func print_next_line():
 
 func _on_char_print_timer_timeout():
 	if !waiting_for_input:
+		text_print_player.play()
 		var line : String = current_dialogue_graph_node.text_lines[line_index]
 		var character : String = line[char_index]
 		text_buffer.add_text(character)
@@ -145,3 +163,7 @@ func _on_option_2_button_up():
 
 func _on_option_3_button_up():
 	call_option(3)
+
+
+func _on_open_timer_timeout():
+	start_printing_graph_node()

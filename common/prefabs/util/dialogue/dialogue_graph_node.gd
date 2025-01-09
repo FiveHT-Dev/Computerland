@@ -6,9 +6,7 @@ extends Node
 @export var region_delimiter : String
 @export_category("Printing")
 @export var print_speed : float = 0.1
-@export var pitch_variation_min : float = 0.98
-@export var pitch_variation_max : float = 1.02
-@export var print_sfx : AudioStreamOggVorbis
+@export var print_sfx : AudioStreamRandomizer = preload("res://audio/ui/streams/textbox_print_default_sfx.tres")
 
 @onready var advance_connections : Array
 @onready var options : Array

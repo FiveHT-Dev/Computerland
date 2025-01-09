@@ -12,6 +12,7 @@ func _on_player_interacted():
 
 func open_dialogue():
 	if dialogue_agent.graph_start_node != null:
+		dialogue_agent.talked_to()
 		Manager.game.in_game_ui.open_textbox(dialogue_agent.graph_start_node, textbox_to_open_index)
 		if dialogue_agent.focus_camera:
 			Manager.game.cam.add_override_focus(cam_focus_point)

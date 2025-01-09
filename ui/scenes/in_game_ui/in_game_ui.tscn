@@ -1,8 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdpbfylxw4i66"]
+[gd_scene load_steps=10 format=3 uid="uid://bdpbfylxw4i66"]
 
+[ext_resource type="Theme" uid="uid://dvetrtn65767g" path="res://ui/themes/in_game_ui_main.theme" id="1_18x1n"]
 [ext_resource type="Script" path="res://ui/scenes/in_game_ui/in_game_ui.gd" id="1_kejvp"]
 [ext_resource type="Script" path="res://ui/scenes/in_game_ui/textbox.gd" id="2_oivwo"]
 [ext_resource type="PackedScene" uid="uid://bw0n6udouxib0" path="res://ui/post_processing/crt_filter/crt_filter.tscn" id="2_yadkv"]
+[ext_resource type="Script" path="res://ui/themes/igum_button.gd" id="5_6di1i"]
+[ext_resource type="AudioStream" uid="uid://dytpy5idhnk4l" path="res://audio/ui/sfx/sfx_textbox_open.ogg" id="5_cmjnh"]
+[ext_resource type="AudioStream" uid="uid://rx6q0gugp4ip" path="res://audio/ui/sfx/sfx_textbox_close.ogg" id="6_cveyd"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_6grh2"]
 noise_type = 2
@@ -14,18 +18,6 @@ width = 448
 height = 256
 noise = SubResource("FastNoiseLite_6grh2")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e4irp"]
-bg_color = Color(0.5307, 0.61, 0.598105, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.733416, 0.795717, 0.97574, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-
 [node name="InGameUi" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -33,6 +25,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_18x1n")
 script = ExtResource("1_kejvp")
 
 [node name="text_texture" type="TextureRect" parent="."]
@@ -84,7 +77,6 @@ offset_left = 293.0
 offset_top = 3.0
 offset_right = 445.0
 offset_bottom = 70.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_e4irp")
 script = ExtResource("2_oivwo")
 
 [node name="text_buffer" type="RichTextLabel" parent="main_textbox"]
@@ -111,6 +103,7 @@ offset_right = 57.0
 offset_bottom = 29.0
 theme_override_font_sizes/font_size = 10
 text = "test text"
+script = ExtResource("5_6di1i")
 
 [node name="option_1" type="Button" parent="main_textbox"]
 visible = false
@@ -121,6 +114,7 @@ offset_right = 57.0
 offset_bottom = 59.0
 theme_override_font_sizes/font_size = 10
 text = "test text"
+script = ExtResource("5_6di1i")
 
 [node name="option_2" type="Button" parent="main_textbox"]
 visible = false
@@ -131,6 +125,7 @@ offset_right = 129.0
 offset_bottom = 29.0
 theme_override_font_sizes/font_size = 10
 text = "test text"
+script = ExtResource("5_6di1i")
 
 [node name="option_3" type="Button" parent="main_textbox"]
 visible = false
@@ -142,6 +137,22 @@ offset_bottom = 59.0
 theme_override_font_sizes/font_size = 10
 text = "test text"
 alignment = 2
+script = ExtResource("5_6di1i")
+
+[node name="text_print_player" type="AudioStreamPlayer" parent="main_textbox"]
+bus = &"UI"
+
+[node name="open_player" type="AudioStreamPlayer" parent="main_textbox"]
+stream = ExtResource("5_cmjnh")
+bus = &"UI"
+
+[node name="close_player" type="AudioStreamPlayer" parent="main_textbox"]
+stream = ExtResource("6_cveyd")
+bus = &"UI"
+
+[node name="open_timer" type="Timer" parent="main_textbox"]
+wait_time = 0.2
+one_shot = true
 
 [node name="post_process_above_ui" type="Control" parent="."]
 anchors_preset = 0
@@ -155,3 +166,4 @@ offset_bottom = 40.0
 [connection signal="button_up" from="main_textbox/option_1" to="main_textbox" method="_on_option_1_button_up"]
 [connection signal="button_up" from="main_textbox/option_2" to="main_textbox" method="_on_option_2_button_up"]
 [connection signal="button_up" from="main_textbox/option_3" to="main_textbox" method="_on_option_3_button_up"]
+[connection signal="timeout" from="main_textbox/open_timer" to="main_textbox" method="_on_open_timer_timeout"]
