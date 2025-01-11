@@ -8,7 +8,7 @@ noise = SubResource("FastNoiseLite_3noqs")
 
 [resource]
 transparency = 1
-albedo_color = Color(0.81, 0.981, 1, 0.231373)
+albedo_color = Color(0.84, 0.984, 1, 0.203922)
 metallic_specular = 0.7
 roughness = 0.2
 refraction_enabled = true

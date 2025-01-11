@@ -11,7 +11,7 @@ extends CharacterBody3D
 ]
 @onready var character : Node3D = $char_pivot/player_char
 @onready var current_cam_follow_transform : Node3D = $cam_follow_transform_0
-
+@onready var mat_pchar_glass : StandardMaterial3D = preload("res://common/characters/player_char/mat_pchar_glass.tres")
 var current_triggers : Dictionary = {}
 
 var char_angle : float = 0.0
@@ -31,7 +31,11 @@ func _process(delta):
 		running = false
 		moving = false
 	else:
-		input_dir = Input.get_vector("left", "right", "forward", "backward")
+		if !Manager.game.switching_rooms:
+			input_dir = Input.get_vector("left", "right", "forward", "backward")
+			mat_pchar_glass.albedo_color.a = lerpf(mat_pchar_glass.albedo_color.a, 0.25, 0.1)
+		else:
+			mat_pchar_glass.albedo_color.a = lerpf(mat_pchar_glass.albedo_color.a, 0.0, 0.1)
 		moving = velocity.length() > 0.1
 		if Input.is_action_pressed("run"):
 			running = true
@@ -60,6 +64,9 @@ func remove_trigger(t : Trigger):
 	if current_triggers.has(id):
 		current_triggers.erase(id)
 
+func place_at_new_transform(new_t : Node3D):
+	global_position = new_t.global_position
+	Manager.game.cam.force_to_follow_transform()
 
 func _physics_process(delta):
 	# Add the gravity.

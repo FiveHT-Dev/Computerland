@@ -687,36 +687,42 @@ shadow_mesh = SubResource("ArrayMesh_k6aea")
 [node name="player_char" type="Node3D"]
 
 [node name="Torso" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_0ox3u")
 mesh = SubResource("ArrayMesh_1jwnp")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("1_0ox3u")
 
 [node name="Arm_L" type="MeshInstance3D" parent="Torso"]
 transform = Transform3D(1, 0, 0, 0, 0.904864, 0.425701, 0, -0.425702, 0.904863, -1.49012e-08, 0.829745, 0.51024)
+material_override = ExtResource("1_0ox3u")
 mesh = SubResource("ArrayMesh_htcyr")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("1_0ox3u")
 
 [node name="Arm_R" type="MeshInstance3D" parent="Torso"]
 transform = Transform3D(1, 0, 0, 0, 0.904864, -0.425701, 0, 0.425702, 0.904863, -1.49012e-08, 0.829745, -0.51024)
+material_override = ExtResource("1_0ox3u")
 mesh = SubResource("ArrayMesh_f5q7j")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("1_0ox3u")
 
 [node name="Head" type="MeshInstance3D" parent="Torso"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.88201, 0)
+material_override = ExtResource("1_0ox3u")
 mesh = SubResource("ArrayMesh_40k52")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("1_0ox3u")
 
 [node name="Ear_L" type="MeshInstance3D" parent="Torso/Head"]
 transform = Transform3D(0.398552, -0.0518394, -0.25638, -0.0549331, 0.440254, -0.174414, 0.255735, 0.175358, 0.362092, -0.0902716, -0.192031, 0.782438)
+material_override = ExtResource("1_0ox3u")
 mesh = SubResource("ArrayMesh_fvxnj")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("1_0ox3u")
 
 [node name="Ear_R" type="MeshInstance3D" parent="Torso/Head"]
 transform = Transform3D(0.398552, -0.137807, 0.222323, 0.0549331, 0.440254, 0.174414, -0.255735, -0.120197, 0.383945, -0.0902716, -0.192031, -0.782438)
+material_override = ExtResource("1_0ox3u")
 mesh = SubResource("ArrayMesh_tyujy")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("1_0ox3u")
@@ -729,12 +735,14 @@ playback_default_blend_time = 0.5
 
 [node name="Leg_L" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.19121, 0.36)
+material_override = ExtResource("1_0ox3u")
 mesh = SubResource("ArrayMesh_gohvf")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("1_0ox3u")
 
 [node name="Leg_R" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.19121, -0.36)
+material_override = ExtResource("1_0ox3u")
 mesh = SubResource("ArrayMesh_rr51e")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("1_0ox3u")

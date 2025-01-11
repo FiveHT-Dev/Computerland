@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bdpbfylxw4i66"]
+[gd_scene load_steps=11 format=3 uid="uid://bdpbfylxw4i66"]
 
 [ext_resource type="Theme" uid="uid://dvetrtn65767g" path="res://ui/themes/in_game_ui_main.theme" id="1_18x1n"]
 [ext_resource type="Script" path="res://ui/scenes/in_game_ui/in_game_ui.gd" id="1_kejvp"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://ui/themes/igum_button.gd" id="5_6di1i"]
 [ext_resource type="AudioStream" uid="uid://dytpy5idhnk4l" path="res://audio/ui/sfx/sfx_textbox_open.ogg" id="5_cmjnh"]
 [ext_resource type="AudioStream" uid="uid://rx6q0gugp4ip" path="res://audio/ui/sfx/sfx_textbox_close.ogg" id="6_cveyd"]
+[ext_resource type="Material" uid="uid://sa6um8oo2gni" path="res://ui/graphics/transition_circle/transition_circle_smat.tres" id="8_dmvv0"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_6grh2"]
 noise_type = 2
@@ -151,7 +152,7 @@ stream = ExtResource("6_cveyd")
 bus = &"UI"
 
 [node name="open_timer" type="Timer" parent="main_textbox"]
-wait_time = 0.2
+wait_time = 0.75
 one_shot = true
 
 [node name="post_process_above_ui" type="Control" parent="."]
@@ -160,6 +161,15 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="CRTFilter" parent="post_process_above_ui" instance=ExtResource("2_yadkv")]
+
+[node name="transition_circle" type="ColorRect" parent="."]
+material = ExtResource("8_dmvv0")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="timeout" from="main_textbox/char_print_timer" to="main_textbox" method="_on_char_print_timer_timeout"]
 [connection signal="button_up" from="main_textbox/option_0" to="main_textbox" method="_on_option_0_button_up"]

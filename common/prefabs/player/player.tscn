@@ -4,6 +4,8 @@
 [ext_resource type="Script" path="res://common/prefabs/player/player.gd" id="1_pv5mv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_l4m1u"]
+radius = 0.272056
+height = 1.2275
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gpear"]
 animation = &"idle"
@@ -75,15 +77,35 @@ transform = Transform3D(1, 0, 0, 0, 0.707106, 0.707106, 0, -0.707106, 0.707106, 
 gizmo_extents = 1.0
 
 [node name="char_pivot" type="Node3D" parent="."]
-transform = Transform3D(0.335533, 0, 0, 0, 0.335533, 0, 0, 0, 0.335533, 0, 0, 0)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 
 [node name="player_char" parent="char_pivot" instance=ExtResource("1_mdu7m")]
 
+[node name="Torso" parent="char_pivot/player_char" index="0"]
+surface_material_override/0 = null
+
 [node name="Arm_L" parent="char_pivot/player_char/Torso" index="0"]
 transform = Transform3D(1, 0, 0, 0, 0.904864, 0.425701, 0, -0.425702, 0.904863, 0, 0.829745, 0.51024)
+surface_material_override/0 = null
 
 [node name="Arm_R" parent="char_pivot/player_char/Torso" index="1"]
 transform = Transform3D(1, 0, 0, 0, 0.904863, -0.425701, 0, 0.425701, 0.904863, 0, 0.829745, -0.51024)
+surface_material_override/0 = null
+
+[node name="Head" parent="char_pivot/player_char/Torso" index="2"]
+surface_material_override/0 = null
+
+[node name="Ear_L" parent="char_pivot/player_char/Torso/Head" index="0"]
+surface_material_override/0 = null
+
+[node name="Ear_R" parent="char_pivot/player_char/Torso/Head" index="1"]
+surface_material_override/0 = null
+
+[node name="Leg_L" parent="char_pivot/player_char" index="2"]
+surface_material_override/0 = null
+
+[node name="Leg_R" parent="char_pivot/player_char" index="3"]
+surface_material_override/0 = null
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../char_pivot/player_char")

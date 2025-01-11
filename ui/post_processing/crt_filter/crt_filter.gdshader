@@ -55,7 +55,7 @@ void fragment() {
 	vec2 scanline_uv = vec2(SCREEN_UV.x - floor(sin((TIME + FRAGCOORD.x * 2.0f) * 80.0f) * scanlines.r) * 0.002f, SCREEN_UV.y);
 	vec3 scanline_screen = texture(screen_texture, scanline_uv).rgb;
 	
-	vec3 noise = texture(noise_tex, SCREEN_UV + (sin(TIME * 80.0f) * 100.0f)).rgb * 0.04f;
+	vec3 noise = texture(noise_tex, SCREEN_UV + (sin(TIME * 80.0f) * 100.0f)).rgb * 0.03f;
 	//vec3 ofs_screen_0 = texture(screen_texture, SCREEN_UV + vec2(0.005f, 0.0f)).rgb;
 	//vec3 ofs_screen_1 = texture(screen_texture, SCREEN_UV - vec2(0.005f, 0.0f)).rgb;
 	vec3 screen = texture(screen_texture, SCREEN_UV).rgb;

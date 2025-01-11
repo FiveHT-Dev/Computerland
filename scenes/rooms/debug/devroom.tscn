@@ -1,0 +1,198 @@
+[gd_scene load_steps=23 format=3 uid="uid://bac38xeb4mxne"]
+
+[ext_resource type="Script" path="res://common/scripts/room.gd" id="1_qspdi"]
+[ext_resource type="Script" path="res://common/resources/loaded_scenes/post_process_list.gd" id="2_6is7m"]
+[ext_resource type="Script" path="res://common/prefabs/util/save_interface/save_interface.gd" id="3_7fjgd"]
+[ext_resource type="PackedScene" uid="uid://du1ef6euq7e78" path="res://common/prefabs/util/triggers/room_gate/room_gate.tscn" id="4_hqigq"]
+[ext_resource type="PackedScene" uid="uid://tv0im8eeplcd" path="res://common/prefabs/cam/cam_follow_area.tscn" id="4_rma6n"]
+[ext_resource type="PackedScene" uid="uid://b1x3m7qad36kx" path="res://common/prefabs/util/triggers/dialogue_trigger/dialogue_trigger.tscn" id="5_bfuh1"]
+[ext_resource type="Script" path="res://common/prefabs/util/dialogue/dialogue_graph_node.gd" id="6_qn2uq"]
+[ext_resource type="Material" uid="uid://biusc5doowhrt" path="res://common/graphics/shaders/shadermats/smat_graytex_planks_01.tres" id="6_tuiee"]
+[ext_resource type="Script" path="res://common/prefabs/util/dialogue/dialogue_advance_connection.gd" id="7_yioq0"]
+[ext_resource type="Script" path="res://common/prefabs/util/dialogue/dialogue_option.gd" id="8_so441"]
+[ext_resource type="Script" path="res://common/prefabs/util/dialogue/dialogue_advance_connection_dict_key.gd" id="9_hqjpa"]
+
+[sub_resource type="Resource" id="Resource_0whd2"]
+script = ExtResource("2_6is7m")
+paths = ["res://ui/post_processing/crt_filter.tscn"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vi8tc"]
+size = Vector2(10, 10)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_bcqi2"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k3s3f"]
+sky_top_color = Color(1, 1, 1, 1)
+sky_horizon_color = Color(0.537011, 0.537011, 0.537011, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0.537255, 0.537255, 0.537255, 1)
+
+[sub_resource type="Sky" id="Sky_im4qi"]
+sky_material = SubResource("ProceduralSkyMaterial_k3s3f")
+
+[sub_resource type="Environment" id="Environment_q34is"]
+background_mode = 2
+sky = SubResource("Sky_im4qi")
+fog_enabled = true
+fog_light_color = Color(1, 1, 1, 1)
+fog_aerial_perspective = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_km87u"]
+size = Vector3(10.0963, 1, 9.98474)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vsh7d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_65egx"]
+albedo_color = Color(1, 0.4, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_nguh0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0df86"]
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="Devroom" type="Node3D"]
+script = ExtResource("1_qspdi")
+hide_player = null
+hide_in_game_ui = null
+post_process_list = SubResource("Resource_0whd2")
+
+[node name="utilities" type="Node" parent="."]
+
+[node name="SaveInterface" type="Node" parent="utilities"]
+script = ExtResource("3_7fjgd")
+path = "rooms/devroom"
+
+[node name="gates" type="Node" parent="utilities"]
+
+[node name="room_gate" parent="utilities/gates" instance=ExtResource("4_hqigq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.53873, 0.507221, -0.17861)
+next_room_path = "debug/devroom2"
+
+[node name="spawn_transform" parent="utilities/gates/room_gate" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19918, -0.485769, 0)
+
+[node name="player_spawn_pos" type="Marker3D" parent="utilities"]
+
+[node name="camera" type="Node" parent="."]
+
+[node name="audio" type="Node" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_vi8tc")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_bcqi2")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_q34is")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(0.705179, 0.709029, 0, -0.394584, 0.392441, 0.830839, 0.589089, -0.58589, 0.556513, 0, 0, 0)
+
+[node name="CamFollowArea" parent="." instance=ExtResource("4_rma6n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.239109, 0, 0.99922)
+
+[node name="CollisionShape3D" parent="CamFollowArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.238556, 0, -1.02374)
+shape = SubResource("BoxShape3D_km87u")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.39406, 0.532632, -1.12511)
+mesh = SubResource("BoxMesh_vsh7d")
+surface_material_override/0 = ExtResource("6_tuiee")
+
+[node name="dialogue_trigger" parent="MeshInstance3D2" instance=ExtResource("5_bfuh1")]
+
+[node name="dialogue_agent" parent="MeshInstance3D2/dialogue_trigger" index="1" node_paths=PackedStringArray("graph_start_node")]
+graph_start_node = NodePath("DialogueGraphNode")
+focus_camera = true
+
+[node name="SaveInterface" type="Node" parent="MeshInstance3D2/dialogue_trigger/dialogue_agent" index="0"]
+script = ExtResource("3_7fjgd")
+path = "dialogue_agents/debug_dialogue_agent"
+
+[node name="DialogueGraphNode" type="Node" parent="MeshInstance3D2/dialogue_trigger/dialogue_agent" index="1"]
+script = ExtResource("6_qn2uq")
+file_path = "res://dialogue/debug_dialogue.txt"
+region_delimiter = "1"
+
+[node name="DialogueAdvanceConnection" type="Node" parent="MeshInstance3D2/dialogue_trigger/dialogue_agent/DialogueGraphNode" node_paths=PackedStringArray("next_node")]
+script = ExtResource("7_yioq0")
+next_node = NodePath("../../DialogueGraphNode2")
+
+[node name="DialogueGraphNode2" type="Node" parent="MeshInstance3D2/dialogue_trigger/dialogue_agent" index="2"]
+script = ExtResource("6_qn2uq")
+file_path = "res://dialogue/debug_dialogue.txt"
+region_delimiter = "2"
+
+[node name="DialogueOption" type="Node" parent="MeshInstance3D2/dialogue_trigger/dialogue_agent/DialogueGraphNode2" node_paths=PackedStringArray("next_node")]
+script = ExtResource("8_so441")
+option_name = "Okay"
+next_node = NodePath("../../DialogueGraphNode3")
+
+[node name="DialogueOption2" type="Node" parent="MeshInstance3D2/dialogue_trigger/dialogue_agent/DialogueGraphNode2" node_paths=PackedStringArray("next_node")]
+script = ExtResource("8_so441")
+option_name = "Go back"
+next_node = NodePath("../../DialogueGraphNode")
+
+[node name="DialogueGraphNode3" type="Node" parent="MeshInstance3D2/dialogue_trigger/dialogue_agent" index="3"]
+script = ExtResource("6_qn2uq")
+file_path = "res://dialogue/debug_dialogue.txt"
+region_delimiter = "3"
+
+[node name="DialogueAdvanceConnectionDictKey" type="Node" parent="MeshInstance3D2/dialogue_trigger/dialogue_agent/DialogueGraphNode3" node_paths=PackedStringArray("node_to_check", "next_node")]
+script = ExtResource("9_hqjpa")
+dict_name = "save_dict"
+dict_key = "num_times_talked_to"
+dict_comparison = "1"
+node_to_check = NodePath("../../SaveInterface")
+comparison_type = 4
+next_node = NodePath("../../DialogueGraphNode4")
+
+[node name="DialogueAdvanceConnectionDictKey2" type="Node" parent="MeshInstance3D2/dialogue_trigger/dialogue_agent/DialogueGraphNode3" node_paths=PackedStringArray("node_to_check", "next_node")]
+script = ExtResource("9_hqjpa")
+dict_name = "save_dict"
+dict_key = "num_times_talked_to"
+dict_comparison = "1"
+node_to_check = NodePath("../../SaveInterface")
+comparison_type = 1
+next_node = NodePath("../../DialogueGraphNode5")
+
+[node name="DialogueGraphNode4" type="Node" parent="MeshInstance3D2/dialogue_trigger/dialogue_agent" index="4"]
+script = ExtResource("6_qn2uq")
+file_path = "res://dialogue/debug_dialogue.txt"
+region_delimiter = "4"
+
+[node name="DialogueGraphNode5" type="Node" parent="MeshInstance3D2/dialogue_trigger/dialogue_agent" index="5"]
+script = ExtResource("6_qn2uq")
+file_path = "res://dialogue/debug_dialogue.txt"
+region_delimiter = "5"
+
+[node name="cam_focus_point" type="Marker3D" parent="MeshInstance3D2/dialogue_trigger"]
+transform = Transform3D(1, 0, 0, 0, 0.887775, 0.460277, 0, -0.460277, 0.887775, 0, 1.24095, 1.52553)
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 1, 2.09465, 1.96001, -1.12511)
+mesh = SubResource("BoxMesh_vsh7d")
+surface_material_override/0 = ExtResource("6_tuiee")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.1991, 0, 0, 0, 2.97054, 0, 0, 0, 1, 3.4011, 0.532632, -3.45683)
+mesh = SubResource("BoxMesh_vsh7d")
+surface_material_override/0 = SubResource("StandardMaterial3D_65egx")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.779441, 0, 0.27824, 0, 2.97054, 0, -0.309201, 0, 0.701394, -3.45749, 0.532633, 2.57371)
+mesh = SubResource("BoxMesh_vsh7d")
+surface_material_override/0 = SubResource("StandardMaterial3D_65egx")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.41199, 0)
+mesh = SubResource("SphereMesh_nguh0")
+surface_material_override/0 = SubResource("StandardMaterial3D_0df86")
+
+[editable path="utilities/gates/room_gate"]
+[editable path="CamFollowArea"]
+[editable path="MeshInstance3D2/dialogue_trigger"]

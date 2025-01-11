@@ -1,0 +1,81 @@
+[gd_scene load_steps=13 format=3 uid="uid://dl5ymq0k4m250"]
+
+[ext_resource type="Script" path="res://common/scripts/room.gd" id="1_pgxfs"]
+[ext_resource type="Script" path="res://common/resources/loaded_scenes/post_process_list.gd" id="2_snhua"]
+[ext_resource type="Script" path="res://common/prefabs/util/save_interface/save_interface.gd" id="3_4rmv6"]
+[ext_resource type="PackedScene" uid="uid://tv0im8eeplcd" path="res://common/prefabs/cam/cam_follow_area.tscn" id="5_gnbye"]
+[ext_resource type="Material" uid="uid://b10fm2q2tefw1" path="res://common/graphics/shaders/shadermats/smat_graytex_grass_01.tres" id="5_k4ji6"]
+
+[sub_resource type="Resource" id="Resource_0whd2"]
+script = ExtResource("2_snhua")
+paths = ["res://ui/post_processing/crt_filter.tscn"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k3s3f"]
+sky_top_color = Color(1, 1, 1, 1)
+sky_horizon_color = Color(0.537011, 0.537011, 0.537011, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0.537255, 0.537255, 0.537255, 1)
+
+[sub_resource type="Sky" id="Sky_im4qi"]
+sky_material = SubResource("ProceduralSkyMaterial_k3s3f")
+
+[sub_resource type="Environment" id="Environment_q34is"]
+background_mode = 2
+sky = SubResource("Sky_im4qi")
+fog_enabled = true
+fog_light_color = Color(1, 1, 1, 1)
+fog_aerial_perspective = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q460w"]
+size = Vector3(1000, 1, 1000)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gxy2g"]
+size = Vector2(1000, 1000)
+subdivide_width = 4
+subdivide_depth = 4
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_reeru"]
+
+[node name="NullRoom" type="Node3D"]
+script = ExtResource("1_pgxfs")
+hide_player = null
+hide_in_game_ui = null
+post_process_list = SubResource("Resource_0whd2")
+
+[node name="utilities" type="Node" parent="."]
+
+[node name="SaveInterface" type="Node" parent="utilities"]
+script = ExtResource("3_4rmv6")
+path = "rooms/devroom2"
+
+[node name="gates" type="Node" parent="utilities"]
+
+[node name="player_spawn_pos" type="Marker3D" parent="utilities"]
+
+[node name="camera" type="Node" parent="."]
+
+[node name="audio" type="Node" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_q34is")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(0.705179, 0.709029, 0, -0.394584, 0.392441, 0.830839, 0.589089, -0.58589, 0.556513, 0, 0, 0)
+
+[node name="CamFollowArea" parent="." instance=ExtResource("5_gnbye")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.239109, 0, 0.99922)
+
+[node name="CollisionShape3D" parent="CamFollowArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.6827, 0, -1.02374)
+shape = SubResource("BoxShape3D_q460w")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("5_k4ji6")
+mesh = SubResource("PlaneMesh_gxy2g")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_reeru")
+
+[editable path="CamFollowArea"]

@@ -40,6 +40,12 @@ func _process(delta):
 func add_override_focus(focus : Node3D):
 	override_focus_object = focus
 
+func force_to_follow_transform():
+	if follow_transform == null:
+		follow_transform = player.current_cam_follow_transform
+	global_position = follow_transform.global_position
+	global_basis = follow_transform.global_basis
+
 func remove_override_focus():
 	override_focus_object = null
 

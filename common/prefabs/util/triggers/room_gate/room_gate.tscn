@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://du1ef6euq7e78"]
+
+[ext_resource type="Script" path="res://common/prefabs/util/triggers/room_gate/room_gate.gd" id="1_srawx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oy7m3"]
+
+[node name="room_gate" type="Area3D"]
+script = ExtResource("1_srawx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_oy7m3")
+
+[node name="spawn_transform" type="Marker3D" parent="."]
+gizmo_extents = 1.0

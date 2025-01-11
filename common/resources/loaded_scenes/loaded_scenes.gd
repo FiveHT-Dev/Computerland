@@ -2,7 +2,7 @@ class_name LoadedScenes
 extends Resource
 
 const NULL_SCENE = preload("res://scenes/debug/null_scene.tscn")
-
+const NULL_ROOM = preload("res://scenes/rooms/debug/null_room.tscn")
 var data : Dictionary = {}
 
 func create_data():
@@ -11,6 +11,14 @@ func create_data():
 		var dir_path : String = "res://scenes/" + s_folder
 		var s_folder_files : PackedStringArray = DirAccess.get_files_at(dir_path)
 		for file : String in s_folder_files:
+			if file.ends_with(".tscn"):
+				var file_path : String = dir_path + "/" +file
+				data[file_path] = load(file_path)
+	var room_folders : PackedStringArray = DirAccess.get_directories_at("res://scenes/rooms")
+	for r_folder : String in room_folders:
+		var dir_path : String = "res://scenes/rooms/" + r_folder
+		var r_folder_files : PackedStringArray = DirAccess.get_files_at(dir_path)
+		for file : String in r_folder_files:
 			if file.ends_with(".tscn"):
 				var file_path : String = dir_path + "/" +file
 				data[file_path] = load(file_path)

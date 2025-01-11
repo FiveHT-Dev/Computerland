@@ -11,9 +11,12 @@ const CRT_FILTER = preload("res://ui/post_processing/crt_filter/crt_filter.tscn"
 
 var loaded_scenes : LoadedScenes
 var current_room : Room
+var next_room : Room
+var next_gate_index : int = -1
 var in_game_ui : InGameUI
 var player : Player
 var cam : Cam
+var switching_rooms : bool = false
 
 # initialise game
 func _ready():
@@ -24,14 +27,28 @@ func _ready():
 	in_game_ui = IN_GAME_UI.instantiate()
 	cam = CAM.instantiate()
 	if override_room:
-		switch_rooms(override_room_path)
+		force_load_room(override_room_path, -1)
 
 # delte current room and load next room using path.
-func switch_rooms(path : String):
+func start_switching_rooms(path : String, gate_index : int):
+	var room : PackedScene = loaded_scenes.get_loaded_scene("res://scenes/rooms/" + path + ".tscn")
+	if room != null:
+		next_room = room.instantiate()
+	else:
+		next_room = loaded_scenes.NULL_ROOM.instantiate()
+	next_gate_index = gate_index
+	switching_rooms = true
+
+func force_load_room(path : String, gate_index : int):
 	if current_room != null:
 		current_room.room_removed()
 		current_room.queue_free()
-	current_room = loaded_scenes.get_loaded_scene(path).instantiate()
+	var room : PackedScene = loaded_scenes.get_loaded_scene("res://scenes/rooms/" + path + ".tscn")
+	if room != null:
+		current_room = room.instantiate()
+	else:
+		current_room = loaded_scenes.NULL_ROOM.instantiate()
+	next_gate_index = gate_index
 	add_child(current_room)
 	
 	if current_room.hide_in_game_ui:
@@ -43,6 +60,44 @@ func switch_rooms(path : String):
 		hide_player()
 	else:
 		show_player()
+	
+	spawn_player()
+
+func switch_rooms():
+	if current_room != null:
+		current_room.room_removed()
+		current_room.queue_free()
+	current_room = next_room
+	next_room = null
+	add_child(current_room)
+	
+	if current_room.hide_in_game_ui:
+		hide_in_game_ui()
+	else:
+		show_in_game_ui()
+	
+	if current_room.hide_player:
+		hide_player()
+	else:
+		show_player()
+	spawn_player()
+
+func _process(delta):
+	if switching_rooms:
+		if in_game_ui.t_circ_close():
+			switch_rooms()
+			switching_rooms = false
+	else:
+		in_game_ui.t_circ_open()
+
+func spawn_player():
+	var num_gates : int = current_room.gates.get_child_count()
+	if next_gate_index < 0 || num_gates == 0 || num_gates <= next_gate_index:
+		player.place_at_new_transform(current_room.player_spawn_pos)
+	else:
+		var gate : RoomGate = current_room.gates.get_child(next_gate_index)
+		player.place_at_new_transform(gate.spawn_transform)
+	next_room = null
 
 func hide_player():
 	player.global_position = Vector3.ZERO
