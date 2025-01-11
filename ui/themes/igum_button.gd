@@ -1,6 +1,6 @@
 class_name IGUMButton
 extends Button
-
+@export var play_pressed_sound : bool
 @onready var hover_player : AudioStreamPlayer = AudioStreamPlayer.new()
 @onready var pressed_player : AudioStreamPlayer = AudioStreamPlayer.new()
 var previous_pos : Vector2
@@ -9,7 +9,7 @@ var previous_pos : Vector2
 func _ready():
 	button_down.connect(_on_button_down)
 	button_up.connect(_on_button_up)
-	mouse_entered.connect(_on_hover)
+	focus_entered.connect(_on_hover)
 	keep_pressed_outside = true
 	add_child(hover_player)
 	add_child(pressed_player)
@@ -27,4 +27,5 @@ func _on_button_down():
 
 func _on_button_up():
 	position = previous_pos
-	pressed_player.play()
+	if play_pressed_sound:
+		pressed_player.play()

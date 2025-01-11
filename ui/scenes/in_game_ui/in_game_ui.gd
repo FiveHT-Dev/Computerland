@@ -2,7 +2,9 @@ class_name InGameUI
 extends Control
 
 @onready var player_stopping_ui_elements : Array = [
-	$main_textbox
+	$main_textbox,
+	$main_menu,
+	$exit_game_are_you_sure
 ]
 
 @onready var textboxes : Array = [
@@ -16,6 +18,9 @@ extends Control
 @onready var open_timer = $main_textbox/open_timer
 @onready var transition_circle : ColorRect = $transition_circle
 @onready var transition_circle_smat : ShaderMaterial = preload("res://ui/graphics/transition_circle/transition_circle_smat.tres")
+@onready var main_menu = $main_menu
+@onready var mm_button = $main_menu/VBoxContainer/Button
+
 
 var player : Player
 var post_process_layers : Dictionary = {}
@@ -26,6 +31,7 @@ func _ready():
 	interact_panel_label.self_modulate.a = 0.0
 	interact_panel.scale = Vector2(0.01, 0.01)
 	transition_circle.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _process(delta):
 	can_player_move = check_if_player_can_move()
@@ -33,6 +39,12 @@ func _process(delta):
 		player = Manager.game.player
 	else:
 		show_interact(!player.current_triggers.is_empty() && can_player_move)
+	if Input.is_action_just_pressed("escape"):
+		main_menu.visible = !main_menu.visible
+		if main_menu.visible:
+			mm_button.grab_focus()
+		else:
+			$main_menu/close.play()
 
 func add_post_process_layer(path : String, below_ui : bool):
 	if post_process_layers.has(path):
@@ -91,3 +103,20 @@ func check_if_player_can_move() -> bool:
 		if i.visible:
 			return false
 	return true
+
+
+
+
+func _on_mm_exit_game_button_up():
+	$exit_game_are_you_sure.visible = true
+	$main_menu.visible = false
+	$exit_game_are_you_sure/VBoxContainer/egays_no.grab_focus()
+
+
+func _on_egays_yes_button_up():
+	get_tree().quit()
+
+
+func _on_egays_no_button_up():
+	$exit_game_are_you_sure.visible = false
+	$main_menu/close.play()

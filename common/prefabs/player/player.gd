@@ -18,8 +18,8 @@ var char_angle : float = 0.0
 var input_dir : Vector2
 var moving : bool
 var speed : float
-var walk_speed : float = 5.0
-var run_speed : float = 9.0
+var walk_speed : float = 3.5
+var run_speed : float = 5.0
 var running : bool
 var cft_index : int = 0
 var cft_increment = 1

@@ -13,6 +13,8 @@ extends Control
 @onready var close_player : AudioStreamPlayer = $close_player
 @onready var open_timer : Timer = $open_timer
 @onready var start_pos = position
+@onready var enable_options_timer : Timer = $enable_options_timer
+
 
 
 var current_dialogue_graph_node : DialogueGraphNode
@@ -79,8 +81,10 @@ func clear_options():
 	for button : Button in option_buttons:
 		button.visible = false
 		button.text = ""
+		button.disabled = true
 
 func display_options():
+	enable_options_timer.start()
 	text_buffer.clear()
 	clear_options()
 	var i : int = 0
@@ -92,8 +96,10 @@ func display_options():
 		i += 1
 		if i > 3:
 			break
+	displaying_options = true
 
 func call_option(index : int):
+	displaying_options = false
 	var option_node : DialogueOption = option_nodes[index]
 	if option_node.option_action == option_node.OptionAction.NEXT_NODE:
 		current_dialogue_graph_node = option_node.next_node
@@ -167,3 +173,11 @@ func _on_option_3_button_up():
 
 func _on_open_timer_timeout():
 	start_printing_graph_node()
+
+
+func _on_enable_options_timer_timeout():
+	for b in option_buttons:
+		if b.visible:
+			b.disabled = false
+	var b0 : Button = option_buttons[0]
+	b0.grab_focus()

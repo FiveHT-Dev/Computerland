@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://biusc5doowhrt"]
 
 [ext_resource type="Shader" path="res://common/graphics/shaders/gdshaders/gray_textured.gdshader" id="1_05y8v"]
-[ext_resource type="Texture2D" uid="uid://dretxpxp4bmou" path="res://common/graphics/textures/64/64_tex_planks_1.jpg" id="2_i77kt"]
+[ext_resource type="Texture2D" uid="uid://dretxpxp4bmou" path="res://common/graphics/textures/64/64_graytex_planks_1.jpg" id="2_8qmuo"]
 
 [resource]
 render_priority = 0
@@ -9,4 +9,4 @@ shader = ExtResource("1_05y8v")
 shader_parameter/modulate = Color(0.673618, 0.554641, 0.335091, 1)
 shader_parameter/uv_scale = Vector2(4, 4)
 shader_parameter/uv_offset = null
-shader_parameter/tex = ExtResource("2_i77kt")
+shader_parameter/tex = ExtResource("2_8qmuo")

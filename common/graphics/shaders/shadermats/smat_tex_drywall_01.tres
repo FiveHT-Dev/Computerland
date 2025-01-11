@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cw23v32ru77gr"]
+
+[ext_resource type="Shader" path="res://common/graphics/shaders/gdshaders/textured.gdshader" id="1_r201b"]
+[ext_resource type="Texture2D" uid="uid://dxebjgku0xfry" path="res://common/graphics/textures/64/64_tex_drywall_1.jpg" id="2_q3m5i"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_r201b")
+shader_parameter/modulate = Color(1, 1, 1, 1)
+shader_parameter/uv_scale = Vector2(2, 2)
+shader_parameter/uv_offset = null
+shader_parameter/tex = ExtResource("2_q3m5i")

@@ -8,6 +8,7 @@ const CRT_FILTER = preload("res://ui/post_processing/crt_filter/crt_filter.tscn"
 
 @export var override_room : bool
 @export var override_room_path : String
+@export var materials_to_hide : Array
 
 var loaded_scenes : LoadedScenes
 var current_room : Room
@@ -20,6 +21,8 @@ var switching_rooms : bool = false
 
 # initialise game
 func _ready():
+	for m in materials_to_hide:
+		m.albedo_color.a = 0.0
 	Manager.game = self
 	loaded_scenes = LoadedScenes.new()
 	loaded_scenes.create_data()

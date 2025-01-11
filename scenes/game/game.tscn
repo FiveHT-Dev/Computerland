@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://b3dpcwbdlg0x6"]
+[gd_scene load_steps=3 format=3 uid="uid://b3dpcwbdlg0x6"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_4k21e"]
+[ext_resource type="Material" uid="uid://belcqep4r66s3" path="res://common/graphics/materials/regular_uv/INVISIBLE_COLLIDER.tres" id="2_fep0p"]
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_4k21e")
 override_room = true
 override_room_path = "debug/devroom"
+materials_to_hide = [ExtResource("2_fep0p")]

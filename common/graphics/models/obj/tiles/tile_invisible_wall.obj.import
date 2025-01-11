@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://jpf1e73ysyx8"
+path="res://.godot/imported/tile_invisible_wall.obj-edd0cadb483ea974c81fe31698a245f1.mesh"
+
+[deps]
+
+files=["res://.godot/imported/tile_invisible_wall.obj-edd0cadb483ea974c81fe31698a245f1.mesh"]
+
+source_file="res://common/graphics/models/obj/tiles/tile_invisible_wall.obj"
+dest_files=["res://.godot/imported/tile_invisible_wall.obj-edd0cadb483ea974c81fe31698a245f1.mesh", "res://.godot/imported/tile_invisible_wall.obj-edd0cadb483ea974c81fe31698a245f1.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

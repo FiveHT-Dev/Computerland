@@ -1,5 +1,4 @@
 extends Node
-
 var dirs_to_check : PackedStringArray = [
 	"user://saves",
 	"user://saves/rooms",

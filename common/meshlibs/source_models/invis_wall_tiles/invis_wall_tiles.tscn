@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://kfk8m02tw5vs"]
+
+[ext_resource type="Material" uid="uid://belcqep4r66s3" path="res://common/graphics/materials/regular_uv/INVISIBLE_COLLIDER.tres" id="1_wd2is"]
+[ext_resource type="ArrayMesh" uid="uid://jpf1e73ysyx8" path="res://common/graphics/models/obj/tiles/tile_invisible_wall.obj" id="2_5ytct"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ee1vs"]
+data = PackedVector3Array(-1, 4, 1, -1, 0, 1, -1, 4, -1, -1, 4, -1, -1, 0, 1, -1, 0, -1, -1, 4, -1, -1, 0, -1, 1, 4, -1, 1, 4, -1, -1, 0, -1, 1, 0, -1, 1, 4, -1, 1, 0, -1, 1, 4, 1, 1, 4, 1, 1, 0, -1, 1, 0, 1, 1, 4, 1, 1, 0, 1, -1, 4, 1, -1, 4, 1, 1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, -1, 1, 0, 1, 1, 0, 1, -1, 0, -1, -1, 0, 1, -1, 4, -1, 1, 4, -1, -1, 4, 1, -1, 4, 1, 1, 4, -1, 1, 4, 1)
+
+[node name="InvisWallTiles" type="Node3D"]
+
+[node name="invis_wall_square" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_wd2is")
+mesh = ExtResource("2_5ytct")
+surface_material_override/0 = ExtResource("1_wd2is")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="invis_wall_square"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="invis_wall_square/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_ee1vs")
