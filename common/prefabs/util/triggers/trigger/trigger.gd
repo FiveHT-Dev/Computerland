@@ -52,7 +52,6 @@ func _on_body_entered(body):
 		if player == null:
 			player = body
 		has_player = true
-		player.add_trigger(self)
 		if !has_to_interact:
 			if Manager.game.in_game_ui.check_if_player_can_move():
 				_on_player_entered()
@@ -60,6 +59,8 @@ func _on_body_entered(body):
 				if delete_on_interact:
 					delete.emit()
 					queue_free()
+		else:
+			player.add_trigger(self)
 
 
 func _on_body_exited(body):

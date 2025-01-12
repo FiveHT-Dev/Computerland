@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bac38xeb4mxne"]
+[gd_scene load_steps=20 format=3 uid="uid://bac38xeb4mxne"]
 
 [ext_resource type="Script" path="res://common/scripts/room.gd" id="1_qspdi"]
 [ext_resource type="Script" path="res://common/resources/loaded_scenes/post_process_list.gd" id="2_6is7m"]
@@ -38,14 +38,6 @@ fog_aerial_perspective = 1.0
 size = Vector3(6.36679, 1, 6.42282)
 
 [sub_resource type="BoxMesh" id="BoxMesh_vsh7d"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_65egx"]
-albedo_color = Color(1, 0.4, 1, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_nguh0"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0df86"]
-albedo_color = Color(1, 0, 0, 1)
 
 [node name="Devroom" type="Node3D"]
 script = ExtResource("1_qspdi")
@@ -163,21 +155,6 @@ region_delimiter = "5"
 [node name="cam_focus_point" type="Marker3D" parent="MeshInstance3D2/dialogue_trigger"]
 transform = Transform3D(1, 0, 0, 0, 0.887775, 0.460277, 0, -0.460277, 0.887775, 0, 1.24095, 1.52553)
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(2.1991, 0, 0, 0, 2.97054, 0, 0, 0, 1, 3.4011, 0.532632, -3.45683)
-mesh = SubResource("BoxMesh_vsh7d")
-surface_material_override/0 = SubResource("StandardMaterial3D_65egx")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.779441, 0, 0.27824, 0, 2.97054, 0, -0.309201, 0, 0.701394, -3.45749, 0.532633, 2.57371)
-mesh = SubResource("BoxMesh_vsh7d")
-surface_material_override/0 = SubResource("StandardMaterial3D_65egx")
-
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.41199, 0)
-mesh = SubResource("SphereMesh_nguh0")
-surface_material_override/0 = SubResource("StandardMaterial3D_0df86")
-
 [node name="gridmap_main" type="GridMap" parent="."]
 mesh_library = ExtResource("12_x7f0m")
 cell_size = Vector3(0.8, 0.4, 0.8)
@@ -194,7 +171,7 @@ cell_size = Vector3(0.8, 0.4, 0.8)
 cell_center_y = false
 cell_scale = 0.4
 data = {
-"cells": PackedInt32Array(1, 4, 1048576, 2, 4, 1048576, 3, 4, 1048576, 0, 4, 1048576, 65535, 4, 1048576, 65534, 4, 1048576, 65533, 4, 1048576, 65532, 4, 1048576)
+"cells": PackedInt32Array(1, 4, 1048576, 2, 4, 1048576, 3, 4, 1048576, 0, 4, 1048576, 65535, 4, 1048576, 65534, 4, 1048576, 65533, 4, 1048576, 65532, 4, 1048576, 5, 1, 0, 4, 1, 0)
 }
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 

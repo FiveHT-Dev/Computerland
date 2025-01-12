@@ -6,5 +6,5 @@
 [node name="Game" type="Node3D"]
 script = ExtResource("1_4k21e")
 override_room = true
-override_room_path = "debug/devroom"
+override_room_path = "hub_town/player_house/bedroom"
 materials_to_hide = [ExtResource("2_fep0p")]

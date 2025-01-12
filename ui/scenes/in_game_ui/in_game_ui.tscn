@@ -105,6 +105,7 @@ offset_bottom = 29.0
 theme_override_font_sizes/font_size = 10
 text = "test text"
 script = ExtResource("5_6di1i")
+play_pressed_sound = true
 
 [node name="option_1" type="Button" parent="main_textbox"]
 visible = false
@@ -116,6 +117,7 @@ offset_bottom = 59.0
 theme_override_font_sizes/font_size = 10
 text = "test text"
 script = ExtResource("5_6di1i")
+play_pressed_sound = true
 
 [node name="option_2" type="Button" parent="main_textbox"]
 visible = false
@@ -127,6 +129,7 @@ offset_bottom = 29.0
 theme_override_font_sizes/font_size = 10
 text = "test text"
 script = ExtResource("5_6di1i")
+play_pressed_sound = true
 
 [node name="option_3" type="Button" parent="main_textbox"]
 visible = false
@@ -139,6 +142,7 @@ theme_override_font_sizes/font_size = 10
 text = "test text"
 alignment = 2
 script = ExtResource("5_6di1i")
+play_pressed_sound = true
 
 [node name="text_print_player" type="AudioStreamPlayer" parent="main_textbox"]
 bus = &"UI"
@@ -250,7 +254,6 @@ offset_bottom = 40.0
 [node name="CRTFilter" parent="post_process_above_ui" instance=ExtResource("2_yadkv")]
 
 [node name="transition_circle" type="ColorRect" parent="."]
-visible = false
 material = ExtResource("8_dmvv0")
 layout_mode = 1
 anchors_preset = 15

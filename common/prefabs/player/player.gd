@@ -70,7 +70,7 @@ func place_at_new_transform(new_t : Node3D):
 
 func _physics_process(delta):
 	# Add the gravity.
-	if not is_on_floor():
+	if not is_on_floor() && !Manager.game.switching_rooms:
 		velocity += get_gravity() * delta
 	
 	# Get the input direction and handle the movement/deceleration.

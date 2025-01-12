@@ -51,7 +51,10 @@ func remove_override_focus():
 
 func _physics_process(delta):
 	if follow_transform != null:
+		var vel : Vector3 = Vector3.ZERO
+		if follow_player:
+			vel = player.velocity
 		global_basis = global_basis.slerp(follow_transform.global_basis, 0.2)
 		var dist : float = clampf(global_position.distance_to(follow_transform.global_position), 0.0, 1.0)
-		velocity = velocity.lerp(player.velocity + (global_position.direction_to(follow_transform.global_position) * cam_speed * dist), 0.2)
+		velocity = velocity.lerp(vel + (global_position.direction_to(follow_transform.global_position) * cam_speed * dist), 0.2)
 		move_and_slide()

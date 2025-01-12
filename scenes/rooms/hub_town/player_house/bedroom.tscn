@@ -1,0 +1,135 @@
+[gd_scene load_steps=19 format=3 uid="uid://byc7dnpg8elju"]
+
+[ext_resource type="Script" path="res://common/scripts/room.gd" id="1_bgrrh"]
+[ext_resource type="Script" path="res://common/resources/loaded_scenes/post_process_list.gd" id="2_ra6ho"]
+[ext_resource type="Script" path="res://common/prefabs/util/save_interface/save_interface.gd" id="3_f6tmc"]
+[ext_resource type="Environment" uid="uid://bpqq7fn4pb7jb" path="res://common/graphics/environments/env_pitch_black.tres" id="3_niwuy"]
+[ext_resource type="PackedScene" uid="uid://du1ef6euq7e78" path="res://common/prefabs/util/triggers/room_gate/room_gate.tscn" id="4_2w4ch"]
+[ext_resource type="PackedScene" uid="uid://tv0im8eeplcd" path="res://common/prefabs/cam/cam_follow_area.tscn" id="5_toqnt"]
+[ext_resource type="MeshLibrary" uid="uid://dptbrhd361obw" path="res://common/meshlibs/libs/house_tiles.tres" id="6_ogtkr"]
+[ext_resource type="MeshLibrary" uid="uid://kkqsaw6c48dj" path="res://common/meshlibs/libs/invis_wall_tiles.tres" id="7_mna5h"]
+[ext_resource type="PackedScene" uid="uid://dbq5mmxejuqlv" path="res://common/prefabs/props/furniture/bed.tscn" id="8_v87y3"]
+[ext_resource type="PackedScene" uid="uid://u8hij1p4kbpq" path="res://common/prefabs/props/furniture/nightstand.tscn" id="9_jjp50"]
+[ext_resource type="PackedScene" uid="uid://dqcb1cfvgn4vt" path="res://common/prefabs/props/furniture/shelf.tscn" id="10_4v1ep"]
+[ext_resource type="PackedScene" uid="uid://dsff520xyh0qv" path="res://common/prefabs/props/furniture/shelf_2.tscn" id="11_pt1xi"]
+[ext_resource type="PackedScene" uid="uid://ct3orsrhwcjbv" path="res://common/prefabs/props/furniture/wardrobe.tscn" id="12_7pt5e"]
+[ext_resource type="PackedScene" uid="uid://35whuo5afynh" path="res://common/prefabs/props/furniture/table_2.tscn" id="13_u4l7h"]
+[ext_resource type="PackedScene" uid="uid://cs13ks1pki10a" path="res://common/prefabs/props/furniture/chair_3.tscn" id="14_bd1es"]
+
+[sub_resource type="Resource" id="Resource_0whd2"]
+script = ExtResource("2_ra6ho")
+paths = ["res://ui/post_processing/crt_filter.tscn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oibli"]
+size = Vector3(3.28787, 1, 2.34097)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_23lys"]
+size = Vector3(1.40534, 1, 2.34097)
+
+[node name="Bedroom" type="Node3D"]
+script = ExtResource("1_bgrrh")
+hide_player = null
+hide_in_game_ui = null
+post_process_list = SubResource("Resource_0whd2")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("3_niwuy")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(0.705179, 0.709029, 0, -0.394584, 0.392441, 0.830839, 0.589089, -0.58589, 0.556513, 0, 0, 0)
+visible = false
+
+[node name="utilities" type="Node" parent="."]
+
+[node name="SaveInterface" type="Node" parent="utilities"]
+script = ExtResource("3_f6tmc")
+path = "rooms/devroom"
+
+[node name="gates" type="Node" parent="utilities"]
+
+[node name="room_gate" parent="utilities/gates" instance=ExtResource("4_2w4ch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.39784, 0.507221, 0.381316)
+next_room_path = "debug/devroom2"
+
+[node name="spawn_transform" parent="utilities/gates/room_gate" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.407993, 0)
+
+[node name="player_spawn_pos" type="Marker3D" parent="utilities"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.08905, 0)
+
+[node name="camera" type="Node" parent="."]
+
+[node name="CamFollowArea" parent="camera" node_paths=PackedStringArray("follow_object") instance=ExtResource("5_toqnt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.239109, 0, 0.99922)
+follow_type = 1
+follow_object = NodePath("Marker3D")
+
+[node name="CollisionShape3D" parent="camera/CamFollowArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.512784, 0, -3.02484)
+shape = SubResource("BoxShape3D_oibli")
+
+[node name="Marker3D" type="Marker3D" parent="camera/CamFollowArea"]
+transform = Transform3D(1, 0, 0, 0, 0.923089, 0.384585, 0, -0.384585, 0.923089, -0.478427, 1.21434, -0.901869)
+
+[node name="CamFollowArea2" parent="camera" node_paths=PackedStringArray("follow_object") instance=ExtResource("5_toqnt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.239109, 0, 0.99922)
+follow_type = 2
+follow_object = NodePath("")
+
+[node name="CollisionShape3D" parent="camera/CamFollowArea2" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.00378, 0, -3.02484)
+shape = SubResource("BoxShape3D_23lys")
+
+[node name="audio" type="Node" parent="."]
+
+[node name="room" type="Node" parent="."]
+
+[node name="gridmap_main" type="GridMap" parent="room"]
+mesh_library = ExtResource("6_ogtkr")
+cell_size = Vector3(0.8, 0.4, 0.8)
+cell_center_y = false
+cell_scale = 0.4
+data = {
+"cells": PackedInt32Array(-65539, 1, 5, -65538, 1, 5, -65537, 1, 5, -131072, 1, 5, -131071, 1, 5, -131070, 1, 5, -131070, 0, 5, -131071, 0, 5, -131072, 0, 5, -65537, 0, 5, -65537, 65535, 5, -65538, 65535, 5, -65539, 65535, 5, -65539, 0, 5, -65538, 0, 5, -131072, 65535, 5, -131071, 65535, 5, -131070, 65535, 5, -131072, 65533, 5, -65537, 65533, 5, -65538, 65533, 5, -65539, 65533, 5, -65539, 65534, 5, -65539, 65532, 5, -65538, 65532, 5, -65537, 65532, 5, -131072, 65532, 5, -131072, 65534, 5, -65537, 65534, 5, -65538, 65534, 5, 0, 65532, 1048576, 65535, 65532, 1048582, 65534, 65532, 1048582, 65533, 65532, 655360, 1, 65535, 1048582, 65533, 65533, 655366, 65533, 65534, 655366, 65533, 65535, 655366, 65533, 0, 655366, 65533, 1, 655366, 2, 0, 6, 2, 1, 6, 0, 65533, 6, 0, 65534, 6, 0, 65535, 1048577, 2, 65535, 6, -131070, 65534, 5, -131070, 65533, 5)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="bed" parent="room/gridmap_main" instance=ExtResource("8_v87y3")]
+transform = Transform3D(0.243292, 0, 0, 0, 0.243292, 0, 0, 0, 0.243292, -1.86152, 0, -2.17698)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="room/gridmap_main"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21032, 1.61743, -0.244646)
+light_energy = 2.0
+omni_range = 5.3197
+
+[node name="nightstand" parent="room/gridmap_main" instance=ExtResource("9_jjp50")]
+transform = Transform3D(-0.251613, 0, 2.19967e-08, 0, 0.251613, 0, -2.19967e-08, 0, -0.251613, -1.06442, 0, -2.91779)
+
+[node name="shelf" parent="room/gridmap_main" instance=ExtResource("10_4v1ep")]
+transform = Transform3D(-1.03403e-08, 0, -0.236558, 0, 0.236558, 0, 0.236558, 0, -1.03403e-08, -2.20531, -2.38419e-07, 0.893108)
+
+[node name="shelf_2" parent="room/gridmap_main" instance=ExtResource("11_pt1xi")]
+transform = Transform3D(-1.45678e-08, 0, 0.333272, 0, 0.333272, 0, -0.333272, 0, -1.45678e-08, 0.566795, 0, -2.65273)
+
+[node name="wardrobe" parent="room/gridmap_main" instance=ExtResource("12_7pt5e")]
+transform = Transform3D(-1.00726e-08, 0, 0.230435, 0, 0.230435, 0, -0.230435, 0, -1.00726e-08, 0.523229, 0, -1.70591)
+
+[node name="table_2" parent="room/gridmap_main" instance=ExtResource("13_u4l7h")]
+transform = Transform3D(-0.288109, 0, -2.51873e-08, 0, 0.288109, 0, 2.51873e-08, 0, -0.288109, -0.514208, 0, 1.27139)
+
+[node name="gridmap_invis_colliders" type="GridMap" parent="room"]
+mesh_library = ExtResource("7_mna5h")
+cell_size = Vector3(0.8, 0.4, 0.8)
+cell_center_y = false
+cell_scale = 0.4
+data = {
+"cells": PackedInt32Array(3, 65534, 0, 3, 65533, 0, 3, 65532, 0, 2, 65532, 0, 1, 65532, 0, 1, 65533, 0, 1, 65534, 0, 65533, 2, 0, 65534, 2, 0, 65535, 2, 0, 0, 2, 0, 1, 2, 0, 2, 2, 0)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="chair_3" parent="." instance=ExtResource("14_bd1es")]
+transform = Transform3D(-0.530681, 0, -0.105135, 0, 0.540995, 0, 0.105135, 0, -0.530681, -0.740207, 0, 0.932024)
+
+[editable path="utilities/gates/room_gate"]
+[editable path="camera/CamFollowArea"]
+[editable path="camera/CamFollowArea2"]
