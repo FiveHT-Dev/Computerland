@@ -1,0 +1,126 @@
+[gd_scene load_steps=13 format=3 uid="uid://dx5b76e04yd70"]
+
+[ext_resource type="Script" path="res://common/scripts/room.gd" id="1_oawsx"]
+[ext_resource type="Script" path="res://common/resources/loaded_scenes/post_process_list.gd" id="2_vrfnv"]
+[ext_resource type="Environment" uid="uid://bpqq7fn4pb7jb" path="res://common/graphics/environments/env_pitch_black.tres" id="3_ax54g"]
+[ext_resource type="Script" path="res://common/prefabs/util/save_interface/save_interface.gd" id="4_42nyo"]
+[ext_resource type="PackedScene" uid="uid://du1ef6euq7e78" path="res://common/prefabs/util/triggers/room_gate/room_gate.tscn" id="5_64fhs"]
+[ext_resource type="PackedScene" uid="uid://tv0im8eeplcd" path="res://common/prefabs/cam/cam_follow_area.tscn" id="6_yb7ju"]
+[ext_resource type="MeshLibrary" uid="uid://dptbrhd361obw" path="res://common/meshlibs/libs/house_tiles.tres" id="7_5vdch"]
+[ext_resource type="MeshLibrary" uid="uid://dkcki62b5mdxm" path="res://common/meshlibs/libs/bathroom_tiles.tres" id="8_y07mg"]
+[ext_resource type="MeshLibrary" uid="uid://kkqsaw6c48dj" path="res://common/meshlibs/libs/invis_wall_tiles.tres" id="9_biv5e"]
+
+[sub_resource type="Resource" id="Resource_0whd2"]
+script = ExtResource("2_vrfnv")
+paths = ["res://ui/post_processing/crt_filter.tscn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1dhp0"]
+size = Vector3(2.17826, 1, 2.34097)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_prd4s"]
+size = Vector3(2.40201, 1, 2.34097)
+
+[node name="Bedroom" type="Node3D"]
+script = ExtResource("1_oawsx")
+post_process_list = SubResource("Resource_0whd2")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("3_ax54g")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(0.705179, 0.709029, 0, -0.394584, 0.392441, 0.830839, 0.589089, -0.58589, 0.556513, 0, 0, 0)
+visible = false
+
+[node name="utilities" type="Node" parent="."]
+
+[node name="SaveInterface" type="Node" parent="utilities"]
+script = ExtResource("4_42nyo")
+path = "rooms/devroom"
+
+[node name="gates" type="Node" parent="utilities"]
+
+[node name="room_gate2" parent="utilities/gates" instance=ExtResource("5_64fhs")]
+transform = Transform3D(-1, 0, -8.74232e-08, 0, 1, 0, 8.74232e-08, 0, -1, -1.21141, 0.507221, 0.389092)
+next_room_path = "hub_town/player_house/living_room"
+next_room_gate_index = 2
+
+[node name="spawn_transform" parent="utilities/gates/room_gate2" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.61555, -0.484134, -5.96046e-08)
+
+[node name="cam_spawn_transform" type="Marker3D" parent="utilities/gates/room_gate2"]
+transform = Transform3D(-1, -1.71586e-08, 8.57224e-08, -8.88178e-16, 0.98055, 0.196271, -8.74228e-08, 0.196271, -0.98055, -2.10998, 0.949458, -2.20937)
+
+[node name="room_gate" parent="utilities/gates" instance=ExtResource("5_64fhs")]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 3.60396, 0.507221, 0.389092)
+next_room_path = "hub_town/player_house/living_room"
+next_room_gate_index = 1
+
+[node name="spawn_transform" parent="utilities/gates/room_gate" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.61555, -0.484134, -5.96046e-08)
+
+[node name="cam_spawn_transform" type="Marker3D" parent="utilities/gates/room_gate"]
+transform = Transform3D(-1, -1.71586e-08, 8.57224e-08, -8.88178e-16, 0.98055, 0.196271, -8.74228e-08, 0.196271, -0.98055, -2.10998, 0.949458, -2.20937)
+
+[node name="player_spawn_pos" type="Marker3D" parent="utilities"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.08905, 0)
+
+[node name="camera" type="Node" parent="."]
+
+[node name="CamFollowArea2" parent="camera" instance=ExtResource("6_yb7ju")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.71864, 0, 3.37129)
+follow_type = 2
+
+[node name="CollisionShape3D" parent="camera/CamFollowArea2" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.61732, 0, -3.02484)
+shape = SubResource("BoxShape3D_1dhp0")
+
+[node name="CamFollowArea3" parent="camera" instance=ExtResource("6_yb7ju")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.11738, 0, 3.37129)
+follow_type = 2
+
+[node name="CollisionShape3D" parent="camera/CamFollowArea3" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.50212, 0, -3.02484)
+shape = SubResource("BoxShape3D_prd4s")
+
+[node name="audio" type="Node" parent="."]
+
+[node name="room" type="Node" parent="."]
+
+[node name="gridmap_main" type="GridMap" parent="room"]
+mesh_library = ExtResource("7_5vdch")
+cell_size = Vector3(0.8, 0.4, 0.8)
+cell_center_y = false
+cell_scale = 0.4
+data = {
+"cells": PackedInt32Array(2, 65535, 1048576, 2, 1, 6, 2, 0, 8, 0, 65535, 655360, 1, 65535, 1048582, 0, 1, 655366, 0, 0, 655368)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="room/gridmap_main"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.016872, 1.58308, 0.297696)
+omni_range = 5.3197
+
+[node name="gridmap_floor" type="GridMap" parent="room"]
+mesh_library = ExtResource("8_y07mg")
+cell_size = Vector3(0.8, 0.4, 0.8)
+cell_center_y = false
+cell_scale = 0.4
+data = {
+"cells": PackedInt32Array(-131070, 65535, 0, -131070, 0, 0, -131070, 1, 0, -131071, 65535, 0, -131071, 0, 0, -131071, 1, 0, -131072, 1, 0, -131072, 0, 0, -131072, 65535, 0, -131069, 0, 3, -65537, 0, 655363)
+}
+metadata/_editor_floor_ = Vector3(0, -2, 0)
+
+[node name="gridmap_invis_colliders" type="GridMap" parent="room"]
+mesh_library = ExtResource("9_biv5e")
+cell_size = Vector3(0.8, 0.4, 0.8)
+cell_center_y = false
+cell_scale = 0.4
+data = {
+"cells": PackedInt32Array(3, 65535, 0, 4, 65535, 0, 5, 65535, 0, 5, 0, 0, 5, 1, 0, 4, 1, 0, 3, 1, 0, 2, 2, 655360, 1, 2, 655360, 0, 2, 655360, 65535, 1, 655360, 65534, 1, 655360, 65533, 1, 655360, 65533, 0, 655360, 65533, 65535, 655360, 65534, 65535, 655360, 65535, 65535, 655360)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[editable path="utilities/gates/room_gate2"]
+[editable path="utilities/gates/room_gate"]
+[editable path="camera/CamFollowArea2"]
+[editable path="camera/CamFollowArea3"]

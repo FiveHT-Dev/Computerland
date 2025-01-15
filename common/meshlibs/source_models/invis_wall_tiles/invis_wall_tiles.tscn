@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://kfk8m02tw5vs"]
+[gd_scene load_steps=5 format=3 uid="uid://kfk8m02tw5vs"]
 
+[ext_resource type="Script" path="res://common/meshlibs/source_models/invis_wall_tiles/invis_wall_tile.gd" id="1_71qaj"]
 [ext_resource type="Material" uid="uid://belcqep4r66s3" path="res://common/graphics/materials/regular_uv/INVISIBLE_COLLIDER.tres" id="1_wd2is"]
 [ext_resource type="ArrayMesh" uid="uid://jpf1e73ysyx8" path="res://common/graphics/models/obj/tiles/tile_invisible_wall.obj" id="2_5ytct"]
 
@@ -12,6 +13,7 @@ data = PackedVector3Array(-1, 4, 1, -1, 0, 1, -1, 4, -1, -1, 4, -1, -1, 0, 1, -1
 material_override = ExtResource("1_wd2is")
 mesh = ExtResource("2_5ytct")
 surface_material_override/0 = ExtResource("1_wd2is")
+script = ExtResource("1_71qaj")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="invis_wall_square"]
 

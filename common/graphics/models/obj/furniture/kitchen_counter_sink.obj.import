@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://7bnx6u8rsrmm"
+path="res://.godot/imported/kitchen_counter_sink.obj-1712c46dd72630b538286b2f25d20e5c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/kitchen_counter_sink.obj-1712c46dd72630b538286b2f25d20e5c.mesh"]
+
+source_file="res://common/graphics/models/obj/furniture/kitchen_counter_sink.obj"
+dest_files=["res://.godot/imported/kitchen_counter_sink.obj-1712c46dd72630b538286b2f25d20e5c.mesh", "res://.godot/imported/kitchen_counter_sink.obj-1712c46dd72630b538286b2f25d20e5c.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

@@ -7,6 +7,8 @@ extends Area3D
 
 var has_player : bool = false
 var player : Player
+var can_interact_t : float = 0.5
+var can_interact : bool = false
 signal player_interacted()
 signal player_entered()
 signal delete()
@@ -14,7 +16,6 @@ signal delete()
 func _ready():
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
-	set_process(has_to_interact)
 
 func _on_player_entered():
 	pass
@@ -29,14 +30,21 @@ func _on_player_exited():
 	pass
 
 func _process(delta):
-	if has_player:
-		if Input.is_action_just_pressed("interact"):
-			if Manager.game.in_game_ui.check_if_player_can_move():
-				_on_player_interacted()
-				player_interacted.emit()
-				if delete_on_interact:
-					delete.emit()
-					queue_free()
+	can_interact = can_interact_t < 0.0
+	if can_interact:
+		if !has_to_interact:
+			set_process(false)
+			return
+		if has_player:
+			if Input.is_action_just_pressed("interact"):
+				if Manager.game.in_game_ui.check_if_player_can_move():
+					_on_player_interacted()
+					player_interacted.emit()
+					if delete_on_interact:
+						delete.emit()
+						queue_free()
+	else:
+		can_interact_t -= delta
 
 #func _try_show_interact(val : bool):
 #	if has_to_interact && SceneManager.current_scene.in_game_ui != null:
@@ -48,7 +56,7 @@ func _process(delta):
 #				SceneManager.current_scene.in_game_ui.triggers_that_have_player.erase(get_instance_id())
 
 func _on_body_entered(body):
-	if body is Player:
+	if body is Player && can_interact && body != null:
 		if player == null:
 			player = body
 		has_player = true
@@ -60,12 +68,12 @@ func _on_body_entered(body):
 					delete.emit()
 					queue_free()
 		else:
-			player.add_trigger(self)
+			body.add_trigger(self)
 
 
 func _on_body_exited(body):
-	if body is Player:
+	if body is Player && can_interact && body != null:
 		_on_player_exited()
 		#_try_show_interact(false)
-		player.remove_trigger(self)
+		body.remove_trigger(self)
 		has_player = false

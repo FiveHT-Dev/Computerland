@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=4 uid="uid://c6t2cbwtgv0j"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ra7mq"]
+albedo_color = Color(0.560955, 0.560955, 0.560955, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_kg0wg"]
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 2, 2),
+"attribute_data": PackedByteArray("//8AAP///3//3wAA/9//f/+/AAD/v/9//58AAP+f/3//fwAA/3//f/9fAAD/X/9//z8AAP8//3/YGNeY/z+fiNgY15j/P5+I/x8AAP8f/38AAAAAAAD/f3DrjZT/v46Cb/3/v3DrcOv/v2/9jZRw646C/7+NlI2UJ2fXmHFrjZT/P46CX3f/v3B9/78nZybncWtw6/8/Xvf/P2/92Bgm544UcOugCP+/jwL/v44UjZQnZ9eYoAj/v9gYJuf/P173J2cm5193/78="),
+"format": 34896613399,
+"index_count": 180,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAgADAAQABAADAAUABAAFAAYABgAFAAcABgAHAAgACAAHAAkACAAJAAoACgAJAAsACgALAAwADAALAA0ADgAPABAAEAAPABEADAANABIAEgANABMAEgATABQAFAATABUAFgAXABgAGAAXABkAGQAXABoAGgAXABsAGwAXABwAHAAXAB0AHgAPAB8AHwAPACAAIQAeACIAIgAeAB8AIwAhACQAJAAhACIAJQAjACYAJgAjACQAJwAlACgAKAAlACYAKQAnACoAKgAnACgADgApACsAKwApACoADwAOACAAIAAOACsAEQAsABAAEAAsAC0ALQAsAC4ALgAsAC8ALwAsADAAMAAsADEAJwApAC4ALgApAC0AIwAlADAAMAAlAC8AHgAhACwALAAhADEAKQAOAC0ALQAOABAAJQAnAC8ALwAnAC4AIQAjADEAMQAjADAADwAeABEAEQAeACwA"),
+"material": SubResource("StandardMaterial3D_ra7mq"),
+"name": "bin_2",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 50,
+"vertex_data": PackedByteArray("/3///wAA/fz/fwAAghwH/IHa//99JaXhWMYAAKY5PuL//////3/mw3zjAAD/f0nFgdr//4HakqhYxgAAWMZQq/9//////56Z/38AAHzj/Z19Jf//gdqSqKY5AABYxlCrAAD///9/5sOCHAAA/39JxWwu//9sLmaw/3///6MMuKfiPccG4j2eqv9/xwaAIoSdfSX//30lpeGmOQAApjk+4v9///8AAP38/38AAIIcB/xYxgAApjmAI/9/AACCHP0dfOMAAP9/RjlYxgAAWMYeVf9/AAB84wFipjkAAFjGHlWCHAAA/39GOaY5AACmOYAjktH//2wuZrCB2v//fSX+4P9///8AAGDmW/P///9/g8P//////39yyJLR//+S0UbTgdr//4Hah6j/f///W/NF2P9//////56ZbC7//5LRRtN9Jf//gdqHqKMM////f4PDAAD///9/csh9Jf//fSX+4BzCxwbiPZ6qgCLHBv9/5sbiPccGHML43P9/xwZ+3XniHMLHBhzC+Nx+3ccG/3/mxm+noQqFdOcrUqjPC8RyKy1wsjgZIWS7N1jDny+OTL9I////fwAA/3+er6a8QDeOzDiZjc1DSCHkWNOZZP7//38CxH5X////f8+Lq9fTUsTyoYqP2BhUhfRwDBFaAAD/fxQe1kPXJ7ZEAAD/f0k71qcoPBOe7SVwjJjkpax22EB0/v//f6XnsrBqv7Rfh/NGoDW+v1H+//9//v//f7ffh3O/0cnBTM+mZ7TflMBA9Ienftf8u1fDq2Hd2Z1z/v//f5zzIKar4aa8")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_7luas"]
+radius = 1.00601
+
+[node name="dustbin" type="MeshInstance3D"]
+transform = Transform3D(0.127049, 0, 0, 0, 0.127049, 0, 0, 0, 0.127049, 0, 0, 0)
+mesh = SubResource("ArrayMesh_kg0wg")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.994498, 0)
+shape = SubResource("CylinderShape3D_7luas")

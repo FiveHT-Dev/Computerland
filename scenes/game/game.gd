@@ -67,6 +67,7 @@ func force_load_room(path : String, gate_index : int):
 	spawn_player()
 
 func switch_rooms():
+	#player.global_position = Vector3(0.0, 1000.0, 0.0)
 	if current_room != null:
 		current_room.room_removed()
 		current_room.queue_free()
@@ -84,6 +85,7 @@ func switch_rooms():
 	else:
 		show_player()
 	spawn_player()
+	next_room = null
 
 func _process(delta):
 	if switching_rooms:
@@ -99,8 +101,9 @@ func spawn_player():
 		player.place_at_new_transform(current_room.player_spawn_pos)
 	else:
 		var gate : RoomGate = current_room.gates.get_child(next_gate_index)
-		player.place_at_new_transform(gate.spawn_transform)
-	next_room = null
+		var cam_spawn_transform : Node3D = gate.get_node_or_null("cam_spawn_transform")
+		player.place_at_new_transform(gate.spawn_transform, cam_spawn_transform)
+	
 
 func hide_player():
 	player.global_position = Vector3.ZERO

@@ -1,0 +1,213 @@
+[gd_scene load_steps=29 format=3 uid="uid://dl0ydrkbbpnkb"]
+
+[ext_resource type="Script" path="res://common/scripts/room.gd" id="1_oon8u"]
+[ext_resource type="Script" path="res://common/resources/loaded_scenes/post_process_list.gd" id="2_6owno"]
+[ext_resource type="Environment" uid="uid://bpqq7fn4pb7jb" path="res://common/graphics/environments/env_pitch_black.tres" id="3_ltq6x"]
+[ext_resource type="Script" path="res://common/prefabs/util/save_interface/save_interface.gd" id="4_j2csu"]
+[ext_resource type="PackedScene" uid="uid://du1ef6euq7e78" path="res://common/prefabs/util/triggers/room_gate/room_gate.tscn" id="5_itwc4"]
+[ext_resource type="PackedScene" uid="uid://tv0im8eeplcd" path="res://common/prefabs/cam/cam_follow_area.tscn" id="6_01tef"]
+[ext_resource type="MeshLibrary" uid="uid://dkcki62b5mdxm" path="res://common/meshlibs/libs/bathroom_tiles.tres" id="7_6m5sj"]
+[ext_resource type="PackedScene" uid="uid://mgyl3qcstpmq" path="res://common/prefabs/props/furniture/bathtub.tscn" id="8_p4x50"]
+[ext_resource type="PackedScene" uid="uid://k6exgfd5u16e" path="res://common/prefabs/props/furniture/toilet.tscn" id="9_ola7n"]
+[ext_resource type="PackedScene" uid="uid://dq7t2w0sn8f15" path="res://common/prefabs/props/furniture/sink.tscn" id="10_7bxtl"]
+[ext_resource type="Material" uid="uid://biusc5doowhrt" path="res://common/graphics/shaders/shadermats/smat_graytex_planks_01.tres" id="11_3t44a"]
+[ext_resource type="Material" uid="uid://cic2aqlg4g1hr" path="res://scenes/rooms/hub_town/player_house/bathroom_mirror.tres" id="12_als1i"]
+[ext_resource type="ArrayMesh" uid="uid://crol80leuw25u" path="res://common/graphics/models/obj/tiles/tile_house_wall.obj" id="12_ecdls"]
+[ext_resource type="Shader" path="res://common/graphics/shaders/gdshaders/textured.gdshader" id="13_hvbxr"]
+[ext_resource type="Texture2D" uid="uid://cgqfnodeibcfn" path="res://common/graphics/textures/32/32_graytex_tiles_2.jpg" id="14_oap6x"]
+[ext_resource type="MeshLibrary" uid="uid://kkqsaw6c48dj" path="res://common/meshlibs/libs/invis_wall_tiles.tres" id="15_2oh06"]
+[ext_resource type="PackedScene" uid="uid://nxwvlqsxextt" path="res://common/prefabs/props/furniture/towel_rack.tscn" id="15_8hpua"]
+[ext_resource type="PackedScene" uid="uid://c6t2cbwtgv0j" path="res://common/prefabs/props/furniture/dustbin.tscn" id="18_5sly6"]
+
+[sub_resource type="Resource" id="Resource_0whd2"]
+script = ExtResource("2_6owno")
+paths = ["res://ui/post_processing/crt_filter.tscn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_byihi"]
+size = Vector3(4.86673, 1, 2.26995)
+
+[sub_resource type="BoxMesh" id="BoxMesh_alnuq"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_xamb4"]
+resource_local_to_scene = true
+material = ExtResource("12_als1i")
+orientation = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s478a"]
+render_priority = 0
+shader = ExtResource("13_hvbxr")
+shader_parameter/modulate = Color(0.88, 1, 0.978, 1)
+shader_parameter/brightness = 1.23
+shader_parameter/contrast = 1.08
+shader_parameter/uv_scale = Vector2(2, 2)
+shader_parameter/uv_offset = null
+shader_parameter/invert = false
+shader_parameter/tex = ExtResource("14_oap6x")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2wgd2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_valej"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_053jo"]
+material = SubResource("StandardMaterial3D_valej")
+orientation = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_megec"]
+emission_enabled = true
+emission = Color(1, 1, 0.756863, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_uod1e"]
+material = SubResource("StandardMaterial3D_megec")
+radial_segments = 4
+rings = 4
+
+[node name="Bedroom" type="Node3D"]
+script = ExtResource("1_oon8u")
+post_process_list = SubResource("Resource_0whd2")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("3_ltq6x")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(0.705179, 0.709029, 0, -0.394584, 0.392441, 0.830839, 0.589089, -0.58589, 0.556513, 0, 0, 0)
+visible = false
+
+[node name="utilities" type="Node" parent="."]
+
+[node name="SaveInterface" type="Node" parent="utilities"]
+script = ExtResource("4_j2csu")
+path = "rooms/devroom"
+
+[node name="gates" type="Node" parent="utilities"]
+
+[node name="room_gate" parent="utilities/gates" instance=ExtResource("5_itwc4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.98533, 0.507221, 0.538641)
+next_room_path = "hub_town/player_house/hallway"
+next_room_gate_index = 1
+
+[node name="CollisionShape3D" parent="utilities/gates/room_gate" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.09344, -0.0308513, -1.71656)
+
+[node name="spawn_transform" parent="utilities/gates/room_gate" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.37624, -0.511625, -1.76307)
+
+[node name="cam_spawn_transform" type="Marker3D" parent="utilities/gates/room_gate"]
+transform = Transform3D(1, 0, 0, 0, 0.96397, 0.26601, 0, -0.26601, 0.96397, 2.09579, 0.981846, 0.272958)
+
+[node name="player_spawn_pos" type="Marker3D" parent="utilities"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.641009, 1.08905, -1.72775)
+
+[node name="camera" type="Node" parent="."]
+
+[node name="CamFollowArea2" parent="camera" instance=ExtResource("6_01tef")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.08144, 0, -0.0634409)
+follow_type = 2
+follow_object = NodePath("")
+
+[node name="CollisionShape3D" parent="camera/CamFollowArea2" index="0"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2.07748, 4.76837e-07, -2.8031)
+shape = SubResource("BoxShape3D_byihi")
+
+[node name="audio" type="Node" parent="."]
+
+[node name="room" type="Node" parent="."]
+
+[node name="gridmap_main" type="GridMap" parent="room"]
+mesh_library = ExtResource("7_6m5sj")
+cell_size = Vector3(0.8, 0.4, 0.8)
+cell_center_y = false
+cell_scale = 0.4
+data = {
+"cells": PackedInt32Array(-131072, 65533, 0, -65537, 65533, 0, -65538, 65533, 0, -65539, 65533, 0, -65539, 65534, 0, -65539, 65532, 0, -65538, 65532, 0, -65537, 65532, 0, -131072, 65532, 0, -131072, 65534, 0, -65537, 65534, 0, -65538, 65534, 0, 0, 65532, 1, 65535, 65532, 1048585, 65534, 65532, 1048585, 0, 65533, 1, -65539, 65531, 0, -65538, 65531, 0, -65537, 65531, 0, -131072, 65531, 0, 65535, 65531, 1048577, 65534, 65531, 1048577, 0, 65531, 1048578, 65533, 65531, 655362, -131071, 65534, 3, 65533, 65532, 655361, 65533, 65533, 655361, 65533, 65534, 655361, 0, 65534, 4)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="room/gridmap_main"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.828155, 1.59378, -2.2761)
+light_energy = 1.5
+omni_range = 3.48128
+
+[node name="bathtub" parent="room/gridmap_main" instance=ExtResource("8_p4x50")]
+transform = Transform3D(-1.06981e-08, 0, 0.244745, 0, 0.244745, 0, -0.244745, 0, -1.06981e-08, -1.65539, 0, -1.19401)
+
+[node name="toilet" parent="room/gridmap_main" instance=ExtResource("9_ola7n")]
+transform = Transform3D(-1.00001e-08, 0, 0.228775, 0, 0.228775, 0, -0.228775, 0, -1.00001e-08, -2.05916, 0, -3.409)
+
+[node name="sink" parent="room/gridmap_main" instance=ExtResource("10_7bxtl")]
+transform = Transform3D(-9.44184e-09, 0, 0.216004, 0, 0.216004, 0, -0.216004, 0, -9.44184e-09, -0.462403, 0, -3.77033)
+
+[node name="mirror" type="MeshInstance3D" parent="room/gridmap_main/sink"]
+transform = Transform3D(0.82453, 0, 0, 0, 2.41659, 0, 0, 0, 2.06205, 0.670998, 4.89733, -0.0135841)
+mesh = SubResource("BoxMesh_alnuq")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("11_3t44a")
+
+[node name="reflective_surface" type="MeshInstance3D" parent="room/gridmap_main/sink/mirror"]
+transform = Transform3D(-0.840142, 0, 7.34475e-08, 0, 0.840142, 0, -7.34475e-08, 0, -0.840142, -0.505436, 0, 0)
+mesh = SubResource("QuadMesh_xamb4")
+
+[node name="SubViewport" type="SubViewport" parent="room/gridmap_main/sink/mirror"]
+size = Vector2i(208, 256)
+
+[node name="Camera3D" type="Camera3D" parent="room/gridmap_main/sink/mirror/SubViewport"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.46151, 1.06495, -3.81518)
+
+[node name="only_visible_from_mirror" type="MeshInstance3D" parent="room/gridmap_main"]
+transform = Transform3D(-1.74846e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.74846e-08, 0.4, 0, -1.2)
+layers = 2
+mesh = ExtResource("12_ecdls")
+surface_material_override/0 = SubResource("ShaderMaterial_s478a")
+surface_material_override/1 = SubResource("StandardMaterial3D_2wgd2")
+
+[node name="back_wall2" type="MeshInstance3D" parent="room/gridmap_main/only_visible_from_mirror"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+layers = 2
+mesh = ExtResource("12_ecdls")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_s478a")
+surface_material_override/1 = SubResource("StandardMaterial3D_2wgd2")
+
+[node name="back_wall3" type="MeshInstance3D" parent="room/gridmap_main/only_visible_from_mirror"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+layers = 2
+mesh = ExtResource("12_ecdls")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_s478a")
+surface_material_override/1 = SubResource("StandardMaterial3D_2wgd2")
+
+[node name="back_wall4" type="MeshInstance3D" parent="room/gridmap_main/only_visible_from_mirror"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+layers = 2
+mesh = ExtResource("12_ecdls")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_s478a")
+surface_material_override/1 = SubResource("StandardMaterial3D_2wgd2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="room/gridmap_main/only_visible_from_mirror"]
+transform = Transform3D(-8.93298, 7.80946e-07, 7.80946e-07, -7.80946e-07, -8.93298, 3.41362e-14, 7.80946e-07, -3.41362e-14, 8.93298, -2.75555, 3.99706, 3.07228)
+layers = 2
+mesh = SubResource("QuadMesh_053jo")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="room/gridmap_main/only_visible_from_mirror"]
+transform = Transform3D(0.550028, 0, -3.55271e-15, 0, 0.550028, 0, 3.55271e-15, 0, 0.550028, -2.72902, 3.94637, 3.05488)
+layers = 2
+mesh = SubResource("SphereMesh_uod1e")
+
+[node name="towel_rack" parent="room/gridmap_main" instance=ExtResource("15_8hpua")]
+transform = Transform3D(-6.55671e-09, 0, 0.15, 0, 0.15, 0, -0.15, 0, -6.55671e-09, -2.2624, 0.360819, -2.33867)
+
+[node name="gridmap_invis_colliders" type="GridMap" parent="room"]
+mesh_library = ExtResource("15_2oh06")
+cell_size = Vector3(0.8, 0.4, 0.8)
+cell_center_y = false
+cell_scale = 0.4
+data = {
+"cells": PackedInt32Array(1, 65535, 655360, 2, 65535, 655360, 1, 65533, 655360, 2, 65533, 655360, 3, 65533, 655360, 3, 65534, 655360, 3, 65535, 655360, 0, 65535, 1441792, 65535, 65535, 1441792, 65534, 65535, 1441792, 65533, 65535, 1441792)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="dustbin" parent="." instance=ExtResource("18_5sly6")]
+transform = Transform3D(0.127049, 0, 0, 0, 0.127049, 0, 0, 0, 0.127049, 0.505146, 0, -3.6588)
+
+[editable path="utilities/gates/room_gate"]
+[editable path="camera/CamFollowArea2"]

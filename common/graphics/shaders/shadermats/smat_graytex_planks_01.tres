@@ -11,4 +11,5 @@ shader_parameter/uv_scale = Vector2(4, 4)
 shader_parameter/uv_offset = null
 shader_parameter/brightness = 1.0
 shader_parameter/contrast = 1.0
+shader_parameter/invert = false
 shader_parameter/tex = ExtResource("2_7jxlh")

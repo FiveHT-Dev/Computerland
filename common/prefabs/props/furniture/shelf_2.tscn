@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://dsff520xyh0qv"]
+[gd_scene load_steps=10 format=4 uid="uid://dsff520xyh0qv"]
 
 [ext_resource type="Shader" path="res://common/graphics/shaders/gdshaders/gray_textured.gdshader" id="1_j6j2l"]
 [ext_resource type="Texture2D" uid="uid://dcckfefuim0n1" path="res://common/graphics/textures/64/64x32_graytex_woodgrain_1.jpg" id="2_g4dic"]
+[ext_resource type="Shader" path="res://common/graphics/shaders/gdshaders/textured.gdshader" id="3_urmlp"]
+[ext_resource type="Texture2D" uid="uid://lnc6d0vrpmbc" path="res://common/graphics/textures/32/32_tex_books_1.jpg" id="4_vafvc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jg4dr"]
 render_priority = 0
@@ -11,6 +13,7 @@ shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = null
 shader_parameter/brightness = 1.0
 shader_parameter/contrast = 1.64
+shader_parameter/invert = false
 shader_parameter/tex = ExtResource("2_g4dic")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_d31du"]
@@ -32,6 +35,20 @@ blend_shape_mode = 0
 [sub_resource type="BoxShape3D" id="BoxShape3D_mccrh"]
 size = Vector3(2.99109, 4.00537, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rxvnl"]
+render_priority = 0
+shader = ExtResource("3_urmlp")
+shader_parameter/modulate = Color(1, 1, 1, 1)
+shader_parameter/brightness = 0.35
+shader_parameter/contrast = 1.0
+shader_parameter/uv_scale = Vector2(3, 1)
+shader_parameter/uv_offset = null
+shader_parameter/invert = false
+shader_parameter/tex = ExtResource("4_vafvc")
+
+[sub_resource type="QuadMesh" id="QuadMesh_800o6"]
+material = SubResource("ShaderMaterial_rxvnl")
+
 [node name="shelf_2" type="MeshInstance3D"]
 transform = Transform3D(0.333272, 0, 0, 0, 0.333272, 0, 0, 0, 0.333272, 0, 0, 0)
 mesh = SubResource("ArrayMesh_d31du")
@@ -41,3 +58,7 @@ mesh = SubResource("ArrayMesh_d31du")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(0.999984, 0, 0, 0, 0.999984, 0, 0, 0, 0.999984, -6.24623e-05, 2.00022, 0)
 shape = SubResource("BoxShape3D_mccrh")
+
+[node name="books" type="MeshInstance3D" parent="."]
+transform = Transform3D(-2.7758, 0, 8.74228e-08, 0, 0.816617, 0, -2.42668e-07, 0, -1, 0, 0.49192, -0.340057)
+mesh = SubResource("QuadMesh_800o6")

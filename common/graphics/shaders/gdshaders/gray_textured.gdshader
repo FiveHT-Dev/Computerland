@@ -6,6 +6,7 @@ uniform vec2 uv_scale = vec2(1.0f);
 uniform vec2 uv_offset;
 uniform float brightness : hint_range(0.0, 5.0, 0.01) = 1.0f;
 uniform float contrast : hint_range(0.0, 5.0, 0.01) = 1.0f;
+uniform bool invert = false;
 void vertex() {
 	// Called for every vertex the material is visible on.
 }
@@ -26,9 +27,13 @@ vec3 brightness_contrast(vec3 color)
 }
 
 void fragment() {
-	vec3 tex_col = brightness_contrast(texture(tex, UV * uv_scale + uv_offset).rgb);
-	float i = 0.5f * (tex_col.r + tex_col.b);
-	ALBEDO = vec3(mix(vec3(1.0f, 1.0f, 1.0f), modulate.rgb * i, 1.0 - tex_col.g)) * modulate;
+	float inv = float(invert);
+	vec3 tex_col = texture(tex, UV * uv_scale + uv_offset).rgb;
+	vec3 inverted_col = vec3(1.0f) - tex_col;
+	vec3 current_col = brightness_contrast((tex_col * (1.0f - inv)) + (inverted_col * inv));
+	float i = 0.5f * (current_col.r + current_col.b);
+	vec3 col = vec3(mix(vec3(1.0f, 1.0f, 1.0f), modulate.rgb * i, 1.0 - current_col.g)) * modulate;
+	ALBEDO = col;
 }
 //void light() {
 	// Called for every pixel for every light affecting the CanvasItem.

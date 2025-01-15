@@ -12,7 +12,6 @@ func create_data():
 	get_all_files("res://scenes/", ".tscn", all_files)
 	
 	for f in all_files:
-		print(f)
 		data[f] = load(f)
 		
 

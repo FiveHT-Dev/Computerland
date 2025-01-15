@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://byc7dnpg8elju"]
+[gd_scene load_steps=30 format=4 uid="uid://byc7dnpg8elju"]
 
 [ext_resource type="Script" path="res://common/scripts/room.gd" id="1_bgrrh"]
 [ext_resource type="Script" path="res://common/resources/loaded_scenes/post_process_list.gd" id="2_ra6ho"]
@@ -13,8 +13,14 @@
 [ext_resource type="PackedScene" uid="uid://dqcb1cfvgn4vt" path="res://common/prefabs/props/furniture/shelf.tscn" id="10_4v1ep"]
 [ext_resource type="PackedScene" uid="uid://dsff520xyh0qv" path="res://common/prefabs/props/furniture/shelf_2.tscn" id="11_pt1xi"]
 [ext_resource type="PackedScene" uid="uid://ct3orsrhwcjbv" path="res://common/prefabs/props/furniture/wardrobe.tscn" id="12_7pt5e"]
+[ext_resource type="Shader" path="res://common/graphics/shaders/gdshaders/textured.gdshader" id="12_ojfvq"]
+[ext_resource type="Texture2D" uid="uid://lnc6d0vrpmbc" path="res://common/graphics/textures/32/32_tex_books_1.jpg" id="13_cnk3b"]
 [ext_resource type="PackedScene" uid="uid://35whuo5afynh" path="res://common/prefabs/props/furniture/table_2.tscn" id="13_u4l7h"]
 [ext_resource type="PackedScene" uid="uid://cs13ks1pki10a" path="res://common/prefabs/props/furniture/chair_3.tscn" id="14_bd1es"]
+[ext_resource type="Shader" path="res://common/graphics/shaders/gdshaders/gray_textured.gdshader" id="17_ddl8a"]
+[ext_resource type="Texture2D" uid="uid://d04cacltrd6db" path="res://common/graphics/textures/64/64x32_graytex_tv_1.jpg" id="18_ul6tc"]
+[ext_resource type="Material" uid="uid://dfkhfqq6jg2lp" path="res://common/graphics/materials/regular_uv/metal_01.tres" id="19_h188p"]
+[ext_resource type="PackedScene" uid="uid://c6t2cbwtgv0j" path="res://common/prefabs/props/furniture/dustbin.tscn" id="20_1ajjd"]
 
 [sub_resource type="Resource" id="Resource_0whd2"]
 script = ExtResource("2_ra6ho")
@@ -26,10 +32,78 @@ size = Vector3(3.28787, 1, 2.34097)
 [sub_resource type="BoxShape3D" id="BoxShape3D_23lys"]
 size = Vector3(1.40534, 1, 2.34097)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rxvnl"]
+render_priority = 0
+shader = ExtResource("12_ojfvq")
+shader_parameter/modulate = Color(1, 1, 1, 1)
+shader_parameter/brightness = 0.35
+shader_parameter/contrast = 1.0
+shader_parameter/uv_scale = Vector2(3, 1)
+shader_parameter/uv_offset = null
+shader_parameter/invert = false
+shader_parameter/tex = ExtResource("13_cnk3b")
+
+[sub_resource type="QuadMesh" id="QuadMesh_800o6"]
+material = SubResource("ShaderMaterial_rxvnl")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f5fvh"]
+render_priority = 0
+shader = ExtResource("17_ddl8a")
+shader_parameter/modulate = Color(0.857284, 0.781983, 0.622246, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = null
+shader_parameter/brightness = 0.54
+shader_parameter/contrast = 1.25
+shader_parameter/invert = false
+shader_parameter/tex = ExtResource("18_ul6tc")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5nnyt"]
+resource_name = "Material.033"
+albedo_color = Color(0, 0, 0, 1)
+metallic = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_w1awk"]
+_surfaces = [{
+"aabb": AABB(-0.8, 0, -1.47789, 1.7, 2, 2.97789),
+"attribute_data": PackedByteArray("qLUSuoubErqotXSyi5t0sg7o+M8wvPjPDui1hTC8tYU2v6+zQKmvsza/r7NAqa+zCed+zzC8fs8J57WFMLy1hSynULUOjVC1LKd2ng6Ndp5o21C1SsFQtWjbdp5KwXaeaNvtvErB7bwsp+28Do3tvFKQGH5SkJbXy38Yfst/ltc95+zQ/Lvs0D3nwoT8u8KEzrTHsc60MJ7itmiz4raPnNieMJ7EnI+cD8ei4aD7ouGwwv///////4+aTbGFsE2xe5juspmy7rJAqRegNr8XoECpF6A2vxegQKmvs0CpF6BAqa+zQKkXoDa/F6A2v6+zNr8XoDa/r7M="),
+"format": 34896613399,
+"index_count": 102,
+"index_data": PackedByteArray("AAABAAIAAgABAAMABAAFAAYABgAFAAcACAAJAAoACgAJAAsADAANAA4ADgANAA8AEAARABIAEgARABMAFAAVABYAFgAVABcAGAAZABQAFAAZABUAGgAbABAAEAAbABEAHAAdAB4AHgAdAB8AIAAhACIAIgAhACMAJAAlACYAJgAlACcAJQAoACcAJwAoACkAKgArACwALAArAC0ALgAvADAAMAAvADEAMgAzADQANAAzADUANgA3ADgAOAA3ADkAOgA7ADwAPAA7AD0A"),
+"material": SubResource("ShaderMaterial_f5fvh"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(2.4505, 2.1007, 0, 0),
+"vertex_count": 62,
+"vertex_data": PackedByteArray("AAD///8/VNUAAAAA/z9U1QAA//8AAFTVAAAAAAAAVNUAAP//AAD//wAAAAAAAP///////wAA/////wAAAAD/////nuuvTf5///8iLq9N/n9M5Z7rr03+f0zlIi6vTf5//////////7///wAA////vwAA//////+/AAAAAP///7///wAA/z//vwAAAAD/P/+///8AAP///78AAAAA////vwAA////P/////////8///8AAP//////////////////AAD//wAA////////AAD/////AAAAAP+/AAAAAAAA/7//////AAD/v///AAAAAP+///////8//7///wAA/z//vwAA/////1TVAAAAAP//VNUAAP///z9U1QAAAAD/P1TV//+e669NVNX//57rT/JU1f//////P1TV////////VNX//yIuT/JU1f//AAD//1TV//8iLk/y/7///yIur03/v///AAD///+///8AAP8//7///yIur01U1f//nuuvTVTV//8AAP8/VNX//////z9U1f//Ii5P8v////+e60/y//9M5SIuT/L//0zlnutP8v////8iLq9N/7///yIuT/L/v0zlIi6vTf+/TOUiLk/y/7///57rT/L/v///nuuvTf+/TOWe60/y/79M5Z7rr03/v1TVVNVU1VTVVNVU1VTVVNX/v/+//7//v/+//7//v/+//3////9/////f////3////////////////////////8AAP9/AAD/fwAA/38AAP9//3//v/9//7//f/+//3//v/9//7//f/+/AAD/fwAA/3//fwAA/38AAP9/AAD/fwAAVNVU1VTVVNVU1VTVVNVU1aoqqiqqKqoqqiqqKqoqqiqqKqoqqiqqKv9/AAD/fwAA/38AAP9/AACqKqoqqiqqKqoqqiqqKqoq////f////3////9/////f////3////9/////f////38AAP9/AAD/fwAA/38AAP9/")
+}, {
+"aabb": AABB(0.722721, 0.36042, -0.574212, 1e-05, 1.48038, 1.91501),
+"attribute_data": PackedByteArray("55qTbBdlk2znmmtDF2VrQw=="),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgABAAMA"),
+"material": SubResource("StandardMaterial3D_5nnyt"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAD//wAAVNUAAAAAAABU1QAA/////1TVAAAAAP//VNWqKqoqqiqqKqoqqiqqKqoq")
+}, {
+"aabb": AABB(-0.202004, 1.96511, -0.311657, 0.404008, 1.81793, 1.41949),
+"attribute_data": PackedByteArray("/5////9f////n/+//1//v/+f/7//X/+//5//f/9f/3//n/9//1//f/+f/z//X/8//5//P/9f/z//nwAA/18AAP9f/3//H/9//1//P/8f/z//3/9//5//f//f/z//n/8//5////9f////n/+//1//v/+f/7//X/+//5//f/9f/3//n/9//1//f/+f/z//X/8//5//P/9f/z//nwAA/18AAP9f/3//H/9//1//P/8f/z//3/9//5//f//f/z//n/8//5////9f////n/+//1//v/+f/7//X/+//5//f/9f/3//n/9//1//f/+f/z//X/8//5//P/9f/z//nwAA/18AAA=="),
+"format": 34896613399,
+"index_count": 96,
+"index_data": PackedByteArray("AAABAAIAAgABAAMABAAFAAYABgAFAAcACAAJAAoACgAJAAsADAANAA4ADgANAA8AEAARABIAEgARABMAFAAVABYAFgAVABcAGAAZABoAGgAZABsAHAAdAB4AHgAdAB8AIAAhACIAIgAhACMAJAAlACYAJgAlACcAKAApACoAKgApACsALAAtAC4ALgAtAC8AMAAxADIAMgAxADMANAA1ADYANgA1ADcAOAA5ADoAOgA5ADsAPAA9AD4APgA9AD8A"),
+"material": ExtResource("19_h188p"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 64,
+"vertex_data": PackedByteArray("AADBJGKsVNUAAAAAYqxU1QAAwSQAAFTVAAAAAAAAVNUAAMEkAAD//wAAAAAAAP/////BJAAA/////wAAAAD/////wSQAAFTV//8AAAAAVNX//8EkYqxU1f//AABirFTV///BJGKs/7///wAAYqz/vwAAwSRirP+/AAAAAGKs/7///wAAAAD/vwAAAAAAAP+///8AAGKs/78AAAAAYqz/vwAAwSQAAP/////BJAAA//8AAMEkYqz/////wSRirP//L5l4HxV6ON8vmf//xvI43y+ZIxtOhzjfL5mp+///ON8vmSMbToeW9C+Zqfv//5b0z2YjG06HlvTPZqn7//+W9M9mIxtOh7DMz2ap+///sMzPZngfFXqwzM9m///G8rDMz2Z4HxV6lcHPZv//xvKVwS+ZeB8VepXBL5n//8bylcHPZqn7/////y+Zqfv/////z2b//8by//8vmf//xvL//y+ZIxtOh86vz2YjG06Hzq8vmXgfFXrOr89meB8Ves6vL5klBatgw9AvmbnzRyLD0C+ZYge3bsPQL5n29VMww9AvmWIHt24y+i+Z9vVTMDL6z2ZiB7duMvrPZvb1UzAy+s9mYge3bjfaz2b29VMwN9rPZiUFq2A32s9mufNHIjfaz2YlBatgaMDPZrnzRyJowC+ZJQWrYGjAL5m580ciaMBU1VTVVNVU1VTVVNVU1VTV/7//v/+//7//v/+//7//v6oqqiqqKqoqqiqqKqoqqir/////////////////////AAD/fwAA/38AAP9/AAD/f/9//7//f/+//3//v/9//7/3T+6f90/un/dP7p/3T+6f2cUlOtnFJTrZxSU62cUlOoakDUmGpA1JhqQNSYakDUmgbaBtoG2gbaBtoG2gbaBtHLP//xyz//8cs///HLP//////3////9/////f////39OWJ2wTlidsE5YnbBOWJ2w6zwTw+s8E8PrPBPD6zwTw3Gt5FpxreRaca3kWnGt5FrCisKKworCisKKworCisKK")
+}]
+blend_shape_mode = 0
+
 [node name="Bedroom" type="Node3D"]
 script = ExtResource("1_bgrrh")
-hide_player = null
-hide_in_game_ui = null
 post_process_list = SubResource("Resource_0whd2")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -48,11 +122,14 @@ path = "rooms/devroom"
 [node name="gates" type="Node" parent="utilities"]
 
 [node name="room_gate" parent="utilities/gates" instance=ExtResource("4_2w4ch")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.39784, 0.507221, 0.381316)
-next_room_path = "debug/devroom2"
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.99242, 0.507221, -2.0533)
+next_room_path = "hub_town/player_house/hallway"
 
 [node name="spawn_transform" parent="utilities/gates/room_gate" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.407993, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.26387, -0.496396, -2.38419e-07)
+
+[node name="cam_spawn_transform" type="Marker3D" parent="utilities/gates/room_gate"]
+transform = Transform3D(-4.37114e-08, 0.196271, -0.98055, 0, 0.98055, 0.196271, 1, 8.57929e-09, -4.28612e-08, -4.64129, 0.949458, -0.182328)
 
 [node name="player_spawn_pos" type="Marker3D" parent="utilities"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.08905, 0)
@@ -71,10 +148,9 @@ shape = SubResource("BoxShape3D_oibli")
 [node name="Marker3D" type="Marker3D" parent="camera/CamFollowArea"]
 transform = Transform3D(1, 0, 0, 0, 0.923089, 0.384585, 0, -0.384585, 0.923089, -0.478427, 1.21434, -0.901869)
 
-[node name="CamFollowArea2" parent="camera" node_paths=PackedStringArray("follow_object") instance=ExtResource("5_toqnt")]
+[node name="CamFollowArea2" parent="camera" instance=ExtResource("5_toqnt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.239109, 0, 0.99922)
 follow_type = 2
-follow_object = NodePath("")
 
 [node name="CollisionShape3D" parent="camera/CamFollowArea2" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.00378, 0, -3.02484)
@@ -90,9 +166,9 @@ cell_size = Vector3(0.8, 0.4, 0.8)
 cell_center_y = false
 cell_scale = 0.4
 data = {
-"cells": PackedInt32Array(-65539, 1, 5, -65538, 1, 5, -65537, 1, 5, -131072, 1, 5, -131071, 1, 5, -131070, 1, 5, -131070, 0, 5, -131071, 0, 5, -131072, 0, 5, -65537, 0, 5, -65537, 65535, 5, -65538, 65535, 5, -65539, 65535, 5, -65539, 0, 5, -65538, 0, 5, -131072, 65535, 5, -131071, 65535, 5, -131070, 65535, 5, -131072, 65533, 5, -65537, 65533, 5, -65538, 65533, 5, -65539, 65533, 5, -65539, 65534, 5, -65539, 65532, 5, -65538, 65532, 5, -65537, 65532, 5, -131072, 65532, 5, -131072, 65534, 5, -65537, 65534, 5, -65538, 65534, 5, 0, 65532, 1048576, 65535, 65532, 1048582, 65534, 65532, 1048582, 65533, 65532, 655360, 1, 65535, 1048582, 65533, 65533, 655366, 65533, 65534, 655366, 65533, 65535, 655366, 65533, 0, 655366, 65533, 1, 655366, 2, 0, 6, 2, 1, 6, 0, 65533, 6, 0, 65534, 6, 0, 65535, 1048577, 2, 65535, 6, -131070, 65534, 5, -131070, 65533, 5)
+"cells": PackedInt32Array(-65539, 1, 5, -65538, 1, 5, -65537, 1, 5, -131072, 1, 5, -131071, 1, 5, -131070, 1, 5, -131070, 0, 5, -131071, 0, 5, -131072, 0, 5, -65537, 0, 5, -65537, 65535, 5, -65538, 65535, 5, -65539, 65535, 5, -65539, 0, 5, -65538, 0, 5, -131072, 65535, 5, -131071, 65535, 5, -131070, 65535, 5, -131072, 65533, 5, -65537, 65533, 5, -65538, 65533, 5, -65539, 65533, 5, -65539, 65534, 5, -65539, 65532, 5, -65538, 65532, 5, -65537, 65532, 5, -131072, 65532, 5, -131072, 65534, 5, -65537, 65534, 5, -65538, 65534, 5, 0, 65532, 1048576, 65535, 65532, 1048582, 65534, 65532, 1048582, 65533, 65532, 655360, 1, 65535, 1048582, 65533, 65533, 655366, 65533, 65534, 655366, 65533, 65535, 655366, 65533, 0, 655366, 65533, 1, 655366, 0, 65533, 6, 0, 65534, 6, 0, 65535, 1048577, -131070, 65534, 1048583, 2, 65535, 1048584, 3, 65535, 1048576, 3, 0, 6, 3, 1, 6, -131069, 65535, 5, -131069, 0, 5, -131069, 1, 5)
 }
-metadata/_editor_floor_ = Vector3(0, 0, 0)
+metadata/_editor_floor_ = Vector3(0, -2, 0)
 
 [node name="bed" parent="room/gridmap_main" instance=ExtResource("8_v87y3")]
 transform = Transform3D(0.243292, 0, 0, 0, 0.243292, 0, 0, 0, 0.243292, -1.86152, 0, -2.17698)
@@ -111,11 +187,35 @@ transform = Transform3D(-1.03403e-08, 0, -0.236558, 0, 0.236558, 0, 0.236558, 0,
 [node name="shelf_2" parent="room/gridmap_main" instance=ExtResource("11_pt1xi")]
 transform = Transform3D(-1.45678e-08, 0, 0.333272, 0, 0.333272, 0, -0.333272, 0, -1.45678e-08, 0.566795, 0, -2.65273)
 
+[node name="books2" type="MeshInstance3D" parent="room/gridmap_main/shelf_2"]
+transform = Transform3D(-2.7758, 0, 8.74228e-08, 0, 0.816617, 0, -2.42668e-07, 0, -1, 0, 1.49556, -0.245003)
+mesh = SubResource("QuadMesh_800o6")
+
+[node name="books3" type="MeshInstance3D" parent="room/gridmap_main/shelf_2"]
+transform = Transform3D(-2.7758, 0, 8.74228e-08, 0, 0.816617, 0, -2.42668e-07, 0, -1, 0, 2.487, -0.340057)
+mesh = SubResource("QuadMesh_800o6")
+
+[node name="books4" type="MeshInstance3D" parent="room/gridmap_main/shelf_2"]
+transform = Transform3D(-2.7758, 0, 8.74228e-08, 0, 0.816617, 0, -2.42668e-07, 0, -1, 0, 3.497, -0.300108)
+mesh = SubResource("QuadMesh_800o6")
+
 [node name="wardrobe" parent="room/gridmap_main" instance=ExtResource("12_7pt5e")]
 transform = Transform3D(-1.00726e-08, 0, 0.230435, 0, 0.230435, 0, -0.230435, 0, -1.00726e-08, 0.523229, 0, -1.70591)
 
 [node name="table_2" parent="room/gridmap_main" instance=ExtResource("13_u4l7h")]
 transform = Transform3D(-0.288109, 0, -2.51873e-08, 0, 0.288109, 0, 2.51873e-08, 0, -0.288109, -0.514208, 0, 1.27139)
+
+[node name="chair_3" parent="room/gridmap_main" instance=ExtResource("14_bd1es")]
+transform = Transform3D(-0.530681, 0, -0.105135, 0, 0.540995, 0, 0.105135, 0, -0.530681, -0.740207, 0, 0.932024)
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="room/gridmap_main"]
+transform = Transform3D(-0.161151, 0, 0.0117324, 0, 0.161578, 0, -0.0117324, 0, -0.161151, 0.52174, 0.616808, -1.61962)
+mesh = SubResource("ArrayMesh_w1awk")
+
+[node name="dustbin" parent="room/gridmap_main" instance=ExtResource("20_1ajjd")]
+transform = Transform3D(0.127049, 0, 0, 0, 0.127049, 0, 0, 0, 0.127049, 2.95624, 0, 1.38478)
+skeleton = NodePath("../../..")
 
 [node name="gridmap_invis_colliders" type="GridMap" parent="room"]
 mesh_library = ExtResource("7_mna5h")
@@ -123,13 +223,11 @@ cell_size = Vector3(0.8, 0.4, 0.8)
 cell_center_y = false
 cell_scale = 0.4
 data = {
-"cells": PackedInt32Array(3, 65534, 0, 3, 65533, 0, 3, 65532, 0, 2, 65532, 0, 1, 65532, 0, 1, 65533, 0, 1, 65534, 0, 65533, 2, 0, 65534, 2, 0, 65535, 2, 0, 0, 2, 0, 1, 2, 0, 2, 2, 0)
+"cells": PackedInt32Array(3, 65534, 0, 3, 65533, 0, 3, 65532, 0, 2, 65532, 0, 1, 65532, 0, 1, 65533, 0, 1, 65534, 0, 65533, 2, 0, 65534, 2, 0, 65535, 2, 0, 0, 2, 0, 1, 2, 0, 2, 2, 0, 3, 2, 0)
 }
 metadata/_editor_floor_ = Vector3(0, 0, 0)
-
-[node name="chair_3" parent="." instance=ExtResource("14_bd1es")]
-transform = Transform3D(-0.530681, 0, -0.105135, 0, 0.540995, 0, 0.105135, 0, -0.530681, -0.740207, 0, 0.932024)
 
 [editable path="utilities/gates/room_gate"]
 [editable path="camera/CamFollowArea"]
 [editable path="camera/CamFollowArea2"]
+[editable path="room/gridmap_main/shelf_2"]

@@ -1,0 +1,124 @@
+[gd_scene load_steps=12 format=3 uid="uid://byhy4jdrlqukx"]
+
+[ext_resource type="Script" path="res://common/scripts/room.gd" id="1_y67hk"]
+[ext_resource type="Script" path="res://common/resources/loaded_scenes/post_process_list.gd" id="2_dlpiv"]
+[ext_resource type="Environment" uid="uid://bpqq7fn4pb7jb" path="res://common/graphics/environments/env_pitch_black.tres" id="3_wf8ib"]
+[ext_resource type="Script" path="res://common/prefabs/util/save_interface/save_interface.gd" id="4_s086i"]
+[ext_resource type="PackedScene" uid="uid://du1ef6euq7e78" path="res://common/prefabs/util/triggers/room_gate/room_gate.tscn" id="5_iph0y"]
+[ext_resource type="PackedScene" uid="uid://tv0im8eeplcd" path="res://common/prefabs/cam/cam_follow_area.tscn" id="6_nb3kk"]
+[ext_resource type="MeshLibrary" uid="uid://dptbrhd361obw" path="res://common/meshlibs/libs/house_tiles.tres" id="7_uxmiq"]
+[ext_resource type="MeshLibrary" uid="uid://kkqsaw6c48dj" path="res://common/meshlibs/libs/invis_wall_tiles.tres" id="14_1hgun"]
+
+[sub_resource type="Resource" id="Resource_0whd2"]
+script = ExtResource("2_dlpiv")
+paths = ["res://ui/post_processing/crt_filter.tscn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_55i1t"]
+size = Vector3(1, 1, 1.5813)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0fvcf"]
+size = Vector3(12.8307, 1, 13.1164)
+
+[node name="Bedroom" type="Node3D"]
+script = ExtResource("1_y67hk")
+post_process_list = SubResource("Resource_0whd2")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("3_wf8ib")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(0.705179, 0.709029, 0, -0.394584, 0.392441, 0.830839, 0.589089, -0.58589, 0.556513, 0, 0, 0)
+visible = false
+
+[node name="utilities" type="Node" parent="."]
+
+[node name="SaveInterface" type="Node" parent="utilities"]
+script = ExtResource("4_s086i")
+path = "rooms/devroom"
+
+[node name="gates" type="Node" parent="utilities"]
+
+[node name="room_gate" parent="utilities/gates" instance=ExtResource("5_iph0y")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.475412, 0.507221, 3.54157)
+next_room_path = "hub_town/player_house/bedroom"
+
+[node name="spawn_transform" parent="utilities/gates/room_gate" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25075, -0.488109, -0.0594784)
+
+[node name="room_gate2" parent="utilities/gates" instance=ExtResource("5_iph0y")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.12962, 0.507221, 0.44123)
+next_room_path = "hub_town/player_house/bathroom"
+
+[node name="spawn_transform" parent="utilities/gates/room_gate2" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4585, -0.474803, 2.98023e-08)
+
+[node name="room_gate3" parent="utilities/gates" instance=ExtResource("5_iph0y")]
+transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 2.10537, 0.507221, -2.01392)
+next_room_path = "hub_town/player_house/utility_room"
+
+[node name="spawn_transform" parent="utilities/gates/room_gate3" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.45293, -0.486657, 2.38419e-07)
+
+[node name="room_gate4" parent="utilities/gates" instance=ExtResource("5_iph0y")]
+transform = Transform3D(1.31135e-07, 0, 1, 0, 1, 0, -1, 0, 1.31135e-07, -0.00562191, 0.507221, -4.7774)
+next_room_path = "hub_town/player_house/living_room"
+
+[node name="CollisionShape3D" parent="utilities/gates/room_gate4" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0020752)
+shape = SubResource("BoxShape3D_55i1t")
+
+[node name="spawn_transform" parent="utilities/gates/room_gate4" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.57663, -0.493771, 7.49715e-08)
+
+[node name="player_spawn_pos" type="Marker3D" parent="utilities"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.241403, 0)
+
+[node name="camera" type="Node" parent="."]
+
+[node name="CamFollowArea2" parent="camera" node_paths=PackedStringArray("follow_object") instance=ExtResource("6_nb3kk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.239109, 0, 0.99922)
+follow_type = 1
+follow_object = NodePath("Marker3D")
+teleport_on_enter = true
+
+[node name="CollisionShape3D" parent="camera/CamFollowArea2" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.346867, 0, -2.88023)
+shape = SubResource("BoxShape3D_0fvcf")
+
+[node name="Marker3D" type="Marker3D" parent="camera/CamFollowArea2"]
+transform = Transform3D(1, 0, 0, 0, 0.99079, 0.135404, 0, -0.135404, 0.99079, 0.233028, 1.69361, 3.86473)
+
+[node name="audio" type="Node" parent="."]
+
+[node name="room" type="Node" parent="."]
+
+[node name="gridmap_main" type="GridMap" parent="room"]
+mesh_library = ExtResource("7_uxmiq")
+cell_size = Vector3(0.8, 0.4, 0.8)
+cell_center_y = false
+cell_scale = 0.4
+data = {
+"cells": PackedInt32Array(-65537, 2, 5, -65537, 1, 5, -65537, 0, 5, -65537, 65535, 5, -65537, 65534, 5, -65537, 65533, 5, -65537, 65532, 5, -131072, 65532, 5, -131072, 65533, 5, -131072, 65534, 5, -131072, 65535, 5, -131072, 0, 5, -131072, 1, 5, -131072, 2, 5, -65537, 3, 1441799, -65538, 0, 655367, -131071, 65533, 7, -65537, 65531, 1048583, -131072, 65531, 1048583, 65535, 2, 655366, 0, 2, 6, 0, 1, 6, 0, 0, 6, 0, 65535, 6, 0, 65534, 6, 0, 65532, 6, 65535, 1, 655366, 65535, 65535, 655366, 65535, 65534, 655366, 65535, 65533, 655366, 65535, 65532, 655366, 65535, 0, 655368, 0, 65533, 8)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="room/gridmap_main"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21032, 1.61743, -0.244646)
+light_energy = 2.0
+omni_range = 5.3197
+
+[node name="gridmap_invis_colliders" type="GridMap" parent="room"]
+mesh_library = ExtResource("14_1hgun")
+cell_size = Vector3(0.8, 0.4, 0.8)
+cell_center_y = false
+cell_scale = 0.4
+data = {
+"cells": PackedInt32Array(65534, 3, 655360, 65534, 4, 655360, 65534, 5, 655360, 65535, 5, 655360, 0, 5, 655360, 0, 4, 655360, 0, 3, 655360, 1, 3, 655360, 65534, 65535, 655360, 65533, 65535, 655360, 65532, 65535, 655360, 65532, 0, 655360, 65532, 1, 655360, 65533, 1, 655360, 65534, 1, 655360, 1, 65534, 655360, 2, 65534, 655360, 3, 65534, 655360, 3, 65533, 655360, 3, 65532, 655360, 2, 65532, 655360, 1, 65532, 655360, 65534, 65531, 655360, 65534, 65530, 655360, 65534, 65529, 655360, 65535, 65529, 655360, 0, 65529, 655360, 1, 65529, 655360, 1, 65530, 655360, 1, 65531, 655360)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[editable path="utilities/gates/room_gate"]
+[editable path="utilities/gates/room_gate2"]
+[editable path="utilities/gates/room_gate3"]
+[editable path="utilities/gates/room_gate4"]
+[editable path="camera/CamFollowArea2"]

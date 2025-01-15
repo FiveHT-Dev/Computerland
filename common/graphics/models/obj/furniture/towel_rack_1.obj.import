@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ba3w1wpir624q"
+path="res://.godot/imported/towel_rack_1.obj-53944ff12201ccc528de60efcac3a672.mesh"
+
+[deps]
+
+files=["res://.godot/imported/towel_rack_1.obj-53944ff12201ccc528de60efcac3a672.mesh"]
+
+source_file="res://common/graphics/models/obj/furniture/towel_rack_1.obj"
+dest_files=["res://.godot/imported/towel_rack_1.obj-53944ff12201ccc528de60efcac3a672.mesh", "res://.godot/imported/towel_rack_1.obj-53944ff12201ccc528de60efcac3a672.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

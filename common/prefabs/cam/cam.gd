@@ -41,10 +41,14 @@ func add_override_focus(focus : Node3D):
 	override_focus_object = focus
 
 func force_to_follow_transform():
+	override_focus_object = null
 	if follow_transform == null:
 		follow_transform = player.current_cam_follow_transform
-	global_position = follow_transform.global_position
-	global_basis = follow_transform.global_basis
+	force_to_transform(follow_transform)
+
+func force_to_transform(t : Node3D):
+	global_position = t.global_position
+	global_basis = t.global_basis
 
 func remove_override_focus():
 	override_focus_object = null

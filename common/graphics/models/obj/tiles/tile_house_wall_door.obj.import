@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://2t7mc4c7hxoq"
+path="res://.godot/imported/tile_house_wall_door.obj-dbb548bcafa2d3bb1025acc78f216b1f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/tile_house_wall_door.obj-dbb548bcafa2d3bb1025acc78f216b1f.mesh"]
+
+source_file="res://common/graphics/models/obj/tiles/tile_house_wall_door.obj"
+dest_files=["res://.godot/imported/tile_house_wall_door.obj-dbb548bcafa2d3bb1025acc78f216b1f.mesh", "res://.godot/imported/tile_house_wall_door.obj-dbb548bcafa2d3bb1025acc78f216b1f.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

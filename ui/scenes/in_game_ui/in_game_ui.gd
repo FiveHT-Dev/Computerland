@@ -66,7 +66,7 @@ func t_circ_close() -> bool:
 func t_circ_open() -> bool:
 	var r : float = transition_circle_smat.get_shader_parameter("circle_r")
 	if r < 2.0:
-		transition_circle_smat.set_shader_parameter("circle_r", lerpf(r, 2.1, 0.1))
+		transition_circle_smat.set_shader_parameter("circle_r", lerpf(r, 2.1, 0.05))
 		return false
 	return true
 

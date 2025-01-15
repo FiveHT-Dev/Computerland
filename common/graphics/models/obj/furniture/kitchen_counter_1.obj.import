@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://3c8q1no7ypb7"
+path="res://.godot/imported/kitchen_counter_1.obj-db5e867cd6d48a70c86faf7b3d2dd24f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/kitchen_counter_1.obj-db5e867cd6d48a70c86faf7b3d2dd24f.mesh"]
+
+source_file="res://common/graphics/models/obj/furniture/kitchen_counter_1.obj"
+dest_files=["res://.godot/imported/kitchen_counter_1.obj-db5e867cd6d48a70c86faf7b3d2dd24f.mesh", "res://.godot/imported/kitchen_counter_1.obj-db5e867cd6d48a70c86faf7b3d2dd24f.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

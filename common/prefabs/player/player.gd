@@ -18,8 +18,8 @@ var char_angle : float = 0.0
 var input_dir : Vector2
 var moving : bool
 var speed : float
-var walk_speed : float = 3.5
-var run_speed : float = 5.0
+var walk_speed : float = 2.5
+var run_speed : float = 4.0
 var running : bool
 var cft_index : int = 0
 var cft_increment = 1
@@ -64,9 +64,12 @@ func remove_trigger(t : Trigger):
 	if current_triggers.has(id):
 		current_triggers.erase(id)
 
-func place_at_new_transform(new_t : Node3D):
+func place_at_new_transform(new_t : Node3D, cam_t : Node3D = null):
 	global_position = new_t.global_position
-	Manager.game.cam.force_to_follow_transform()
+	if cam_t == null:
+		Manager.game.cam.force_to_transform(cam_follow_transforms[cft_index])
+	else:
+		Manager.game.cam.force_to_transform(cam_t)
 
 func _physics_process(delta):
 	# Add the gravity.

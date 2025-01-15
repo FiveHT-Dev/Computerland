@@ -7,6 +7,7 @@ var previous_pos : Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	mouse_filter = MOUSE_FILTER_IGNORE
 	button_down.connect(_on_button_down)
 	button_up.connect(_on_button_up)
 	focus_entered.connect(_on_hover)

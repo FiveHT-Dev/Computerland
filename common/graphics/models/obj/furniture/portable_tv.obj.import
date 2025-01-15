@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://3i3wkmu443y8"
+path="res://.godot/imported/portable_tv.obj-20cc0d49696c0bc7813fc1bddcdb86d1.mesh"
+
+[deps]
+
+files=["res://.godot/imported/portable_tv.obj-20cc0d49696c0bc7813fc1bddcdb86d1.mesh"]
+
+source_file="res://common/graphics/models/obj/furniture/portable_tv.obj"
+dest_files=["res://.godot/imported/portable_tv.obj-20cc0d49696c0bc7813fc1bddcdb86d1.mesh", "res://.godot/imported/portable_tv.obj-20cc0d49696c0bc7813fc1bddcdb86d1.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
