@@ -10,7 +10,7 @@ collision_mask = 2
 script = ExtResource("1_t0jy2")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-cull_mask = 1048573
+cull_mask = 1048557
 current = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

@@ -12,6 +12,8 @@ extends CharacterBody3D
 @onready var character : Node3D = $char_pivot/player_char
 @onready var current_cam_follow_transform : Node3D = $cam_follow_transform_0
 @onready var mat_pchar_glass : StandardMaterial3D = preload("res://common/characters/player_char/mat_pchar_glass.tres")
+
+
 var current_triggers : Dictionary = {}
 
 var char_angle : float = 0.0

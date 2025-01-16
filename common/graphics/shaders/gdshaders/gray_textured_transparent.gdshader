@@ -33,7 +33,7 @@ void fragment() {
 	vec3 tex_col = brightness_contrast((tex_with_alpha.rgb * (1.0f - inv)) + (inverted_col * inv));
 	float i = 0.5f * (tex_col.r + tex_col.b);
 	vec3 col = vec3(mix(vec3(1.0f, 1.0f, 1.0f), modulate.rgb * i, 1.0 - tex_col.g)) * modulate;
-	
+
 	ALBEDO = col;
 	ALPHA = tex_with_alpha.a;
 }

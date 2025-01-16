@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://byhy4jdrlqukx"]
+[gd_scene load_steps=13 format=3 uid="uid://byhy4jdrlqukx"]
 
 [ext_resource type="Script" path="res://common/scripts/room.gd" id="1_y67hk"]
 [ext_resource type="Script" path="res://common/resources/loaded_scenes/post_process_list.gd" id="2_dlpiv"]
@@ -6,7 +6,8 @@
 [ext_resource type="Script" path="res://common/prefabs/util/save_interface/save_interface.gd" id="4_s086i"]
 [ext_resource type="PackedScene" uid="uid://du1ef6euq7e78" path="res://common/prefabs/util/triggers/room_gate/room_gate.tscn" id="5_iph0y"]
 [ext_resource type="PackedScene" uid="uid://tv0im8eeplcd" path="res://common/prefabs/cam/cam_follow_area.tscn" id="6_nb3kk"]
-[ext_resource type="MeshLibrary" uid="uid://dptbrhd361obw" path="res://common/meshlibs/libs/house_tiles.tres" id="7_uxmiq"]
+[ext_resource type="MeshLibrary" uid="uid://bg3833rhe17qs" path="res://common/meshlibs/libs/tiles_floors.meshlib" id="8_d6b1m"]
+[ext_resource type="MeshLibrary" uid="uid://b2hiym4l12r66" path="res://common/meshlibs/libs/tiles_walls.meshlib" id="9_dsdul"]
 [ext_resource type="MeshLibrary" uid="uid://kkqsaw6c48dj" path="res://common/meshlibs/libs/invis_wall_tiles.tres" id="14_1hgun"]
 
 [sub_resource type="Resource" id="Resource_0whd2"]
@@ -92,22 +93,9 @@ transform = Transform3D(1, 0, 0, 0, 0.99079, 0.135404, 0, -0.135404, 0.99079, 0.
 
 [node name="room" type="Node" parent="."]
 
-[node name="gridmap_main" type="GridMap" parent="room"]
-mesh_library = ExtResource("7_uxmiq")
-cell_size = Vector3(0.8, 0.4, 0.8)
-cell_center_y = false
-cell_scale = 0.4
-data = {
-"cells": PackedInt32Array(-65537, 2, 5, -65537, 1, 5, -65537, 0, 5, -65537, 65535, 5, -65537, 65534, 5, -65537, 65533, 5, -65537, 65532, 5, -131072, 65532, 5, -131072, 65533, 5, -131072, 65534, 5, -131072, 65535, 5, -131072, 0, 5, -131072, 1, 5, -131072, 2, 5, -65537, 3, 1441799, -65538, 0, 655367, -131071, 65533, 7, -65537, 65531, 1048583, -131072, 65531, 1048583, 65535, 2, 655366, 0, 2, 6, 0, 1, 6, 0, 0, 6, 0, 65535, 6, 0, 65534, 6, 0, 65532, 6, 65535, 1, 655366, 65535, 65535, 655366, 65535, 65534, 655366, 65535, 65533, 655366, 65535, 65532, 655366, 65535, 0, 655368, 0, 65533, 8)
-}
-metadata/_editor_floor_ = Vector3(0, 0, 0)
+[node name="gridmaps" type="Node" parent="room"]
 
-[node name="OmniLight3D" type="OmniLight3D" parent="room/gridmap_main"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21032, 1.61743, -0.244646)
-light_energy = 2.0
-omni_range = 5.3197
-
-[node name="gridmap_invis_colliders" type="GridMap" parent="room"]
+[node name="invis_colliders" type="GridMap" parent="room/gridmaps"]
 mesh_library = ExtResource("14_1hgun")
 cell_size = Vector3(0.8, 0.4, 0.8)
 cell_center_y = false
@@ -116,6 +104,32 @@ data = {
 "cells": PackedInt32Array(65534, 3, 655360, 65534, 4, 655360, 65534, 5, 655360, 65535, 5, 655360, 0, 5, 655360, 0, 4, 655360, 0, 3, 655360, 1, 3, 655360, 65534, 65535, 655360, 65533, 65535, 655360, 65532, 65535, 655360, 65532, 0, 655360, 65532, 1, 655360, 65533, 1, 655360, 65534, 1, 655360, 1, 65534, 655360, 2, 65534, 655360, 3, 65534, 655360, 3, 65533, 655360, 3, 65532, 655360, 2, 65532, 655360, 1, 65532, 655360, 65534, 65531, 655360, 65534, 65530, 655360, 65534, 65529, 655360, 65535, 65529, 655360, 0, 65529, 655360, 1, 65529, 655360, 1, 65530, 655360, 1, 65531, 655360)
 }
 metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="floor" type="GridMap" parent="room/gridmaps"]
+mesh_library = ExtResource("8_d6b1m")
+cell_size = Vector3(0.8, 0.4, 0.8)
+cell_center_y = false
+cell_scale = 0.4
+data = {
+"cells": PackedInt32Array(-131072, 65532, 1441792, -65537, 65532, 1441792, -65537, 65533, 1441792, -65537, 65534, 1441792, -65537, 65535, 1441792, -65537, 0, 1441792, -65537, 1, 1441792, -65537, 2, 1441792, -131072, 2, 1441792, -131072, 1, 1441792, -131072, 0, 1441792, -131072, 65535, 1441792, -131072, 65534, 1441792, -131072, 65533, 1441792, -131071, 65533, 1, -131072, 65531, 1048577, -65537, 65531, 1048577, -65538, 0, 655361, -65537, 3, 1441793)
+}
+metadata/_editor_floor_ = Vector3(0, -2, 0)
+
+[node name="walls" type="GridMap" parent="room/gridmaps"]
+mesh_library = ExtResource("9_dsdul")
+cell_size = Vector3(0.8, 0.4, 0.8)
+cell_center_y = false
+cell_scale = 0.4
+data = {
+"cells": PackedInt32Array(0, 2, 0, 0, 1, 2, 0, 0, 2, 0, 65535, 2, 0, 65534, 2, 0, 65532, 2, 65535, 65532, 655362, 65535, 65533, 655362, 65535, 65534, 655362, 65535, 65535, 655362, 65535, 1, 655362, 65535, 2, 655362, 65535, 0, 655363, 0, 65533, 3)
+}
+
+[node name="contents" type="Node" parent="room"]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="room/contents"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21032, 1.61743, -0.244646)
+light_energy = 2.0
+omni_range = 5.3197
 
 [editable path="utilities/gates/room_gate"]
 [editable path="utilities/gates/room_gate2"]

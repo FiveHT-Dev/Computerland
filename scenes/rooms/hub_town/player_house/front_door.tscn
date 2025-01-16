@@ -6,8 +6,8 @@
 [ext_resource type="Script" path="res://common/prefabs/util/save_interface/save_interface.gd" id="4_42nyo"]
 [ext_resource type="PackedScene" uid="uid://du1ef6euq7e78" path="res://common/prefabs/util/triggers/room_gate/room_gate.tscn" id="5_64fhs"]
 [ext_resource type="PackedScene" uid="uid://tv0im8eeplcd" path="res://common/prefabs/cam/cam_follow_area.tscn" id="6_yb7ju"]
-[ext_resource type="MeshLibrary" uid="uid://dptbrhd361obw" path="res://common/meshlibs/libs/house_tiles.tres" id="7_5vdch"]
-[ext_resource type="MeshLibrary" uid="uid://dkcki62b5mdxm" path="res://common/meshlibs/libs/bathroom_tiles.tres" id="8_y07mg"]
+[ext_resource type="MeshLibrary" uid="uid://bg3833rhe17qs" path="res://common/meshlibs/libs/tiles_floors.meshlib" id="8_ynd44"]
+[ext_resource type="MeshLibrary" uid="uid://b2hiym4l12r66" path="res://common/meshlibs/libs/tiles_walls.meshlib" id="9_6c8w7"]
 [ext_resource type="MeshLibrary" uid="uid://kkqsaw6c48dj" path="res://common/meshlibs/libs/invis_wall_tiles.tres" id="9_biv5e"]
 
 [sub_resource type="Resource" id="Resource_0whd2"]
@@ -86,31 +86,9 @@ shape = SubResource("BoxShape3D_prd4s")
 
 [node name="room" type="Node" parent="."]
 
-[node name="gridmap_main" type="GridMap" parent="room"]
-mesh_library = ExtResource("7_5vdch")
-cell_size = Vector3(0.8, 0.4, 0.8)
-cell_center_y = false
-cell_scale = 0.4
-data = {
-"cells": PackedInt32Array(2, 65535, 1048576, 2, 1, 6, 2, 0, 8, 0, 65535, 655360, 1, 65535, 1048582, 0, 1, 655366, 0, 0, 655368)
-}
-metadata/_editor_floor_ = Vector3(0, 0, 0)
+[node name="gridmaps" type="Node" parent="room"]
 
-[node name="OmniLight3D" type="OmniLight3D" parent="room/gridmap_main"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.016872, 1.58308, 0.297696)
-omni_range = 5.3197
-
-[node name="gridmap_floor" type="GridMap" parent="room"]
-mesh_library = ExtResource("8_y07mg")
-cell_size = Vector3(0.8, 0.4, 0.8)
-cell_center_y = false
-cell_scale = 0.4
-data = {
-"cells": PackedInt32Array(-131070, 65535, 0, -131070, 0, 0, -131070, 1, 0, -131071, 65535, 0, -131071, 0, 0, -131071, 1, 0, -131072, 1, 0, -131072, 0, 0, -131072, 65535, 0, -131069, 0, 3, -65537, 0, 655363)
-}
-metadata/_editor_floor_ = Vector3(0, -2, 0)
-
-[node name="gridmap_invis_colliders" type="GridMap" parent="room"]
+[node name="invis_colliders" type="GridMap" parent="room/gridmaps"]
 mesh_library = ExtResource("9_biv5e")
 cell_size = Vector3(0.8, 0.4, 0.8)
 cell_center_y = false
@@ -119,6 +97,31 @@ data = {
 "cells": PackedInt32Array(3, 65535, 0, 4, 65535, 0, 5, 65535, 0, 5, 0, 0, 5, 1, 0, 4, 1, 0, 3, 1, 0, 2, 2, 655360, 1, 2, 655360, 0, 2, 655360, 65535, 1, 655360, 65534, 1, 655360, 65533, 1, 655360, 65533, 0, 655360, 65533, 65535, 655360, 65534, 65535, 655360, 65535, 65535, 655360)
 }
 metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="floor" type="GridMap" parent="room/gridmaps"]
+mesh_library = ExtResource("8_ynd44")
+cell_size = Vector3(0.8, 0.4, 0.8)
+cell_center_y = false
+cell_scale = 0.4
+data = {
+"cells": PackedInt32Array(-131072, 1, 1048578, -131072, 0, 1048578, -131072, 65535, 1048578, -131071, 65535, 1048578, -131070, 65535, 1048578, -131070, 0, 1048578, -131070, 1, 1048578, -131071, 1, 1048578, -131071, 0, 1048578, -131069, 0, 5, -65537, 0, 655363)
+}
+metadata/_editor_floor_ = Vector3(0, -2, 0)
+
+[node name="walls" type="GridMap" parent="room/gridmaps"]
+mesh_library = ExtResource("9_6c8w7")
+cell_size = Vector3(0.8, 0.4, 0.8)
+cell_center_y = false
+cell_scale = 0.4
+data = {
+"cells": PackedInt32Array(0, 65535, 655360, 1, 65535, 1048578, 2, 65535, 1048576, 0, 1, 655362, 2, 1, 2, 2, 0, 3, 0, 0, 655363)
+}
+
+[node name="contents" type="Node" parent="room"]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="room/contents"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.016872, 1.58308, 0.297696)
+omni_range = 5.3197
 
 [editable path="utilities/gates/room_gate2"]
 [editable path="utilities/gates/room_gate"]

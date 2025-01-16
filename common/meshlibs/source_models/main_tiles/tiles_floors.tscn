@@ -1,0 +1,161 @@
+[gd_scene load_steps=23 format=3 uid="uid://totrr8q0xc3"]
+
+[ext_resource type="Material" uid="uid://llbw7m8qc55n" path="res://audio/audio_surface_mats/WOOD.tres" id="3_aowxe"]
+[ext_resource type="Shader" path="res://common/graphics/shaders/gdshaders/gray_textured.gdshader" id="5_n0tem"]
+[ext_resource type="Texture2D" uid="uid://cqkk7y06eeumm" path="res://common/graphics/textures/32/32_graytex_tiles_1.jpg" id="6_dkl4x"]
+[ext_resource type="Material" uid="uid://dk4tqbyislpk3" path="res://audio/audio_surface_mats/TILE.tres" id="6_iy4vp"]
+[ext_resource type="Texture2D" uid="uid://w2hn27f4aqsw" path="res://common/graphics/textures/32/32_graytex_grass_1.jpg" id="7_hojlx"]
+[ext_resource type="ArrayMesh" uid="uid://dch4eupnkm5jt" path="res://common/graphics/models/obj/tiles/tile_floor.obj" id="8_1d86v"]
+[ext_resource type="Material" uid="uid://n2170sdygw5n" path="res://audio/audio_surface_mats/GRASS.tres" id="9_3lhpx"]
+[ext_resource type="Material" uid="uid://c6ivg6j77n2bg" path="res://common/graphics/shaders/shadermats/smat_graytex_planks_02.tres" id="9_g3cs3"]
+[ext_resource type="Shader" path="res://common/graphics/shaders/gdshaders/gray_textured_gradient.gdshader" id="11_djxxy"]
+[ext_resource type="Texture2D" uid="uid://2ohm4uq7dxfu" path="res://common/graphics/textures/32/32_graytex_planks_1.jpg" id="12_fchsv"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_e2hv8"]
+data = PackedVector3Array(-1, 2, -1, 1, 2, -1, -1, 2, 1, -1, 2, 1, 1, 2, -1, 1, 2, 1)
+
+[sub_resource type="Gradient" id="Gradient_1fb8b"]
+offsets = PackedFloat32Array(0.670213, 0.792553, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.151276, 0.151276, 0.151276, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_evay0"]
+gradient = SubResource("Gradient_1fb8b")
+fill_from = Vector2(0, 0.042735)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c5la1"]
+render_priority = 0
+next_pass = ExtResource("3_aowxe")
+shader = ExtResource("11_djxxy")
+shader_parameter/modulate = Color(0.869281, 0.755058, 0.550252, 1)
+shader_parameter/uv_scale = Vector2(2, 2)
+shader_parameter/uv_offset = null
+shader_parameter/brightness = 1.0
+shader_parameter/contrast = 1.0
+shader_parameter/invert = false
+shader_parameter/tex = ExtResource("12_fchsv")
+shader_parameter/gradient = SubResource("GradientTexture2D_evay0")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iddln"]
+render_priority = 0
+next_pass = ExtResource("6_iy4vp")
+shader = ExtResource("5_n0tem")
+shader_parameter/modulate = Color(0.82606, 0.82606, 0.82606, 1)
+shader_parameter/uv_scale = Vector2(2, 2)
+shader_parameter/uv_offset = null
+shader_parameter/brightness = 1.0
+shader_parameter/contrast = 2.35
+shader_parameter/invert = false
+shader_parameter/tex = ExtResource("6_dkl4x")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_sc1dr"]
+data = PackedVector3Array(-1, 2, -1, 1, 2, -1, -1, 2, 1, -1, 2, 1, 1, 2, -1, 1, 2, 1)
+
+[sub_resource type="Gradient" id="Gradient_2jtp1"]
+offsets = PackedFloat32Array(0.670213, 0.792553, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.151276, 0.151276, 0.151276, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uljas"]
+gradient = SubResource("Gradient_2jtp1")
+fill_from = Vector2(0, 0.042735)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_juq2m"]
+render_priority = 0
+next_pass = ExtResource("6_iy4vp")
+shader = ExtResource("11_djxxy")
+shader_parameter/modulate = Color(0.827451, 0.827451, 0.827451, 1)
+shader_parameter/uv_scale = Vector2(2, 2)
+shader_parameter/uv_offset = null
+shader_parameter/brightness = 1.0
+shader_parameter/contrast = 2.35
+shader_parameter/invert = false
+shader_parameter/tex = ExtResource("6_dkl4x")
+shader_parameter/gradient = SubResource("GradientTexture2D_uljas")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_6dkso"]
+data = PackedVector3Array(-1, 2, -1, 1, 2, -1, -1, 2, 1, -1, 2, 1, 1, 2, -1, 1, 2, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w5vh5"]
+render_priority = 0
+next_pass = ExtResource("9_3lhpx")
+shader = ExtResource("5_n0tem")
+shader_parameter/modulate = Color(0.383705, 0.57, 0.3591, 1)
+shader_parameter/uv_scale = Vector2(2, 2)
+shader_parameter/uv_offset = null
+shader_parameter/brightness = 1.25
+shader_parameter/contrast = 1.33
+shader_parameter/invert = false
+shader_parameter/tex = ExtResource("7_hojlx")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fxdnq"]
+render_priority = 0
+next_pass = ExtResource("9_3lhpx")
+shader = ExtResource("11_djxxy")
+shader_parameter/modulate = Color(0.384314, 0.568627, 0.360784, 1)
+shader_parameter/uv_scale = Vector2(2, 2)
+shader_parameter/uv_offset = null
+shader_parameter/brightness = 1.25
+shader_parameter/contrast = 1.33
+shader_parameter/invert = false
+shader_parameter/tex = ExtResource("7_hojlx")
+shader_parameter/gradient = SubResource("GradientTexture2D_evay0")
+
+[node name="house_tiles_floors" type="Node3D"]
+
+[node name="floor_wood" type="MeshInstance3D" parent="."]
+mesh = ExtResource("8_1d86v")
+surface_material_override/0 = ExtResource("9_g3cs3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="floor_wood"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor_wood/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_e2hv8")
+
+[node name="floor_wood_gradient" type="MeshInstance3D" parent="."]
+visible = false
+mesh = ExtResource("8_1d86v")
+surface_material_override/0 = SubResource("ShaderMaterial_c5la1")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="floor_wood_gradient"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor_wood_gradient/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_e2hv8")
+
+[node name="floor_tiles" type="MeshInstance3D" parent="."]
+visible = false
+mesh = ExtResource("8_1d86v")
+surface_material_override/0 = SubResource("ShaderMaterial_iddln")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="floor_tiles"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor_tiles/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_sc1dr")
+
+[node name="floor_tiles_gradient" type="MeshInstance3D" parent="."]
+visible = false
+mesh = ExtResource("8_1d86v")
+surface_material_override/0 = SubResource("ShaderMaterial_juq2m")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="floor_tiles_gradient"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor_tiles_gradient/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_6dkso")
+
+[node name="floor_grass" type="MeshInstance3D" parent="."]
+visible = false
+mesh = ExtResource("8_1d86v")
+surface_material_override/0 = SubResource("ShaderMaterial_w5vh5")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="floor_grass"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor_grass/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_e2hv8")
+
+[node name="floor_grass_gradient" type="MeshInstance3D" parent="."]
+visible = false
+mesh = ExtResource("8_1d86v")
+surface_material_override/0 = SubResource("ShaderMaterial_fxdnq")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="floor_grass_gradient"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor_grass_gradient/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_e2hv8")

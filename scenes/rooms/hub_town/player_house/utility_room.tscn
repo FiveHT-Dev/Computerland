@@ -1,13 +1,14 @@
-[gd_scene load_steps=18 format=3 uid="uid://cqcsmeggtmmgv"]
+[gd_scene load_steps=19 format=3 uid="uid://cqcsmeggtmmgv"]
 
 [ext_resource type="Script" path="res://common/scripts/room.gd" id="1_7prwd"]
 [ext_resource type="Script" path="res://common/resources/loaded_scenes/post_process_list.gd" id="2_5gf0a"]
 [ext_resource type="Script" path="res://common/prefabs/util/save_interface/save_interface.gd" id="4_vfmml"]
 [ext_resource type="PackedScene" uid="uid://du1ef6euq7e78" path="res://common/prefabs/util/triggers/room_gate/room_gate.tscn" id="5_mi840"]
 [ext_resource type="PackedScene" uid="uid://tv0im8eeplcd" path="res://common/prefabs/cam/cam_follow_area.tscn" id="6_2wdh6"]
-[ext_resource type="MeshLibrary" uid="uid://dptbrhd361obw" path="res://common/meshlibs/libs/house_tiles.tres" id="7_o8fl6"]
+[ext_resource type="MeshLibrary" uid="uid://bg3833rhe17qs" path="res://common/meshlibs/libs/tiles_floors.meshlib" id="7_fj8do"]
 [ext_resource type="PackedScene" uid="uid://deswpib0isc7a" path="res://common/prefabs/props/furniture/washing_machine.tscn" id="8_acrbp"]
 [ext_resource type="PackedScene" uid="uid://cv3qn2sk6s61x" path="res://common/prefabs/props/furniture/drying_machine.tscn" id="8_kedyy"]
+[ext_resource type="MeshLibrary" uid="uid://b2hiym4l12r66" path="res://common/meshlibs/libs/tiles_walls.meshlib" id="8_qd0wo"]
 [ext_resource type="PackedScene" uid="uid://q0h36mq2ddsf" path="res://common/prefabs/props/furniture/hamper.tscn" id="9_vfryf"]
 [ext_resource type="PackedScene" uid="uid://cygnlm33e8a7w" path="res://common/prefabs/props/furniture/hamper_full.tscn" id="10_etvjq"]
 [ext_resource type="PackedScene" uid="uid://c6t2cbwtgv0j" path="res://common/prefabs/props/furniture/dustbin.tscn" id="11_gnuvs"]
@@ -74,43 +75,9 @@ shape = SubResource("BoxShape3D_23lys")
 
 [node name="room" type="Node" parent="."]
 
-[node name="gridmap_main" type="GridMap" parent="room"]
-mesh_library = ExtResource("7_o8fl6")
-cell_size = Vector3(0.8, 0.4, 0.8)
-cell_center_y = false
-cell_scale = 0.4
-data = {
-"cells": PackedInt32Array(0, 65535, 1048576, -65538, 1, 655365, -65538, 0, 655365, -65538, 65535, 655365, -65537, 65535, 655365, -65537, 0, 655365, -65537, 1, 655365, -131072, 1, 655365, -131072, 0, 655365, -131072, 65535, 655365, -65539, 0, 655367, 65534, 65535, 655360, 65534, 1, 655366, 0, 1, 6, 0, 0, 6, 65535, 65535, 1048582, 65534, 0, 655368)
-}
-metadata/_editor_floor_ = Vector3(0, 0, 0)
+[node name="gridmaps" type="Node" parent="room"]
 
-[node name="OmniLight3D" type="OmniLight3D" parent="room/gridmap_main"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.358958, 1.58308, 0.465867)
-light_energy = 0.5
-omni_range = 5.3197
-
-[node name="washing_machine" parent="room/gridmap_main" instance=ExtResource("8_acrbp")]
-transform = Transform3D(0.298351, 0, 0, 0, 0.298351, 0, 0, 0, 0.298351, 0.455756, 0, -0.500317)
-
-[node name="drying_machine" parent="room/gridmap_main" instance=ExtResource("8_kedyy")]
-transform = Transform3D(0.298351, 0, 0, 0, 0.298351, 0, 0, 0, 0.298351, -0.168544, 0, -0.49761)
-
-[node name="mesh" parent="room/gridmap_main/drying_machine" index="0"]
-animate = false
-
-[node name="hamper" parent="room/gridmap_main" instance=ExtResource("9_vfryf")]
-transform = Transform3D(0.277079, 0, 0, 0, 0.277079, 0, 0, 0, 0.277079, 0.491971, 0.00465751, 1.29794)
-
-[node name="hamper2" parent="room/gridmap_main" instance=ExtResource("10_etvjq")]
-transform = Transform3D(0.277079, 0, 0, 0, 0.277079, 0, 0, 0, 0.277079, 0.495765, 1.78814e-07, 0.710447)
-
-[node name="dustbin" parent="room/gridmap_main" instance=ExtResource("11_gnuvs")]
-transform = Transform3D(0.127049, 0, 0, 0, 0.127049, 0, 0, 0, 0.127049, -1.28945, 0, 1.31299)
-
-[node name="box_detergent" parent="room/gridmap_main" instance=ExtResource("12_pedkb")]
-transform = Transform3D(0.11393, 0, 0.0524648, 0, 0.12543, 0, -0.0524648, 0, 0.11393, 0.594561, 0.769233, -0.427867)
-
-[node name="gridmap_invis_colliders" type="GridMap" parent="room"]
+[node name="invis_colliders" type="GridMap" parent="room/gridmaps"]
 mesh_library = ExtResource("15_b41sq")
 cell_size = Vector3(0.8, 0.4, 0.8)
 cell_center_y = false
@@ -120,13 +87,65 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
-[node name="shelf_2" parent="." instance=ExtResource("12_0s2aj")]
-transform = Transform3D(-0.333272, 0, -2.91356e-08, 0, 0.333272, 0, 2.91356e-08, 0, -0.333272, -1.05077, 0, -0.596805)
+[node name="floor" type="GridMap" parent="room/gridmaps"]
+mesh_library = ExtResource("7_fj8do")
+cell_size = Vector3(0.8, 0.4, 0.8)
+cell_center_y = false
+cell_scale = 0.4
+data = {
+"cells": PackedInt32Array(-65538, 65535, 655360, -65537, 65535, 655360, -131072, 65535, 655360, -131072, 0, 655360, -131072, 1, 655360, -65537, 1, 655360, -65538, 1, 655360, -65538, 0, 655360, -65537, 0, 655360, -65539, 0, 655361)
+}
+metadata/_editor_floor_ = Vector3(0, -2, 0)
 
-[node name="books" parent="shelf_2" index="1"]
+[node name="walls" type="GridMap" parent="room/gridmaps"]
+mesh_library = ExtResource("8_qd0wo")
+cell_size = Vector3(0.8, 0.4, 0.8)
+cell_center_y = false
+cell_scale = 0.4
+data = {
+"cells": PackedInt32Array(0, 65535, 1048576, 0, 1, 2, 65534, 65535, 655360, 0, 0, 2, 65534, 1, 655362, 65534, 0, 655363, 65535, 65535, 1048578)
+}
+
+[node name="contents" type="Node" parent="room"]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="room/contents"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.358958, 1.58308, 0.465867)
+light_energy = 0.5
+omni_range = 5.3197
+
+[node name="washing_machine" parent="room/contents" instance=ExtResource("8_acrbp")]
+transform = Transform3D(0.298351, 0, 0, 0, 0.298351, 0, 0, 0, 0.298351, 0.455756, 0, -0.500317)
+
+[node name="drying_machine" parent="room/contents" instance=ExtResource("8_kedyy")]
+transform = Transform3D(0.298351, 0, 0, 0, 0.298351, 0, 0, 0, 0.298351, -0.168544, 0, -0.49761)
+
+[node name="mesh" parent="room/contents/drying_machine" index="0"]
+animate = false
+
+[node name="hamper" parent="room/contents" instance=ExtResource("9_vfryf")]
+transform = Transform3D(0.277079, 0, 0, 0, 0.277079, 0, 0, 0, 0.277079, 0.491971, 0.00465751, 1.29794)
+skeleton = NodePath("")
+
+[node name="hamper2" parent="room/contents" instance=ExtResource("10_etvjq")]
+transform = Transform3D(0.277079, 0, 0, 0, 0.277079, 0, 0, 0, 0.277079, 0.495765, 1.78814e-07, 0.710447)
+skeleton = NodePath("")
+
+[node name="dustbin" parent="room/contents" instance=ExtResource("11_gnuvs")]
+transform = Transform3D(0.127049, 0, 0, 0, 0.127049, 0, 0, 0, 0.127049, -1.28945, 0, 1.31299)
+skeleton = NodePath("")
+
+[node name="box_detergent" parent="room/contents" instance=ExtResource("12_pedkb")]
+transform = Transform3D(0.11393, 0, 0.0524648, 0, 0.12543, 0, -0.0524648, 0, 0.11393, 0.594561, 0.769233, -0.427867)
+skeleton = NodePath("")
+
+[node name="shelf_2" parent="room/contents" instance=ExtResource("12_0s2aj")]
+transform = Transform3D(-0.333272, 0, -2.91356e-08, 0, 0.333272, 0, 2.91356e-08, 0, -0.333272, -1.05077, 0, -0.596805)
+skeleton = NodePath("../../..")
+
+[node name="books" parent="room/contents/shelf_2" index="1"]
 visible = false
 
 [editable path="utilities/gates/room_gate"]
 [editable path="camera/CamFollowArea2"]
-[editable path="room/gridmap_main/drying_machine"]
-[editable path="shelf_2"]
+[editable path="room/contents/drying_machine"]
+[editable path="room/contents/shelf_2"]

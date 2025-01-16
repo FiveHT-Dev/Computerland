@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bf82d77m0naev"]
+[gd_scene load_steps=26 format=3 uid="uid://bf82d77m0naev"]
 
 [ext_resource type="Script" path="res://common/scripts/room.gd" id="1_r35r5"]
 [ext_resource type="Script" path="res://common/resources/loaded_scenes/post_process_list.gd" id="2_8wc7y"]
@@ -6,8 +6,9 @@
 [ext_resource type="Script" path="res://common/prefabs/util/save_interface/save_interface.gd" id="4_0714a"]
 [ext_resource type="PackedScene" uid="uid://du1ef6euq7e78" path="res://common/prefabs/util/triggers/room_gate/room_gate.tscn" id="5_jndxt"]
 [ext_resource type="PackedScene" uid="uid://tv0im8eeplcd" path="res://common/prefabs/cam/cam_follow_area.tscn" id="6_yp603"]
-[ext_resource type="MeshLibrary" uid="uid://dptbrhd361obw" path="res://common/meshlibs/libs/house_tiles.tres" id="7_22vpf"]
 [ext_resource type="PackedScene" uid="uid://dx2fu37i6qc1t" path="res://common/prefabs/props/furniture/sofa.tscn" id="8_26gyu"]
+[ext_resource type="MeshLibrary" uid="uid://bg3833rhe17qs" path="res://common/meshlibs/libs/tiles_floors.meshlib" id="8_jkvlt"]
+[ext_resource type="MeshLibrary" uid="uid://b2hiym4l12r66" path="res://common/meshlibs/libs/tiles_walls.meshlib" id="9_8skm5"]
 [ext_resource type="PackedScene" uid="uid://h6ma0bv225xx" path="res://common/prefabs/props/furniture/tv_shelf.tscn" id="9_w105s"]
 [ext_resource type="PackedScene" uid="uid://cfv8wi6ukunlj" path="res://common/prefabs/props/furniture/tv.tscn" id="10_ccubt"]
 [ext_resource type="PackedScene" uid="uid://dsff520xyh0qv" path="res://common/prefabs/props/furniture/shelf_2.tscn" id="11_sq0jm"]
@@ -136,87 +137,9 @@ transform = Transform3D(1, 0, 0, 0, 0.923089, 0.384585, 0, -0.384585, 0.923089, 
 
 [node name="room" type="Node" parent="."]
 
-[node name="gridmap_main" type="GridMap" parent="room"]
-mesh_library = ExtResource("7_22vpf")
-cell_size = Vector3(0.8, 0.4, 0.8)
-cell_center_y = false
-cell_scale = 0.4
-data = {
-"cells": PackedInt32Array(-65537, 2, 1441799, -131072, 2, 1441799, -131070, 1, 1441797, -131071, 1, 1441797, -131072, 1, 1441797, -65537, 1, 1441797, -65538, 1, 1441797, -65539, 1, 1441797, -65539, 0, 1441797, -65538, 0, 1441797, -65537, 0, 1441797, -131072, 0, 1441797, -131071, 0, 1441797, -131070, 0, 1441797, -131072, 65535, 1441797, -65537, 65535, 1441797, -65538, 65535, 1441797, -65539, 65535, 1441797, -65539, 65534, 1441797, -65538, 65534, 1441797, -65537, 65534, 1441797, -65537, 65533, 1441797, -65538, 65533, 1441797, -65539, 65533, 1441797, -65539, 65532, 1441797, -65538, 65532, 1441797, -65537, 65532, 1441797, -65540, 1, 1441797, -65540, 0, 1441797, -65540, 65535, 1441797, -65540, 65534, 1441797, -65540, 65533, 1441797, -65540, 65532, 1441797, -65537, 65531, 1441797, -65538, 65531, 1441797, -65539, 65531, 1441797, -65540, 65531, 1441797, 65532, 65532, 655366, 65532, 65533, 655366, 65532, 65531, 655360, 65533, 65531, 1048582, 2, 1, 6, 65532, 1, 655366, -131071, 65535, 1048581, -131070, 65535, 1048581, -131069, 0, 7, 1, 65535, 1048582, 0, 65535, 1048582, 65535, 65534, 6, 65535, 65533, 6, 65535, 65532, 6, 65535, 65531, 1048576, 65534, 65531, 1048582, 65535, 65535, 1048577, 2, 65535, 1048576, 65532, 65535, 655366, 2, 0, 8, -65541, 0, 655367, 65532, 65534, 655366, 65532, 0, 655368)
-}
-metadata/_editor_floor_ = Vector3(0, 0, 0)
+[node name="gridmaps" type="Node" parent="room"]
 
-[node name="OmniLight3D" type="OmniLight3D" parent="room/gridmap_main"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.36916, 1.61743, 0.178622)
-light_energy = 2.0
-omni_range = 5.3197
-
-[node name="sofa" parent="room/gridmap_main" instance=ExtResource("8_26gyu")]
-transform = Transform3D(0.234556, 0, 3.19744e-14, 0, 0.234556, 0, -3.19744e-14, 0, 0.234556, -2.73097, 2.38419e-07, -2.90629)
-
-[node name="tv_shelf" parent="room/gridmap_main" instance=ExtResource("9_w105s")]
-transform = Transform3D(0.409461, 0, 0, 0, 0.409461, 0, 0, 0, 0.409461, -0.32396, 0, -2.71376)
-
-[node name="tv" parent="room/gridmap_main/tv_shelf" instance=ExtResource("10_ccubt")]
-transform = Transform3D(-0.572086, 0, -5.00133e-08, 0, 0.572086, 0, 5.00133e-08, 0, -0.572086, 0, 1.0733, 0.464303)
-skeleton = NodePath("../..")
-
-[node name="shelf_2" parent="room/gridmap_main" instance=ExtResource("11_sq0jm")]
-transform = Transform3D(-0.333272, 0, -2.91356e-08, 0, 0.333272, 0, 2.91356e-08, 0, -0.333272, 1.85866, -1.78814e-07, -0.591366)
-skeleton = NodePath("../..")
-
-[node name="books2" type="MeshInstance3D" parent="room/gridmap_main/shelf_2"]
-transform = Transform3D(-2.7758, 0, 8.74228e-08, 0, 0.816617, 0, -2.42668e-07, 0, -1, 0, 1.49462, -0.340057)
-mesh = SubResource("QuadMesh_800o6")
-
-[node name="books3" type="MeshInstance3D" parent="room/gridmap_main/shelf_2"]
-transform = Transform3D(-2.7758, 0, 8.74228e-08, 0, 0.816617, 0, -2.42668e-07, 0, -1, 0, 2.50322, -0.340057)
-mesh = SubResource("QuadMesh_800o6")
-
-[node name="shelf_3" parent="room/gridmap_main" instance=ExtResource("11_sq0jm")]
-transform = Transform3D(-0.333272, 0, -2.91356e-08, 0, 0.333272, 0, 2.91356e-08, 0, -0.333272, 0.870657, -1.78814e-07, -0.591366)
-skeleton = NodePath("../..")
-
-[node name="books2" type="MeshInstance3D" parent="room/gridmap_main/shelf_3"]
-transform = Transform3D(-2.7758, 0, 8.74228e-08, 0, 0.816617, 0, -2.42668e-07, 0, -1, 0, 1.49462, -0.340057)
-mesh = SubResource("QuadMesh_800o6")
-
-[node name="books3" type="MeshInstance3D" parent="room/gridmap_main/shelf_3"]
-transform = Transform3D(-2.7758, 0, 8.74228e-08, 0, 0.816617, 0, -2.42668e-07, 0, -1, 0, 3.48109, -0.340057)
-mesh = SubResource("QuadMesh_800o6")
-
-[node name="shelf" parent="room/gridmap_main" instance=ExtResource("14_a7ms5")]
-transform = Transform3D(4.51988e-16, 1.03403e-08, 0.236558, 0.236558, -1.03403e-08, 0, 1.03403e-08, 0.236558, -1.03403e-08, -0.199889, 0.703937, -3.9553)
-skeleton = NodePath("../../..")
-
-[node name="shelf2" parent="room/gridmap_main" instance=ExtResource("14_a7ms5")]
-transform = Transform3D(4.51988e-16, 1.03403e-08, 0.236558, 0.236558, -1.03403e-08, 0, 1.03403e-08, 0.236558, -1.03403e-08, -0.199889, 0.703937, -2.18261)
-skeleton = NodePath("../../..")
-
-[node name="table_3" parent="room/gridmap_main" instance=ExtResource("15_y5pgg")]
-transform = Transform3D(0.298519, 0, 0, 0, 0.298519, 0, 0, 0, 0.298519, -1.66053, 0, 0.72111)
-
-[node name="chair_2" parent="room/gridmap_main/table_3" instance=ExtResource("16_elsuv")]
-transform = Transform3D(-0.803335, 0, 1.39142, 0, 1.60667, 0, -1.39142, 0, -0.803335, 1.7791, 0, -1.11097)
-skeleton = NodePath("../..")
-
-[node name="chair_3" parent="room/gridmap_main/table_3" instance=ExtResource("16_elsuv")]
-transform = Transform3D(-1.42119, 0, -0.749403, 0, 1.60667, 0, 0.749403, 0, -1.42119, -1.45157, 0, -2.57149)
-skeleton = NodePath("../..")
-
-[node name="chair_4" parent="room/gridmap_main/table_3" instance=ExtResource("16_elsuv")]
-transform = Transform3D(1.59432, 0, 0.198837, 0, 1.60667, 0, -0.198837, 0, 1.59432, 1.9841, 0, 1.70134)
-skeleton = NodePath("../..")
-
-[node name="chair_5" parent="room/gridmap_main/table_3" instance=ExtResource("16_elsuv")]
-transform = Transform3D(1.23828, 0, -1.02374, 0, 1.60667, 0, 1.02374, 0, 1.23828, -1.24472, 0, 1.36046)
-skeleton = NodePath("../..")
-
-[node name="dustbin" parent="room/gridmap_main" instance=ExtResource("17_p0wyr")]
-transform = Transform3D(0.127049, 0, 0, 0, 0.127049, 0, 0, 0, 0.127049, 2.1305, 0, 1.31312)
-skeleton = NodePath("../../../camera/CamFollowArea")
-
-[node name="gridmap_invis_colliders" type="GridMap" parent="room"]
+[node name="invis_colliders" type="GridMap" parent="room/gridmaps"]
 mesh_library = ExtResource("17_5x5hi")
 cell_size = Vector3(0.8, 0.4, 0.8)
 cell_center_y = false
@@ -226,6 +149,101 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
+[node name="floor" type="GridMap" parent="room/gridmaps"]
+mesh_library = ExtResource("8_jkvlt")
+cell_size = Vector3(0.8, 0.4, 0.8)
+cell_center_y = false
+cell_scale = 0.4
+data = {
+"cells": PackedInt32Array(-65537, 65531, 655360, -65538, 65531, 655360, -65539, 65531, 655360, -65540, 65531, 655360, -65540, 65532, 655360, -65540, 65533, 655360, -65540, 65534, 655360, -65539, 65534, 655360, -65538, 65534, 655360, -65537, 65534, 655360, -65537, 65533, 655360, -65537, 65532, 655360, -65538, 65532, 655360, -65539, 65532, 655360, -65539, 65533, 655360, -65538, 65533, 655360, -65540, 65535, 655360, -65539, 65535, 655360, -65538, 65535, 655360, -65537, 65535, 655360, -65540, 0, 655360, -65540, 1, 655360, -65539, 1, 655360, -65538, 1, 655360, -65537, 1, 655360, -131072, 1, 655360, -131071, 1, 655360, -131070, 1, 655360, -131070, 0, 655360, -131070, 65535, 655360, -131071, 65535, 655360, -131072, 65535, 655360, -65538, 0, 655360, -65539, 0, 655360, -65537, 0, 655360, -131072, 0, 655360, -131071, 0, 655360, -131072, 2, 1441793, -65537, 2, 1441793, -65541, 0, 655361, -131069, 0, 1)
+}
+metadata/_editor_floor_ = Vector3(0, -2, 0)
+
+[node name="walls" type="GridMap" parent="room/gridmaps"]
+mesh_library = ExtResource("9_8skm5")
+cell_size = Vector3(0.8, 0.4, 0.8)
+cell_center_y = false
+cell_scale = 0.4
+data = {
+"cells": PackedInt32Array(65535, 65531, 1048576, 65532, 65531, 655360, 2, 65535, 1048576, 65534, 65531, 1048578, 65533, 65531, 1048578, 65535, 65534, 2, 65535, 65533, 2, 65535, 65532, 2, 1, 65535, 1048578, 0, 65535, 1048578, 2, 1, 2, 65532, 1, 655362, 65532, 65534, 655362, 65532, 65533, 655362, 65532, 65532, 655362, 65532, 65535, 655362, 65532, 0, 655363, 2, 0, 3, 65535, 65535, 1048577)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="contents" type="Node" parent="room"]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="room/contents"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.36916, 1.61743, 0.178622)
+light_energy = 2.0
+omni_range = 5.3197
+
+[node name="sofa" parent="room/contents" instance=ExtResource("8_26gyu")]
+transform = Transform3D(0.234556, 0, 3.19744e-14, 0, 0.234556, 0, -3.19744e-14, 0, 0.234556, -2.73097, 2.38419e-07, -2.90629)
+skeleton = NodePath("")
+
+[node name="tv_shelf" parent="room/contents" instance=ExtResource("9_w105s")]
+transform = Transform3D(0.409461, 0, 0, 0, 0.409461, 0, 0, 0, 0.409461, -0.32396, 0, -2.71376)
+skeleton = NodePath("")
+
+[node name="tv" parent="room/contents/tv_shelf" instance=ExtResource("10_ccubt")]
+transform = Transform3D(-0.572086, 0, -5.00133e-08, 0, 0.572086, 0, 5.00133e-08, 0, -0.572086, 0, 1.0733, 0.464303)
+skeleton = NodePath("")
+
+[node name="shelf_2" parent="room/contents" instance=ExtResource("11_sq0jm")]
+transform = Transform3D(-0.333272, 0, -2.91356e-08, 0, 0.333272, 0, 2.91356e-08, 0, -0.333272, 1.85866, -1.78814e-07, -0.591366)
+skeleton = NodePath("../..")
+
+[node name="books2" type="MeshInstance3D" parent="room/contents/shelf_2"]
+transform = Transform3D(-2.7758, 0, 8.74228e-08, 0, 0.816617, 0, -2.42668e-07, 0, -1, 0, 1.49462, -0.340057)
+mesh = SubResource("QuadMesh_800o6")
+
+[node name="books3" type="MeshInstance3D" parent="room/contents/shelf_2"]
+transform = Transform3D(-2.7758, 0, 8.74228e-08, 0, 0.816617, 0, -2.42668e-07, 0, -1, 0, 2.50322, -0.340057)
+mesh = SubResource("QuadMesh_800o6")
+
+[node name="shelf_3" parent="room/contents" instance=ExtResource("11_sq0jm")]
+transform = Transform3D(-0.333272, 0, -2.91356e-08, 0, 0.333272, 0, 2.91356e-08, 0, -0.333272, 0.870657, -1.78814e-07, -0.591366)
+skeleton = NodePath("../..")
+
+[node name="books2" type="MeshInstance3D" parent="room/contents/shelf_3"]
+transform = Transform3D(-2.7758, 0, 8.74228e-08, 0, 0.816617, 0, -2.42668e-07, 0, -1, 0, 1.49462, -0.340057)
+mesh = SubResource("QuadMesh_800o6")
+
+[node name="books3" type="MeshInstance3D" parent="room/contents/shelf_3"]
+transform = Transform3D(-2.7758, 0, 8.74228e-08, 0, 0.816617, 0, -2.42668e-07, 0, -1, 0, 3.48109, -0.340057)
+mesh = SubResource("QuadMesh_800o6")
+
+[node name="shelf" parent="room/contents" instance=ExtResource("14_a7ms5")]
+transform = Transform3D(4.51988e-16, 1.03403e-08, 0.236558, 0.236558, -1.03403e-08, 0, 1.03403e-08, 0.236558, -1.03403e-08, -0.199889, 0.703937, -3.9553)
+skeleton = NodePath("../../..")
+
+[node name="shelf2" parent="room/contents" instance=ExtResource("14_a7ms5")]
+transform = Transform3D(4.51988e-16, 1.03403e-08, 0.236558, 0.236558, -1.03403e-08, 0, 1.03403e-08, 0.236558, -1.03403e-08, -0.199889, 0.703937, -2.18261)
+skeleton = NodePath("../../..")
+
+[node name="table_3" parent="room/contents" instance=ExtResource("15_y5pgg")]
+transform = Transform3D(0.298519, 0, 0, 0, 0.298519, 0, 0, 0, 0.298519, -1.66053, 0, 0.72111)
+skeleton = NodePath("")
+
+[node name="chair_2" parent="room/contents/table_3" instance=ExtResource("16_elsuv")]
+transform = Transform3D(-0.803335, 0, 1.39142, 0, 1.60667, 0, -1.39142, 0, -0.803335, 1.7791, 0, -1.11097)
+skeleton = NodePath("")
+
+[node name="chair_3" parent="room/contents/table_3" instance=ExtResource("16_elsuv")]
+transform = Transform3D(-1.42119, 0, -0.749403, 0, 1.60667, 0, 0.749403, 0, -1.42119, -1.45157, 0, -2.57149)
+skeleton = NodePath("")
+
+[node name="chair_4" parent="room/contents/table_3" instance=ExtResource("16_elsuv")]
+transform = Transform3D(1.59432, 0, 0.198837, 0, 1.60667, 0, -0.198837, 0, 1.59432, 1.9841, 0, 1.70134)
+skeleton = NodePath("")
+
+[node name="chair_5" parent="room/contents/table_3" instance=ExtResource("16_elsuv")]
+transform = Transform3D(1.23828, 0, -1.02374, 0, 1.60667, 0, 1.02374, 0, 1.23828, -1.24472, 0, 1.36046)
+skeleton = NodePath("")
+
+[node name="dustbin" parent="room/contents" instance=ExtResource("17_p0wyr")]
+transform = Transform3D(0.127049, 0, 0, 0, 0.127049, 0, 0, 0, 0.127049, 2.1305, 0, 1.31312)
+skeleton = NodePath("../../../camera/CamFollowArea")
+
 [editable path="utilities/gates/room_gate"]
 [editable path="utilities/gates/room_gate2"]
 [editable path="utilities/gates/room_gate3"]
@@ -233,5 +251,5 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 [editable path="camera/CamFollowArea3"]
 [editable path="camera/CamFollowArea4"]
 [editable path="camera/CamFollowArea"]
-[editable path="room/gridmap_main/shelf_2"]
-[editable path="room/gridmap_main/shelf_3"]
+[editable path="room/contents/shelf_2"]
+[editable path="room/contents/shelf_3"]

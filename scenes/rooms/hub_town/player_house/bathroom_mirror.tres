@@ -1,7 +1,7 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cic2aqlg4g1hr"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_tp0jv"]
-viewport_path = NodePath("room/gridmap_main/sink/mirror/SubViewport")
+viewport_path = NodePath("room/contents/sink/mirror/SubViewport")
 
 [resource]
 resource_local_to_scene = true
