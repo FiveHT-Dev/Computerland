@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://dh3xuqc5sh41"]
+
+[ext_resource type="ArrayMesh" uid="uid://cb7rq05rfov6x" path="res://common/graphics/models/obj/furniture/sign_small_1.obj" id="1_nj1va"]
+[ext_resource type="Shader" path="res://common/graphics/shaders/gdshaders/textured.gdshader" id="2_5y06l"]
+[ext_resource type="Texture2D" uid="uid://dt8jyalxq64gv" path="res://common/graphics/textures/32/32_tex_sign_1.png" id="3_8lua7"]
+[ext_resource type="PackedScene" uid="uid://b1x3m7qad36kx" path="res://common/prefabs/util/triggers/dialogue_trigger/dialogue_trigger.tscn" id="4_5dv21"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2ai45"]
+render_priority = 0
+shader = ExtResource("2_5y06l")
+shader_parameter/modulate = Color(1, 1, 1, 1)
+shader_parameter/brightness = 1.0
+shader_parameter/contrast = 1.0
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = null
+shader_parameter/invert = false
+shader_parameter/tex = ExtResource("3_8lua7")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dh04q"]
+size = Vector3(1.61353, 1.53461, 2.78882)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nalfr"]
+size = Vector3(0.63916, 3.97778, 3.41479)
+
+[node name="sign_small" type="MeshInstance3D"]
+transform = Transform3D(0.14, 0, 0, 0, 0.14, 0, 0, 0, 0.14, 0, 0, 0)
+mesh = ExtResource("1_nj1va")
+surface_material_override/0 = SubResource("ShaderMaterial_2ai45")
+
+[node name="dialogue_trigger" parent="." instance=ExtResource("4_5dv21")]
+
+[node name="CollisionShape3D" parent="dialogue_trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.835327, 2.97643, 0.0179443)
+shape = SubResource("BoxShape3D_dh04q")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0314941, 2.00989, -0.00891116)
+shape = SubResource("BoxShape3D_nalfr")
+
+[editable path="dialogue_trigger"]

@@ -1,7 +1,6 @@
 shader_type spatial;
-render_mode diffuse_burley, specular_schlick_ggx, depth_prepass_alpha, blend_mix;
-uniform sampler2D tex : repeat_enable, filter_linear;
-uniform sampler2D gradient;
+render_mode diffuse_burley, specular_schlick_ggx, blend_mix, depth_draw_always, cull_back;
+uniform sampler2D tex : repeat_disable, filter_linear;
 uniform vec3 modulate : source_color;
 uniform vec2 uv_scale = vec2(1.0f);
 uniform vec2 uv_offset;
@@ -29,13 +28,16 @@ vec3 brightness_contrast(vec3 color)
 
 void fragment() {
 	float inv = float(invert);
-	vec3 tex_col = texture(tex, UV * uv_scale + uv_offset).rgb;
-	vec3 inverted_col = vec3(1.0f) - tex_col;
-	vec3 current_col = brightness_contrast((tex_col * (1.0f - inv)) + (inverted_col * inv));
-	float i = 0.5f * (current_col.r + current_col.b);
-	vec3 col = vec3(mix(vec3(1.0f, 1.0f, 1.0f), modulate.rgb * i, 1.0 - current_col.g)) * modulate;
+	vec4 tex_with_alpha = texture(tex, UV * uv_scale + uv_offset);
+	vec3 inverted_col = vec3(1.0f) - tex_with_alpha.rgb;
+	vec3 tex_col = brightness_contrast((tex_with_alpha.rgb * (1.0f - inv)) + (inverted_col * inv));
+	float i = 0.5f * (tex_col.r + tex_col.b);
+	vec3 col = vec3(mix(vec3(1.0f, 1.0f, 1.0f), modulate.rgb * i, 1.0 - tex_col.g)) * modulate;
 
 	ALBEDO = col;
-	//                               V  This offset is here because otherwise there is a seam
-	ALPHA = texture(gradient, UV - vec2(0.01f, 0.0f)).r;
+	ALPHA = tex_with_alpha.a;
 }
+//void light() {
+	// Called for every pixel for every light affecting the CanvasItem.
+	// Uncomment to replace the default light processing function with this one.
+//}

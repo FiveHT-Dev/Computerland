@@ -1,0 +1,14 @@
+[gd_resource type="QuadMesh" load_steps=3 format=3 uid="uid://bi1k81lhg1u3"]
+
+[ext_resource type="Texture2D" uid="uid://q473eo4h1fnl" path="res://common/graphics/textures/particle/32_pcle_smoke_1.png" id="1_eh7dw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3wwej"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_eh7dw")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[resource]
+material = SubResource("StandardMaterial3D_3wwej")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://totrr8q0xc3"]
+[gd_scene load_steps=27 format=3 uid="uid://totrr8q0xc3"]
 
 [ext_resource type="Material" uid="uid://llbw7m8qc55n" path="res://audio/audio_surface_mats/WOOD.tres" id="3_aowxe"]
 [ext_resource type="Shader" path="res://common/graphics/shaders/gdshaders/gray_textured.gdshader" id="5_n0tem"]
@@ -10,6 +10,7 @@
 [ext_resource type="Material" uid="uid://c6ivg6j77n2bg" path="res://common/graphics/shaders/shadermats/smat_graytex_planks_02.tres" id="9_g3cs3"]
 [ext_resource type="Shader" path="res://common/graphics/shaders/gdshaders/gray_textured_gradient.gdshader" id="11_djxxy"]
 [ext_resource type="Texture2D" uid="uid://c6lqsrw5kxpm0" path="res://common/graphics/textures/32/32_graytex_road_1.jpg" id="11_nsc2h"]
+[ext_resource type="Texture2D" uid="uid://dqcloy4xxjwk8" path="res://common/graphics/textures/32/32_graytex_sidewalk_1.jpg" id="12_6d8uc"]
 [ext_resource type="Texture2D" uid="uid://2ohm4uq7dxfu" path="res://common/graphics/textures/32/32_graytex_planks_1.jpg" id="12_fchsv"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_e2hv8"]
@@ -112,6 +113,18 @@ shader_parameter/contrast = 1.0
 shader_parameter/invert = false
 shader_parameter/tex = ExtResource("11_nsc2h")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_047cn"]
+render_priority = 0
+next_pass = ExtResource("6_iy4vp")
+shader = ExtResource("5_n0tem")
+shader_parameter/modulate = Color(0.329158, 0.329158, 0.329158, 1)
+shader_parameter/uv_scale = Vector2(2, 2)
+shader_parameter/uv_offset = null
+shader_parameter/brightness = 1.35
+shader_parameter/contrast = 2.24
+shader_parameter/invert = false
+shader_parameter/tex = ExtResource("12_6d8uc")
+
 [node name="house_tiles_floors" type="Node3D"]
 
 [node name="floor_wood" type="MeshInstance3D" parent="."]
@@ -175,10 +188,20 @@ surface_material_override/0 = SubResource("ShaderMaterial_fxdnq")
 shape = SubResource("ConcavePolygonShape3D_e2hv8")
 
 [node name="floor_road" type="MeshInstance3D" parent="."]
+visible = false
 mesh = ExtResource("8_1d86v")
 surface_material_override/0 = SubResource("ShaderMaterial_pynip")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="floor_road"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="floor_road/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_e2hv8")
+
+[node name="floor_sidewalk" type="MeshInstance3D" parent="."]
+mesh = ExtResource("8_1d86v")
+surface_material_override/0 = SubResource("ShaderMaterial_047cn")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="floor_sidewalk"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor_sidewalk/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_e2hv8")

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bmxyq0d2tq74s"
+path="res://.godot/imported/tile_fence_short_corner.obj-8f1ccdb6981517eaee2f12025973f2b9.mesh"
+
+[deps]
+
+files=["res://.godot/imported/tile_fence_short_corner.obj-8f1ccdb6981517eaee2f12025973f2b9.mesh"]
+
+source_file="res://common/graphics/models/obj/tiles/tile_fence_short_corner.obj"
+dest_files=["res://.godot/imported/tile_fence_short_corner.obj-8f1ccdb6981517eaee2f12025973f2b9.mesh", "res://.godot/imported/tile_fence_short_corner.obj-8f1ccdb6981517eaee2f12025973f2b9.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
