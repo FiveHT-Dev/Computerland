@@ -76,6 +76,20 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1.2722
 [node name="cam_spawn_transform" type="Marker3D" parent="utilities/gates/room_gate2"]
 transform = Transform3D(-1, -1.71586e-08, 8.57224e-08, -8.88178e-16, 0.98055, 0.196271, -8.74228e-08, 0.196271, -0.98055, 1.25688, 0.949458, -2.20937)
 
+[node name="room_gate3" parent="utilities/gates" instance=ExtResource("5_su2q8")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.516336, 0.507222, 24.0623)
+next_room_path = "hub_town/town/sector_f/ts_f2"
+
+[node name="CollisionShape3D" parent="utilities/gates/room_gate3" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0865498, 0, 0.0753174)
+shape = SubResource("BoxShape3D_kgr6u")
+
+[node name="spawn_transform" parent="utilities/gates/room_gate3" index="1"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1.27228, -0.484134, 0.00557232)
+
+[node name="cam_spawn_transform" type="Marker3D" parent="utilities/gates/room_gate3"]
+transform = Transform3D(1.31134e-07, -0.196271, 0.98055, -2.66453e-15, 0.98055, 0.196271, -1, -2.57379e-08, 1.28584e-07, 3.01164, 0.949458, 0.135601)
+
 [node name="player_spawn_pos" type="Marker3D" parent="utilities"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.92322, 1.08905, -1.25739)
 
@@ -212,3 +226,4 @@ transform = Transform3D(-0.4, 0, -3.49691e-08, 0, 0.4, 0, 3.49691e-08, 0, -0.4, 
 
 [editable path="utilities/gates/room_gate"]
 [editable path="utilities/gates/room_gate2"]
+[editable path="utilities/gates/room_gate3"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://d4nttdwk073jh"]
+[gd_scene load_steps=26 format=3 uid="uid://d4nttdwk073jh"]
 
 [ext_resource type="Script" path="res://common/scripts/room.gd" id="1_j0br2"]
 [ext_resource type="Script" path="res://common/resources/loaded_scenes/post_process_list.gd" id="2_qho2l"]
@@ -28,6 +28,9 @@ paths = ["res://ui/post_processing/crt_filter.tscn"]
 size = Vector3(1.21143, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_28vq5"]
+size = Vector3(0.826906, 1, 4.0769)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dywlt"]
 size = Vector3(0.826906, 1, 4.0769)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w3fvn"]
@@ -82,6 +85,20 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1.2722
 
 [node name="cam_spawn_transform" type="Marker3D" parent="utilities/gates/room_gate2"]
 transform = Transform3D(-1, -1.71586e-08, 8.57224e-08, -8.88178e-16, 0.98055, 0.196271, -8.74228e-08, 0.196271, -0.98055, 1.25688, 0.949458, -2.20937)
+
+[node name="room_gate3" parent="utilities/gates" instance=ExtResource("5_7urhk")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -23.9563, 0.507222, 6.89217)
+next_room_path = "hub_town/town/sector_e/ts_e0"
+
+[node name="CollisionShape3D" parent="utilities/gates/room_gate3" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0865498, 0, 0.0753174)
+shape = SubResource("BoxShape3D_dywlt")
+
+[node name="spawn_transform" parent="utilities/gates/room_gate3" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.09731, -0.484134, 0.00557259)
+
+[node name="cam_spawn_transform" type="Marker3D" parent="utilities/gates/room_gate3"]
+transform = Transform3D(-1, -1.71586e-08, 8.57224e-08, -8.88178e-16, 0.98055, 0.196271, -8.74228e-08, 0.196271, -0.98055, -1.10189, 0.949458, -2.20937)
 
 [node name="player_spawn_pos" type="Marker3D" parent="utilities"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0251, 0.0152266, 1.45592)
@@ -216,3 +233,4 @@ skeleton = NodePath("..")
 
 [editable path="utilities/gates/room_gate"]
 [editable path="utilities/gates/room_gate2"]
+[editable path="utilities/gates/room_gate3"]

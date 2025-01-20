@@ -145,10 +145,10 @@ scale_over_velocity_curve = SubResource("CurveTexture_u2prd")
 color_ramp = SubResource("GradientTexture1D_40mbr")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qfpmy"]
-size = Vector3(6.98058, 4.24493, 6.13284)
+size = Vector3(6.98058, 4.25442, 6.13284)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_f5wre"]
-size = Vector3(3.53732, 4.24493, 6.13284)
+size = Vector3(3.53732, 4.38016, 6.13284)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_t00ol"]
 size = Vector3(4.61632, 4.24493, 4.83393)
@@ -172,13 +172,13 @@ draw_pass_1 = ExtResource("6_3syed")
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.36161, 2.11905, 0.0166473)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.36161, 2.1238, 0.0166473)
 shape = SubResource("BoxShape3D_qfpmy")
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.16129, 2.11905, 0.0166473)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.16129, 2.18666, 0.0166473)
 shape = SubResource("BoxShape3D_f5wre")
 
 [node name="StaticBody3D3" type="StaticBody3D" parent="."]

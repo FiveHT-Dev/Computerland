@@ -12,6 +12,8 @@ extends CharacterBody3D
 @onready var character : Node3D = $char_pivot/player_char
 @onready var current_cam_follow_transform : Node3D = $cam_follow_transform_0
 @onready var mat_pchar_glass : StandardMaterial3D = preload("res://common/characters/player_char/mat_pchar_glass.tres")
+@onready var cam_hit_raycast : RayCast3D = $cam_hit_raycast
+@onready var cam_follow_transform_hit : Node3D = $cam_follow_transform_hit
 
 
 var current_triggers : Dictionary = {}
@@ -54,6 +56,11 @@ func _process(delta):
 		elif cft_index < 0:
 			cft_index = 1
 			cft_increment = 1
+	var chr_col = cam_hit_raycast.get_collider()
+	if chr_col != null:
+		cam_follow_transform_hit.global_position = cam_hit_raycast.get_collision_point()
+		current_cam_follow_transform = cam_follow_transform_hit
+	else:
 		current_cam_follow_transform = cam_follow_transforms[cft_index]
 
 func add_trigger(t : Trigger):

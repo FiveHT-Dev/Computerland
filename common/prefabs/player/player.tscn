@@ -78,6 +78,10 @@ gizmo_extents = 1.0
 transform = Transform3D(1, 0, 0, 0, 0.707106, 0.707106, 0, -0.707106, 0.707106, 0, 4.61393, 3.5)
 gizmo_extents = 1.0
 
+[node name="cam_follow_transform_hit" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.939692, 0.34202, 0, -0.34202, 0.939692, 0, 1.61393, 2)
+gizmo_extents = 1.0
+
 [node name="char_pivot" type="Node3D" parent="."]
 transform = Transform3D(0.178, 0, 0, 0, 0.178, 0, 0, 0, 0.178, 0, 0.545388, 0)
 
@@ -126,5 +130,10 @@ bus = &"SFX"
 script = ExtResource("3_4w4ib")
 ray = NodePath("../floor_raycast")
 char_anim = NodePath("../char_pivot/player_char/AnimationPlayer")
+
+[node name="cam_hit_raycast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.61932, 0)
+target_position = Vector3(0, 0, 2)
+hit_from_inside = true
 
 [editable path="char_pivot/player_char"]

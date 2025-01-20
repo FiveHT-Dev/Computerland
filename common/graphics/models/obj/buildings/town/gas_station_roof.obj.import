@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://x00g1nurwvp1"
+path="res://.godot/imported/gas_station_roof.obj-ca981b9e5c1f161e5fe6df1ff6a9b6fc.mesh"
+
+[deps]
+
+files=["res://.godot/imported/gas_station_roof.obj-ca981b9e5c1f161e5fe6df1ff6a9b6fc.mesh"]
+
+source_file="res://common/graphics/models/obj/buildings/town/gas_station_roof.obj"
+dest_files=["res://.godot/imported/gas_station_roof.obj-ca981b9e5c1f161e5fe6df1ff6a9b6fc.mesh", "res://.godot/imported/gas_station_roof.obj-ca981b9e5c1f161e5fe6df1ff6a9b6fc.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

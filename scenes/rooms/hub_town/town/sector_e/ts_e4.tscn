@@ -65,6 +65,7 @@ transform = Transform3D(-1, -1.71586e-08, 8.57224e-08, -8.88178e-16, 0.98055, 0.
 [node name="room_gate2" parent="utilities/gates" instance=ExtResource("5_mm63b")]
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -11.5214, 0.507222, 23.5309)
 next_room_path = "hub_town/town/sector_f/ts_f4"
+next_room_gate_index = 1
 
 [node name="CollisionShape3D" parent="utilities/gates/room_gate2" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0865498, 0, 0.0760803)

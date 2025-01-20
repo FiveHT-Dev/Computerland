@@ -127,7 +127,7 @@ _surfaces = [{
 blend_shape_mode = 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hs03f"]
-size = Vector3(3.61523, 3.65625, 6.01221)
+size = Vector3(3.61523, 4.57825, 6.01221)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wi8ly"]
 size = Vector3(1.1438, 4.46582, 6.01221)
@@ -177,7 +177,7 @@ mesh = SubResource("ArrayMesh_ku806")
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.21387, 1.32813, 0.00902843)
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 1.21387, 1.78913, 0.00902843)
 shape = SubResource("BoxShape3D_hs03f")
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="."]
