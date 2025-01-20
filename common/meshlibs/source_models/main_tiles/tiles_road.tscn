@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://1lvj4yjbvpwy"]
+[gd_scene load_steps=20 format=3 uid="uid://1lvj4yjbvpwy"]
 
 [ext_resource type="ArrayMesh" uid="uid://dch4eupnkm5jt" path="res://common/graphics/models/obj/tiles/tile_floor.obj" id="1_oix1a"]
 [ext_resource type="Shader" path="res://common/graphics/shaders/gdshaders/gray_textured_transparent.gdshader" id="3_1ir6c"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c6lqsrw5kxpm0" path="res://common/graphics/textures/32/32_graytex_road_1.jpg" id="6_nt2sp"]
 [ext_resource type="Texture2D" uid="uid://cjl5i64bl2s4w" path="res://common/graphics/textures/32/32_tex_road_2.jpg" id="7_nxynr"]
 [ext_resource type="Texture2D" uid="uid://sykxdm6tjslp" path="res://common/graphics/textures/32/32_graytex_road_3.jpg" id="8_tjs6f"]
+[ext_resource type="Texture2D" uid="uid://mtwh1e8gfau5" path="res://common/graphics/textures/32/32_graytex_road_4.jpg" id="9_5xu6n"]
 [ext_resource type="Texture2D" uid="uid://clqxkmfkqept" path="res://common/graphics/textures/32/32_graytex_trans_roadedge_1.png" id="12_sk4bo"]
 [ext_resource type="Texture2D" uid="uid://cs14fcnh02h1c" path="res://common/graphics/textures/32/32_graytex_trans_roadcorner_1.png" id="13_adoew"]
 [ext_resource type="Texture2D" uid="uid://qjb8f2sngfov" path="res://common/graphics/textures/32/32_graytex_trans_roadcorner_2.png" id="14_jo2v0"]
@@ -86,9 +87,22 @@ shader_parameter/uv_offset = null
 shader_parameter/invert = false
 shader_parameter/tex = ExtResource("8_tjs6f")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_227dg"]
+render_priority = 0
+next_pass = ExtResource("6_al27v")
+shader = ExtResource("5_cuh8c")
+shader_parameter/modulate = Color(0.368627, 0.368627, 0.368627, 1)
+shader_parameter/brightness = 0.5
+shader_parameter/contrast = 1.0
+shader_parameter/uv_scale = Vector2(2, 2)
+shader_parameter/uv_offset = null
+shader_parameter/invert = false
+shader_parameter/tex = ExtResource("9_5xu6n")
+
 [node name="tiles_road" type="Node3D"]
 
 [node name="road_edge" type="MeshInstance3D" parent="."]
+visible = false
 mesh = ExtResource("1_oix1a")
 surface_material_override/0 = SubResource("ShaderMaterial_v1xat")
 
@@ -145,4 +159,13 @@ surface_material_override/0 = SubResource("ShaderMaterial_ebu87")
 [node name="StaticBody3D" type="StaticBody3D" parent="road_markings"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="road_markings/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_e2hv8")
+
+[node name="road_crosswalk" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_oix1a")
+surface_material_override/0 = SubResource("ShaderMaterial_227dg")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="road_crosswalk"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="road_crosswalk/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_e2hv8")

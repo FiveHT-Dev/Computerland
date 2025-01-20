@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://d4nttdwk073jh"]
+[gd_scene load_steps=25 format=3 uid="uid://d4nttdwk073jh"]
 
 [ext_resource type="Script" path="res://common/scripts/room.gd" id="1_j0br2"]
 [ext_resource type="Script" path="res://common/resources/loaded_scenes/post_process_list.gd" id="2_qho2l"]
@@ -6,12 +6,14 @@
 [ext_resource type="Script" path="res://common/prefabs/util/save_interface/save_interface.gd" id="4_vwna1"]
 [ext_resource type="PackedScene" uid="uid://du1ef6euq7e78" path="res://common/prefabs/util/triggers/room_gate/room_gate.tscn" id="5_7urhk"]
 [ext_resource type="MeshLibrary" uid="uid://kkqsaw6c48dj" path="res://common/meshlibs/libs/invis_wall_tiles.tres" id="7_8tbkx"]
+[ext_resource type="Script" path="res://common/scripts/invis_colliders.gd" id="7_rmyfa"]
 [ext_resource type="MeshLibrary" uid="uid://bg3833rhe17qs" path="res://common/meshlibs/libs/tiles_floors.meshlib" id="8_ck0o7"]
 [ext_resource type="MeshLibrary" uid="uid://y3do2sh0ls3w" path="res://common/meshlibs/libs/tiles_roads.meshlib" id="9_l06cc"]
 [ext_resource type="MeshLibrary" uid="uid://brsm7rsnhh28b" path="res://common/meshlibs/libs/tiles_fences.meshlib" id="10_1xt6u"]
 [ext_resource type="MeshLibrary" uid="uid://b2hiym4l12r66" path="res://common/meshlibs/libs/tiles_walls.meshlib" id="10_kdiie"]
 [ext_resource type="PackedScene" uid="uid://dfpeb01yc2f6h" path="res://common/prefabs/props/buildings/town/house_1_red.tscn" id="11_if7wa"]
 [ext_resource type="PackedScene" uid="uid://dh3xuqc5sh41" path="res://common/prefabs/props/furniture/sign_small.tscn" id="11_kiwpf"]
+[ext_resource type="MeshLibrary" uid="uid://da2gy7qtyjbkn" path="res://common/meshlibs/libs/trees.meshlib" id="11_wh281"]
 [ext_resource type="PackedScene" uid="uid://b70ia6yioq251" path="res://common/prefabs/props/buildings/town/house_2_red.tscn" id="11_xb85t"]
 [ext_resource type="Texture2D" uid="uid://bda1bn0yccrdh" path="res://common/graphics/textures/48/48_tex_glasskidsign_1.png" id="12_vbw6h"]
 [ext_resource type="PackedScene" uid="uid://b06citfr6othp" path="res://common/prefabs/props/buildings/town/house_2_blue.tscn" id="13_ckteq"]
@@ -25,17 +27,8 @@ paths = ["res://ui/post_processing/crt_filter.tscn"]
 [sub_resource type="BoxShape3D" id="BoxShape3D_coni5"]
 size = Vector3(1.21143, 1, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_p8k16"]
-size = Vector3(1, 7.0611, 28.4808)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_m0ja2"]
-size = Vector3(1, 5.9873, 16.444)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_v8kiq"]
-size = Vector3(1, 7.0611, 28.614)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_grdb0"]
-size = Vector3(49.9541, 5.05444, 1.37199)
+[sub_resource type="BoxShape3D" id="BoxShape3D_28vq5"]
+size = Vector3(0.826906, 1, 4.0769)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w3fvn"]
 albedo_texture = ExtResource("12_vbw6h")
@@ -76,8 +69,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.09731, -0.484134, 0.005572
 [node name="cam_spawn_transform" type="Marker3D" parent="utilities/gates/room_gate"]
 transform = Transform3D(-1, -1.71586e-08, 8.57224e-08, -8.88178e-16, 0.98055, 0.196271, -8.74228e-08, 0.196271, -0.98055, -1.10189, 0.949458, -2.20937)
 
+[node name="room_gate2" parent="utilities/gates" instance=ExtResource("5_7urhk")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 24.1251, 0.507222, 6.89217)
+next_room_path = "hub_town/town/sector_e/ts_e2"
+
+[node name="CollisionShape3D" parent="utilities/gates/room_gate2" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0865498, 0, 0.0753174)
+shape = SubResource("BoxShape3D_28vq5")
+
+[node name="spawn_transform" parent="utilities/gates/room_gate2" index="1"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1.27228, -0.484134, 0.00557232)
+
+[node name="cam_spawn_transform" type="Marker3D" parent="utilities/gates/room_gate2"]
+transform = Transform3D(-1, -1.71586e-08, 8.57224e-08, -8.88178e-16, 0.98055, 0.196271, -8.74228e-08, 0.196271, -0.98055, 1.25688, 0.949458, -2.20937)
+
 [node name="player_spawn_pos" type="Marker3D" parent="utilities"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.92322, 1.08905, -1.25739)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0251, 0.0152266, 1.45592)
 
 [node name="camera" type="Node" parent="."]
 
@@ -93,51 +100,10 @@ cell_size = Vector3(0.8, 0.4, 0.8)
 cell_center_y = false
 cell_scale = 0.4
 data = {
-"cells": PackedInt32Array(30, 6, 1441792, 30, 7, 1441792, 30, 8, 1441792, 30, 9, 1441792, 30, 10, 1441792, 65505, 6, 1441792, 65505, 7, 1441792, 65505, 8, 1441792, 65505, 9, 1441792, 65505, 10, 1441792)
+"cells": PackedInt32Array(30, 6, 1441792, 30, 7, 1441792, 30, 8, 1441792, 30, 9, 1441792, 30, 10, 1441792, 65505, 6, 1441792, 65505, 7, 1441792, 65505, 8, 1441792, 65505, 9, 1441792, 65505, 10, 1441792, 65506, 11, 0, 65505, 11, 0, 65506, 12, 0, 65506, 13, 0, 65506, 14, 0, 65506, 15, 0, 65506, 16, 0, 65506, 17, 0, 65506, 18, 0, 65506, 19, 0, 65506, 20, 0, 65506, 21, 0, 65506, 22, 0, 65506, 23, 0, 65506, 24, 0, 65506, 25, 0, 65506, 26, 0, 65506, 27, 0, 65506, 28, 0, 65506, 29, 0, 65507, 29, 0, 65508, 29, 0, 65509, 29, 0, 65510, 29, 0, 65511, 29, 0, 65512, 29, 0, 65513, 29, 0, 65514, 29, 0, 65515, 29, 0, 65516, 29, 0, 65517, 29, 0, 65518, 29, 0, 65519, 29, 0, 65520, 29, 0, 65521, 29, 0, 65522, 29, 0, 65523, 29, 0, 65524, 29, 0, 65525, 29, 0, 65526, 29, 0, 65527, 29, 0, 65528, 29, 0, 65529, 29, 0, 65530, 29, 0, 65531, 29, 0, 65532, 29, 0, 65533, 29, 0, 65534, 29, 0, 65535, 29, 0, 0, 29, 0, 1, 29, 0, 2, 29, 0, 3, 29, 0, 4, 29, 0, 5, 29, 0, 6, 29, 0, 7, 29, 0, 8, 29, 0, 9, 29, 0, 10, 29, 0, 11, 29, 0, 12, 29, 0, 13, 29, 0, 14, 29, 0, 15, 29, 0, 16, 29, 0, 17, 29, 0, 18, 29, 0, 19, 29, 0, 20, 29, 0, 21, 29, 0, 22, 29, 0, 23, 29, 0, 24, 29, 0, 25, 29, 0, 26, 29, 0, 27, 29, 0, 28, 29, 0, 29, 29, 0, 29, 28, 0, 29, 27, 0, 29, 26, 0, 29, 25, 0, 29, 24, 0, 29, 23, 0, 29, 22, 0, 29, 21, 0, 29, 20, 0, 29, 19, 0, 29, 18, 0, 29, 17, 0, 29, 16, 0, 29, 15, 0, 29, 14, 0, 29, 13, 0, 29, 12, 0, 29, 11, 0, 30, 11, 0, 30, 5, 0, 29, 5, 0, 29, 4, 0, 29, 3, 0, 29, 2, 0, 29, 1, 0, 29, 0, 0, 29, 65535, 0, 29, 65534, 0, 29, 65533, 0, 29, 65532, 0, 29, 65531, 0, 29, 65530, 0, 29, 65529, 0, 29, 65528, 0, 29, 65527, 0, 29, 65526, 0, 29, 65525, 0, 29, 65524, 0, 29, 65523, 0, 29, 65522, 0, 29, 65521, 0, 29, 65520, 0, 29, 65519, 0, 29, 65518, 0, 29, 65517, 0, 29, 65516, 0, 29, 65515, 0, 29, 65514, 0, 29, 65513, 0, 29, 65512, 0, 29, 65511, 0, 29, 65510, 0, 29, 65509, 0, 29, 65508, 0, 29, 65507, 0, 29, 65506, 0, 27, 65506, 0, 26, 65506, 0, 25, 65506, 0, 24, 65506, 0, 23, 65506, 0, 22, 65506, 0, 21, 65506, 0, 20, 65506, 0, 19, 65506, 0, 18, 65506, 0, 17, 65506, 0, 28, 65506, 0, 16, 65506, 0, 15, 65506, 0, 14, 65506, 0, 13, 65506, 0, 12, 65506, 0, 11, 65506, 0, 10, 65506, 0, 9, 65506, 0, 8, 65506, 0, 7, 65506, 0, 6, 65506, 0, 5, 65506, 0, 4, 65506, 0, 3, 65506, 0, 2, 65506, 0, 1, 65506, 0, 0, 65506, 0, 65535, 65506, 0, 65534, 65506, 0, 65533, 65506, 0, 65532, 65506, 0, 65531, 65506, 0, 65530, 65506, 0, 65529, 65506, 0, 65528, 65506, 0, 65527, 65506, 0, 65526, 65506, 0, 65525, 65506, 0, 65524, 65506, 0, 65523, 65506, 0, 65522, 65506, 0, 65521, 65506, 0, 65520, 65506, 0, 65519, 65506, 0, 65518, 65506, 0, 65517, 65506, 0, 65516, 65506, 0, 65515, 65506, 0, 65514, 65506, 0, 65513, 65506, 0, 65512, 65506, 0, 65511, 65506, 0, 65510, 65506, 0, 65509, 65506, 0, 65508, 65506, 0, 65507, 65506, 0, 65506, 65506, 0, 65506, 65507, 0, 65506, 65508, 0, 65506, 65509, 0, 65506, 65510, 0, 65506, 65511, 0, 65506, 65512, 0, 65506, 65513, 0, 65506, 65514, 0, 65506, 65515, 0, 65506, 65516, 0, 65506, 65517, 0, 65506, 65518, 0, 65506, 65519, 0, 65506, 65520, 0, 65506, 65521, 0, 65506, 65522, 0, 65506, 65523, 0, 65506, 65524, 0, 65506, 65525, 0, 65506, 65526, 0, 65506, 65527, 0, 65506, 65528, 0, 65506, 65529, 0, 65506, 65530, 0, 65506, 65531, 0, 65506, 65532, 0, 65506, 65533, 0, 65506, 5, 0, 65506, 4, 0, 65506, 3, 0, 65506, 2, 0, 65506, 1, 0, 65506, 0, 0, 65506, 65535, 0, 65506, 65534, 0, 65505, 5, 0)
 }
+script = ExtResource("7_rmyfa")
 metadata/_editor_floor_ = Vector3(0, 0, 0)
-
-[node name="StaticBody3D" type="StaticBody3D" parent="room/gridmaps/invis_colliders"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.5098, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="room/gridmaps/invis_colliders/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.71555, -9.42804)
-shape = SubResource("BoxShape3D_p8k16")
-
-[node name="StaticBody3D2" type="StaticBody3D" parent="room/gridmaps/invis_colliders"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.5098, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="room/gridmaps/invis_colliders/StaticBody3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.40283, 16.4165)
-shape = SubResource("BoxShape3D_m0ja2")
-
-[node name="StaticBody3D3" type="StaticBody3D" parent="room/gridmaps/invis_colliders"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5047, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="room/gridmaps/invis_colliders/StaticBody3D3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.315, -9.50925)
-shape = SubResource("BoxShape3D_v8kiq")
-
-[node name="StaticBody3D4" type="StaticBody3D" parent="room/gridmaps/invis_colliders"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5047, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="room/gridmaps/invis_colliders/StaticBody3D4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09082, 16.4165)
-shape = SubResource("BoxShape3D_m0ja2")
-
-[node name="StaticBody3D5" type="StaticBody3D" parent="room/gridmaps/invis_colliders"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5047, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="room/gridmaps/invis_colliders/StaticBody3D5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.4771, 1.26379, 23.9526)
-shape = SubResource("BoxShape3D_grdb0")
-
-[node name="StaticBody3D6" type="StaticBody3D" parent="room/gridmaps/invis_colliders"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5047, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="room/gridmaps/invis_colliders/StaticBody3D6"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.4771, 0.763428, -23.6606)
-shape = SubResource("BoxShape3D_grdb0")
 
 [node name="floor" type="GridMap" parent="room/gridmaps"]
 mesh_library = ExtResource("8_ck0o7")
@@ -177,17 +143,14 @@ data = {
 "cells": PackedInt32Array(65527, 4, 0, 65526, 4, 0, 65525, 4, 0, 65524, 4, 0, 65523, 4, 0, 65522, 4, 0, 65521, 4, 0, 65520, 4, 1441793, 65520, 3, 1441792, 65520, 2, 1441792, 65520, 1, 1441792, 65520, 0, 1441792, 65520, 65535, 1441792, 65520, 65534, 1441792, 65520, 65533, 1441792, 65520, 65532, 1441792, 65520, 65531, 1441792, 65520, 65530, 1441792, 65520, 65529, 1441792, 65520, 65528, 1441792, 65520, 65527, 1441792, 65520, 65526, 1441792, 65520, 65525, 1441792, 65520, 65524, 1441792, 65520, 65523, 1441792, 65520, 65522, 1441792, 65520, 65521, 1441792, 65520, 65520, 1441792, 65520, 65519, 1441792, 65520, 65518, 1441792, 65520, 65517, 1441792, 65520, 65516, 1441792, 65520, 65515, 1441792, 65520, 65514, 1441792, 65520, 65513, 1441792, 65520, 65512, 1441792, 65520, 65511, 1441792, 65520, 65510, 1441792, 65520, 65509, 1441792, 65520, 65508, 1441792, 65520, 65507, 1441792, 65529, 4, 0, 65530, 4, 0, 65531, 4, 0, 65532, 4, 0, 65533, 4, 0, 65534, 4, 0, 65535, 4, 1, 65519, 65506, 1048576, 65535, 3, 1048576, 65535, 2, 1048576, 65535, 1, 1048576, 65535, 0, 1048576, 65535, 65535, 1048576, 65535, 65534, 1048576, 65535, 65533, 1048576, 65535, 65532, 1048576, 65535, 65531, 1048576, 65535, 65530, 1048576, 65535, 65529, 1048576, 65535, 65528, 1048576, 65535, 65527, 1048576, 65535, 65526, 1048576, 65535, 65525, 1048576, 65535, 65524, 1048576, 65535, 65523, 1048576, 65535, 65522, 1048576, 65535, 65521, 1048576, 65535, 65520, 1048576, 65535, 65519, 1048576, 65535, 65518, 1048576, 65535, 65517, 1048576, 65535, 65516, 1048576, 65535, 65515, 1048576, 65535, 65514, 1048576, 65535, 65513, 1048576, 65535, 65512, 1048576, 65535, 65511, 1048576, 65535, 65510, 1048576, 65535, 65509, 1048576, 65535, 65508, 1048576, 65535, 65507, 1048576, 65535, 65506, 1048576, 0, 4, 0, 1, 4, 0, 2, 4, 0, 3, 4, 0, 4, 4, 0, 6, 4, 0, 7, 4, 0, 8, 4, 0, 9, 4, 1, 10, 4, 0, 11, 4, 0, 12, 4, 0, 13, 4, 0, 15, 4, 0, 16, 4, 0, 17, 4, 0, 18, 4, 0, 19, 4, 1, 19, 3, 1048576, 19, 2, 1048576, 19, 1, 1048576, 19, 0, 1048576, 19, 65535, 1048576, 19, 65534, 1048576, 19, 65533, 1048576, 19, 65532, 1048576, 19, 65531, 1048576, 19, 65530, 1048576, 19, 65529, 1048576, 19, 65528, 1048576, 19, 65527, 1048576, 19, 65526, 1048576, 19, 65525, 1048576, 19, 65524, 1048576, 19, 65523, 1048576, 19, 65522, 1048576, 19, 65521, 1048576, 19, 65520, 1048577, 18, 65520, 655360, 17, 65520, 655360, 16, 65520, 655360, 15, 65520, 655360, 14, 65520, 655360, 13, 65520, 655360, 12, 65520, 655360, 11, 65520, 655360, 10, 65520, 655360, 9, 65520, 1048577, 8, 65520, 655360, 7, 65520, 655360, 6, 65520, 655360, 5, 65520, 655360, 4, 65520, 655360, 3, 65520, 655360, 2, 65520, 655360, 1, 65520, 655360, 0, 65520, 655360, 9, 3, 1048576, 9, 2, 1048576, 9, 1, 1048576, 9, 0, 1048576, 9, 65535, 1048576, 9, 65534, 1048576, 9, 65533, 1048576, 9, 65532, 1048576, 9, 65531, 1048576, 9, 65530, 1048576, 9, 65529, 1048576, 9, 65528, 1048576, 9, 65527, 1048576, 9, 65526, 1048576, 9, 65525, 1048576, 9, 65524, 1048576, 9, 65523, 1048576, 9, 65522, 1048576, 9, 65521, 1048576)
 }
 
-[node name="house_2" parent="room/gridmaps" instance=ExtResource("11_xb85t")]
-transform = Transform3D(-1.74846e-08, 0, 0.4, 0, 0.4, 0, -0.4, 0, -1.74846e-08, -10.1448, 0, 14.6826)
-
-[node name="House1" parent="room/gridmaps" instance=ExtResource("11_if7wa")]
-transform = Transform3D(5.24537e-08, 0, 0.4, 0, 0.4, 0, -0.4, 0, 5.24537e-08, -10.4108, 7.7486e-07, 19.1253)
-
-[node name="house_3" parent="room/gridmaps" instance=ExtResource("13_ckteq")]
-transform = Transform3D(-1.74846e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.74846e-08, -17.8218, 0, 17.3184)
-
-[node name="house_4" parent="room/gridmaps" instance=ExtResource("14_dg5h6")]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -19.4849, 0, 12.1142)
+[node name="trees" type="GridMap" parent="room/gridmaps"]
+mesh_library = ExtResource("11_wh281")
+cell_size = Vector3(1.5, 1.5, 1.5)
+cell_center_y = false
+cell_scale = 0.75
+data = {
+"cells": PackedInt32Array(8, 65530, 0, 1, 65532, 0, 13, 1, 0, 11, 65534, 0, 14, 65530, 0, 12, 65524, 0, 5, 65525, 0, 2, 65522, 0, 65534, 65525, 0, 65531, 65529, 0, 65533, 65522, 0, 65524, 65525, 0, 65527, 65528, 0, 65527, 65523, 0, 65522, 65529, 0, 65522, 65522, 0, 65529, 65532, 0, 65533, 65533, 0, 65521, 1, 0, 65528, 6, 0, 65530, 6, 0, 65532, 6, 0, 0, 6, 0, 2, 6, 0, 4, 6, 0, 8, 6, 0, 10, 6, 0, 12, 6, 0, 14, 6, 0, 65525, 6, 0, 65532, 13, 0, 2, 12, 0, 8, 14, 0, 11, 10, 0, 12, 13, 0)
+}
 
 [node name="contents" type="Node" parent="room"]
 
@@ -235,4 +198,21 @@ skeleton = NodePath("../../gridmaps")
 transform = Transform3D(-0.4, 0, -3.49691e-08, 0, 0.4, 0, 3.49691e-08, 0, -0.4, -15.6776, 0, -3.53478)
 skeleton = NodePath("..")
 
+[node name="house_7" parent="room/contents" instance=ExtResource("11_xb85t")]
+transform = Transform3D(-1.74846e-08, 0, 0.4, 0, 0.4, 0, -0.4, 0, -1.74846e-08, -10.1448, 0, 14.6826)
+skeleton = NodePath("..")
+
+[node name="House6" parent="room/contents" instance=ExtResource("11_if7wa")]
+transform = Transform3D(5.24537e-08, 0, 0.4, 0, 0.4, 0, -0.4, 0, 5.24537e-08, -10.4108, 7.7486e-07, 19.1253)
+skeleton = NodePath("../../gridmaps")
+
+[node name="house_8" parent="room/contents" instance=ExtResource("13_ckteq")]
+transform = Transform3D(-1.74846e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.74846e-08, -17.8218, 0, 17.3184)
+skeleton = NodePath("..")
+
+[node name="house_9" parent="room/contents" instance=ExtResource("14_dg5h6")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -19.4849, 0, 12.1142)
+skeleton = NodePath("..")
+
 [editable path="utilities/gates/room_gate"]
+[editable path="utilities/gates/room_gate2"]
