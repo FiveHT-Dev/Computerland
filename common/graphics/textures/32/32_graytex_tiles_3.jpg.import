@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lkn66s02h87g"
-path.s3tc="res://.godot/imported/32_graytex_leaves_1.jpg-0eee4b21d10264d0782cf19b7fe5f2f3.s3tc.ctex"
+uid="uid://hroqf86bk4se"
+path.s3tc="res://.godot/imported/32_graytex_tiles_3.jpg-96848684e819d3bd10b0ff3cf2d441bb.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://common/graphics/textures/32/32_graytex_leaves_1.jpg"
-dest_files=["res://.godot/imported/32_graytex_leaves_1.jpg-0eee4b21d10264d0782cf19b7fe5f2f3.s3tc.ctex"]
+source_file="res://common/graphics/textures/32/32_graytex_tiles_3.jpg"
+dest_files=["res://.godot/imported/32_graytex_tiles_3.jpg-96848684e819d3bd10b0ff3cf2d441bb.s3tc.ctex"]
 
 [params]
 

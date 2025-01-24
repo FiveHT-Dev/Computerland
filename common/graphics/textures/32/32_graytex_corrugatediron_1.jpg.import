@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lkn66s02h87g"
-path.s3tc="res://.godot/imported/32_graytex_leaves_1.jpg-0eee4b21d10264d0782cf19b7fe5f2f3.s3tc.ctex"
+uid="uid://bg8u0knce4xxp"
+path.s3tc="res://.godot/imported/32_graytex_corrugatediron_1.jpg-dcfd21fae364f3851b44e85b592a5c2d.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://common/graphics/textures/32/32_graytex_leaves_1.jpg"
-dest_files=["res://.godot/imported/32_graytex_leaves_1.jpg-0eee4b21d10264d0782cf19b7fe5f2f3.s3tc.ctex"]
+source_file="res://common/graphics/textures/32/32_graytex_corrugatediron_1.jpg"
+dest_files=["res://.godot/imported/32_graytex_corrugatediron_1.jpg-dcfd21fae364f3851b44e85b592a5c2d.s3tc.ctex"]
 
 [params]
 

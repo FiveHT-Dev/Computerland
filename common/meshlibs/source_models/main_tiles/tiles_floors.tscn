@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://totrr8q0xc3"]
+[gd_scene load_steps=32 format=3 uid="uid://totrr8q0xc3"]
 
 [ext_resource type="Material" uid="uid://llbw7m8qc55n" path="res://audio/audio_surface_mats/WOOD.tres" id="3_aowxe"]
 [ext_resource type="Shader" path="res://common/graphics/shaders/gdshaders/gray_textured.gdshader" id="5_n0tem"]
@@ -12,6 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://c6lqsrw5kxpm0" path="res://common/graphics/textures/32/32_graytex_road_1.jpg" id="11_nsc2h"]
 [ext_resource type="Texture2D" uid="uid://dqcloy4xxjwk8" path="res://common/graphics/textures/32/32_graytex_sidewalk_1.jpg" id="12_6d8uc"]
 [ext_resource type="Texture2D" uid="uid://2ohm4uq7dxfu" path="res://common/graphics/textures/32/32_graytex_planks_1.jpg" id="12_fchsv"]
+[ext_resource type="Texture2D" uid="uid://hroqf86bk4se" path="res://common/graphics/textures/32/32_graytex_tiles_3.jpg" id="13_yep5w"]
+[ext_resource type="Shader" path="res://common/graphics/shaders/gdshaders/textured.gdshader" id="14_1rw3p"]
+[ext_resource type="Texture2D" uid="uid://bagpelejymo1b" path="res://common/graphics/textures/32/32_tex_tiles_4.jpg" id="15_ojvht"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_e2hv8"]
 data = PackedVector3Array(-1, 2, -1, 1, 2, -1, -1, 2, 1, -1, 2, 1, 1, 2, -1, 1, 2, 1)
@@ -125,6 +128,30 @@ shader_parameter/contrast = 2.24
 shader_parameter/invert = false
 shader_parameter/tex = ExtResource("12_6d8uc")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e84a0"]
+render_priority = 0
+next_pass = ExtResource("6_iy4vp")
+shader = ExtResource("5_n0tem")
+shader_parameter/modulate = Color(0.560955, 0.560955, 0.560955, 1)
+shader_parameter/uv_scale = Vector2(2, 2)
+shader_parameter/uv_offset = null
+shader_parameter/brightness = 0.94
+shader_parameter/contrast = 1.73
+shader_parameter/invert = false
+shader_parameter/tex = ExtResource("13_yep5w")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1mgic"]
+render_priority = 0
+next_pass = ExtResource("6_iy4vp")
+shader = ExtResource("14_1rw3p")
+shader_parameter/modulate = Color(0.67069, 0.67069, 0.67069, 1)
+shader_parameter/brightness = 0.65
+shader_parameter/contrast = 2.04
+shader_parameter/uv_scale = Vector2(2, 2)
+shader_parameter/uv_offset = null
+shader_parameter/invert = false
+shader_parameter/tex = ExtResource("15_ojvht")
+
 [node name="house_tiles_floors" type="Node3D"]
 
 [node name="floor_wood" type="MeshInstance3D" parent="."]
@@ -198,10 +225,30 @@ surface_material_override/0 = SubResource("ShaderMaterial_pynip")
 shape = SubResource("ConcavePolygonShape3D_e2hv8")
 
 [node name="floor_sidewalk" type="MeshInstance3D" parent="."]
+visible = false
 mesh = ExtResource("8_1d86v")
 surface_material_override/0 = SubResource("ShaderMaterial_047cn")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="floor_sidewalk"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="floor_sidewalk/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_e2hv8")
+
+[node name="floor_tiles_2" type="MeshInstance3D" parent="."]
+visible = false
+mesh = ExtResource("8_1d86v")
+surface_material_override/0 = SubResource("ShaderMaterial_e84a0")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="floor_tiles_2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor_tiles_2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_e2hv8")
+
+[node name="floor_tiles_3" type="MeshInstance3D" parent="."]
+mesh = ExtResource("8_1d86v")
+surface_material_override/0 = SubResource("ShaderMaterial_1mgic")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="floor_tiles_3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor_tiles_3/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_e2hv8")

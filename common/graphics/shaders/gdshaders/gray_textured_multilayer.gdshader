@@ -40,7 +40,7 @@ void fragment() {
 	vec4 tex_col_top = texture(tex_top, UV * uv_scale_top + uv_offset_top);
 	vec3 inverted_col_bottom = vec3(1.0f) - tex_col_bottom;
 	vec3 inverted_col_top = vec3(1.0f) - tex_col_top.rgb;
-	
+
 	vec3 current_col_b = brightness_contrast((tex_col_bottom * (1.0f - inv_b)) + (inverted_col_bottom * inv_b), brightness_bottom, contrast_bottom);
 	vec3 current_col_t = brightness_contrast((tex_col_top.rgb * (1.0f - inv_t)) + (inverted_col_top * inv_t), brightness_top, contrast_top);
 	float i_b = 0.5f * (current_col_b.r + current_col_b.b);
