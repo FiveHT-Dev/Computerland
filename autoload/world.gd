@@ -1,0 +1,9 @@
+extends Node
+
+enum Location{
+	SCHOOL,
+	NEIGHBOURHOOD,
+	GAS_STATION,
+	GROCERY_STORE,
+	LIBRARY
+}

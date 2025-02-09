@@ -1,0 +1,92 @@
+[gd_scene load_steps=13 format=3 uid="uid://bpc83vd6j4jso"]
+
+[ext_resource type="Script" path="res://common/scripts/room.gd" id="1_1fpvi"]
+[ext_resource type="Script" path="res://common/resources/loaded_scenes/post_process_list.gd" id="2_0qfan"]
+[ext_resource type="Environment" uid="uid://cy8r8k02r24o5" path="res://common/graphics/environments/env_town.tres" id="3_ffi20"]
+[ext_resource type="Script" path="res://common/prefabs/util/save_interface/save_interface.gd" id="4_tg865"]
+[ext_resource type="MeshLibrary" uid="uid://kkqsaw6c48dj" path="res://common/meshlibs/libs/invis_wall_tiles.tres" id="5_5e8y7"]
+[ext_resource type="Script" path="res://common/scripts/invis_colliders.gd" id="6_m4505"]
+[ext_resource type="MeshLibrary" uid="uid://bg3833rhe17qs" path="res://common/meshlibs/libs/tiles_floors.meshlib" id="7_cyejq"]
+[ext_resource type="MeshLibrary" uid="uid://y3do2sh0ls3w" path="res://common/meshlibs/libs/tiles_roads.meshlib" id="8_bivc5"]
+[ext_resource type="MeshLibrary" uid="uid://b2hiym4l12r66" path="res://common/meshlibs/libs/tiles_walls.meshlib" id="9_xqnee"]
+[ext_resource type="MeshLibrary" uid="uid://brsm7rsnhh28b" path="res://common/meshlibs/libs/tiles_fences.meshlib" id="10_nqamx"]
+[ext_resource type="MeshLibrary" uid="uid://da2gy7qtyjbkn" path="res://common/meshlibs/libs/trees.meshlib" id="11_pc7m7"]
+
+[sub_resource type="Resource" id="Resource_0whd2"]
+script = ExtResource("2_0qfan")
+paths = ["res://ui/post_processing/crt_filter.tscn"]
+
+[node name="TemplateRoom" type="Node3D"]
+script = ExtResource("1_1fpvi")
+post_process_list = SubResource("Resource_0whd2")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("3_ffi20")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(0.705179, 0.709029, 0, -0.394584, 0.392441, 0.830839, 0.589089, -0.58589, 0.556513, 0, 0, 0)
+
+[node name="utilities" type="Node" parent="."]
+
+[node name="SaveInterface" type="Node" parent="utilities"]
+script = ExtResource("4_tg865")
+path = "rooms/devroom"
+
+[node name="gates" type="Node" parent="utilities"]
+
+[node name="player_spawn_pos" type="Marker3D" parent="utilities"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.92322, 1.08905, -1.25739)
+
+[node name="camera" type="Node" parent="."]
+
+[node name="audio" type="Node" parent="."]
+
+[node name="room" type="Node" parent="."]
+
+[node name="gridmaps" type="Node" parent="room"]
+
+[node name="invis_colliders" type="GridMap" parent="room/gridmaps"]
+mesh_library = ExtResource("5_5e8y7")
+cell_size = Vector3(0.8, 0.4, 0.8)
+cell_center_y = false
+cell_scale = 0.4
+script = ExtResource("6_m4505")
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="roads" type="GridMap" parent="room/gridmaps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+mesh_library = ExtResource("8_bivc5")
+cell_size = Vector3(0.8, 0.4, 0.8)
+cell_center_y = false
+cell_scale = 0.4
+metadata/_editor_floor_ = Vector3(0, -2, 0)
+
+[node name="walls" type="GridMap" parent="room/gridmaps"]
+transform = Transform3D(0.99923, 0, 0, 0, 0.99923, 0, 0, 0, 0.99923, 0, 0, 0)
+mesh_library = ExtResource("9_xqnee")
+cell_size = Vector3(0.8, 0.4, 0.8)
+cell_center_y = false
+cell_scale = 0.4
+
+[node name="fences" type="GridMap" parent="room/gridmaps"]
+transform = Transform3D(1.00122, 0, 0, 0, 1.00122, 0, 0, 0, 1.00122, 0, 0, 0)
+mesh_library = ExtResource("10_nqamx")
+cell_size = Vector3(0.8, 0.4, 0.8)
+cell_center_y = false
+cell_scale = 0.4
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="trees" type="GridMap" parent="room/gridmaps"]
+mesh_library = ExtResource("11_pc7m7")
+cell_size = Vector3(1.5, 1.5, 1.5)
+cell_center_y = false
+cell_scale = 0.75
+
+[node name="floor" type="GridMap" parent="room/gridmaps"]
+mesh_library = ExtResource("7_cyejq")
+cell_size = Vector3(1.5, 1.5, 1.5)
+cell_center_y = false
+cell_scale = 0.75
+metadata/_editor_floor_ = Vector3(0, -2, 0)
+
+[node name="contents" type="Node" parent="room"]

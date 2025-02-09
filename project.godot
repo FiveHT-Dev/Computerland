@@ -17,6 +17,8 @@ config/features=PackedStringArray("4.3", "Forward Plus")
 [autoload]
 
 Manager="*res://autoload/manager.gd"
+World="*res://autoload/world.gd"
+Init="*res://autoload/init.gd"
 
 [display]
 

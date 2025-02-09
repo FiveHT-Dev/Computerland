@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://bis1wiee64s3j"]
+
+[ext_resource type="Script" path="res://scenes/battle/battle.gd" id="1_kxfom"]
+[ext_resource type="PackedScene" uid="uid://cgsvtd6sr1gn6" path="res://ui/scenes/battle_ui/battle_ui.tscn" id="2_3f2ai"]
+[ext_resource type="PackedScene" uid="uid://ollllldaokle" path="res://common/prefabs/battle/enemies/enemies.tscn" id="3_m5ttp"]
+[ext_resource type="PackedScene" uid="uid://bquwio0kfkpfa" path="res://common/prefabs/battle/enemy_selector.tscn" id="3_sksxq"]
+[ext_resource type="Script" path="res://common/prefabs/battle/battle_camera.gd" id="5_lfeuk"]
+
+[node name="BattleTown" type="Node3D"]
+script = ExtResource("1_kxfom")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="battle_ui" parent="." instance=ExtResource("2_3f2ai")]
+
+[node name="enemies" parent="." instance=ExtResource("3_m5ttp")]
+
+[node name="enemy_selector" parent="." instance=ExtResource("3_sksxq")]
+
+[node name="battle_camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.973806, 0.227382, 0, -0.227382, 0.973806, 0, 4.20001, 8.484)
+script = ExtResource("5_lfeuk")
+
+[connection signal="select" from="enemy_selector" to="." method="_on_enemy_selector_select"]

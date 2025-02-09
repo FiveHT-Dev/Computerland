@@ -1,0 +1,301 @@
+[gd_scene load_steps=23 format=3 uid="uid://cgsvtd6sr1gn6"]
+
+[ext_resource type="Script" path="res://ui/scenes/battle_ui/battle_ui.gd" id="1_djvx6"]
+[ext_resource type="Theme" uid="uid://dvetrtn65767g" path="res://ui/themes/in_game_ui_main.theme" id="1_fel3y"]
+[ext_resource type="Texture2D" uid="uid://crmd7ukbs2fmb" path="res://ui/graphics/img_progressbar_64x16_bottom.png" id="3_wq3lq"]
+[ext_resource type="Texture2D" uid="uid://y8qbo7umhu41" path="res://ui/graphics/img_progressbar_64x16_top.png" id="4_u3p4v"]
+[ext_resource type="Script" path="res://ui/scenes/battle_ui/hp_mana_tpb.gd" id="5_g8ie5"]
+[ext_resource type="Texture2D" uid="uid://dlvvyqhv0hbdf" path="res://ui/graphics/hp_icon.png" id="6_7j465"]
+[ext_resource type="Texture2D" uid="uid://bljeoxw2nd7ju" path="res://ui/graphics/mana_icon.png" id="7_tdhvf"]
+[ext_resource type="Texture2D" uid="uid://fj5asovnb7xw" path="res://ui/graphics/def_icon.png" id="8_251x7"]
+
+[sub_resource type="Gradient" id="Gradient_rbjq3"]
+offsets = PackedFloat32Array(0, 0.280822, 0.589041, 0.863014, 1)
+colors = PackedColorArray(0.46, 0.46, 0.46, 1, 0.31, 0.31, 0.31, 1, 0.65, 0.65, 0.65, 1, 0.93, 0.93, 0.93, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_k0mop"]
+noise_type = 2
+seed = 34
+frequency = 0.1
+fractal_type = 0
+metadata/_preview_in_3d_space_ = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nj48b"]
+width = 60
+height = 14
+in_3d_space = true
+color_ramp = SubResource("Gradient_rbjq3")
+noise = SubResource("FastNoiseLite_k0mop")
+
+[sub_resource type="Gradient" id="Gradient_4y0s4"]
+offsets = PackedFloat32Array(0, 0.280822, 0.589041, 0.863014, 1)
+colors = PackedColorArray(0.255985, 0.317091, 0.628966, 1, 0.214955, 0.235838, 0.552563, 1, 0.54133, 0.522706, 0.95775, 1, 0.936135, 0.808897, 0.961194, 1, 0.7635, 1, 0.67, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fn1tf"]
+noise_type = 3
+seed = 362
+frequency = 0.1
+offset = Vector3(0, 0, 1)
+fractal_octaves = 3
+metadata/_preview_in_3d_space_ = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xk5vq"]
+width = 60
+height = 14
+in_3d_space = true
+color_ramp = SubResource("Gradient_4y0s4")
+noise = SubResource("FastNoiseLite_fn1tf")
+
+[sub_resource type="Gradient" id="Gradient_nkbxy"]
+offsets = PackedFloat32Array(0, 0.205479, 0.506849, 0.780822, 1)
+colors = PackedColorArray(0.408329, 0.408329, 0.408329, 1, 0.314316, 0.314316, 0.314316, 1, 0.737193, 0.737193, 0.737193, 1, 0.497474, 0.497474, 0.497474, 1, 0.728822, 0.728822, 0.728822, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_p1p1g"]
+gradient = SubResource("Gradient_nkbxy")
+width = 60
+height = 14
+
+[sub_resource type="Gradient" id="Gradient_iktw3"]
+offsets = PackedFloat32Array(0, 0.280822, 0.589041, 0.863014, 1)
+colors = PackedColorArray(0.46, 0.46, 0.46, 1, 0.31, 0.31, 0.31, 1, 0.65, 0.65, 0.65, 1, 0.93, 0.93, 0.93, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5ecxj"]
+noise_type = 2
+frequency = 0.1
+fractal_type = 0
+metadata/_preview_in_3d_space_ = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gwv4x"]
+width = 60
+height = 14
+in_3d_space = true
+color_ramp = SubResource("Gradient_iktw3")
+noise = SubResource("FastNoiseLite_5ecxj")
+
+[sub_resource type="Gradient" id="Gradient_w7d08"]
+offsets = PackedFloat32Array(0, 0.280822, 0.589041, 0.863014, 1)
+colors = PackedColorArray(0.255985, 0.317091, 0.628966, 1, 0.214955, 0.235838, 0.552563, 1, 0.54133, 0.522706, 0.95775, 1, 0.936135, 0.808897, 0.961194, 1, 0.7635, 1, 0.67, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6lgdl"]
+noise_type = 3
+seed = 5
+frequency = 0.1
+offset = Vector3(0, 0, 1)
+fractal_octaves = 3
+metadata/_preview_in_3d_space_ = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vwcuy"]
+width = 60
+height = 14
+in_3d_space = true
+color_ramp = SubResource("Gradient_w7d08")
+noise = SubResource("FastNoiseLite_6lgdl")
+
+[node name="battle_ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_fel3y")
+script = ExtResource("1_djvx6")
+
+[node name="minigames" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="player_stats" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="player_stats_panel" type="Panel" parent="player_stats"]
+offset_left = 352.0
+offset_top = 170.0
+offset_right = 443.0
+offset_bottom = 251.0
+
+[node name="player_name" type="RichTextLabel" parent="player_stats/player_stats_panel"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 4.0
+offset_right = 81.0
+offset_bottom = 44.0
+theme_override_font_sizes/normal_font_size = 10
+text = "PLAYER NAME"
+
+[node name="health_tpb" type="TextureProgressBar" parent="player_stats/player_stats_panel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 21.0
+offset_right = 84.0
+offset_bottom = 37.0
+value = 80.0
+texture_under = ExtResource("3_wq3lq")
+texture_over = ExtResource("4_u3p4v")
+texture_progress = SubResource("NoiseTexture2D_nj48b")
+texture_progress_offset = Vector2(2, 1)
+script = ExtResource("5_g8ie5")
+slice_noise_over_time = true
+tint_progress_based_on_value = true
+tint_start = Color(1, 0, 0, 1)
+tint_end = Color(0, 1, 0, 1)
+
+[node name="health_icon" type="TextureRect" parent="player_stats/player_stats_panel/health_tpb"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -16.0
+offset_right = -1.0
+offset_bottom = 15.0
+texture = ExtResource("6_7j465")
+expand_mode = 1
+
+[node name="mana_tpb" type="TextureProgressBar" parent="player_stats/player_stats_panel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 40.0
+offset_right = 84.0
+offset_bottom = 56.0
+value = 59.0
+texture_under = ExtResource("3_wq3lq")
+texture_over = ExtResource("4_u3p4v")
+texture_progress = SubResource("NoiseTexture2D_xk5vq")
+texture_progress_offset = Vector2(2, 1)
+script = ExtResource("5_g8ie5")
+slice_noise_over_time = true
+
+[node name="mana_icon" type="TextureRect" parent="player_stats/player_stats_panel/mana_tpb"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -16.0
+offset_right = -1.0
+offset_bottom = 15.0
+texture = ExtResource("7_tdhvf")
+expand_mode = 1
+
+[node name="defense_tpb" type="TextureProgressBar" parent="player_stats/player_stats_panel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 59.0
+offset_right = 84.0
+offset_bottom = 75.0
+value = 59.0
+texture_under = ExtResource("3_wq3lq")
+texture_over = ExtResource("4_u3p4v")
+texture_progress = SubResource("GradientTexture2D_p1p1g")
+texture_progress_offset = Vector2(2, 1)
+script = ExtResource("5_g8ie5")
+
+[node name="def_icon" type="TextureRect" parent="player_stats/player_stats_panel/defense_tpb"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -16.0
+offset_right = -1.0
+offset_bottom = 15.0
+texture = ExtResource("8_251x7")
+expand_mode = 1
+
+[node name="enemy_stats" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="enemy_stats_panel" type="Panel" parent="enemy_stats"]
+visible = false
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 93.0
+offset_bottom = 83.0
+
+[node name="enemy_name" type="RichTextLabel" parent="enemy_stats/enemy_stats_panel"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 4.0
+offset_right = 100.0
+offset_bottom = 44.0
+theme_override_font_sizes/normal_font_size = 10
+text = "ENEMY NAME"
+
+[node name="health_tpb" type="TextureProgressBar" parent="enemy_stats/enemy_stats_panel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 21.0
+offset_right = 84.0
+offset_bottom = 37.0
+value = 100.0
+texture_under = ExtResource("3_wq3lq")
+texture_over = ExtResource("4_u3p4v")
+texture_progress = SubResource("NoiseTexture2D_gwv4x")
+texture_progress_offset = Vector2(2, 1)
+script = ExtResource("5_g8ie5")
+slice_noise_over_time = true
+tint_progress_based_on_value = true
+tint_start = Color(1, 0, 0, 1)
+tint_end = Color(0, 1, 0, 1)
+
+[node name="health_icon" type="TextureRect" parent="enemy_stats/enemy_stats_panel/health_tpb"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -16.0
+offset_right = -1.0
+offset_bottom = 15.0
+texture = ExtResource("6_7j465")
+expand_mode = 1
+
+[node name="mana_tpb" type="TextureProgressBar" parent="enemy_stats/enemy_stats_panel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 40.0
+offset_right = 84.0
+offset_bottom = 56.0
+min_value = 100.0
+value = 100.0
+texture_under = ExtResource("3_wq3lq")
+texture_over = ExtResource("4_u3p4v")
+texture_progress = SubResource("NoiseTexture2D_vwcuy")
+texture_progress_offset = Vector2(2, 1)
+script = ExtResource("5_g8ie5")
+slice_noise_over_time = true
+
+[node name="mana_icon" type="TextureRect" parent="enemy_stats/enemy_stats_panel/mana_tpb"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -16.0
+offset_right = -1.0
+offset_bottom = 15.0
+texture = ExtResource("7_tdhvf")
+expand_mode = 1
+
+[node name="defense_tpb" type="TextureProgressBar" parent="enemy_stats/enemy_stats_panel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 59.0
+offset_right = 84.0
+offset_bottom = 75.0
+value = 59.0
+texture_under = ExtResource("3_wq3lq")
+texture_over = ExtResource("4_u3p4v")
+texture_progress = SubResource("GradientTexture2D_p1p1g")
+texture_progress_offset = Vector2(2, 1)
+script = ExtResource("5_g8ie5")
+
+[node name="def_icon" type="TextureRect" parent="enemy_stats/enemy_stats_panel/defense_tpb"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -16.0
+offset_right = -1.0
+offset_bottom = 15.0
+texture = ExtResource("8_251x7")
+expand_mode = 1

@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://bquwio0kfkpfa"]
+
+[ext_resource type="Script" path="res://common/prefabs/battle/enemy_selector.gd" id="1_iauht"]
+[ext_resource type="PackedScene" uid="uid://nel7st8cyxdc" path="res://common/graphics/models/gltf/enemy_selector.glb" id="2_t55q6"]
+[ext_resource type="Material" uid="uid://dfqxbkouhed33" path="res://common/prefabs/battle/mat_es_rim.tres" id="3_vpeht"]
+[ext_resource type="Material" uid="uid://b1kga8wlif4nx" path="res://common/prefabs/battle/mat_es_pad.tres" id="4_fj67a"]
+[ext_resource type="Material" uid="uid://cg64wwsn4tpu2" path="res://common/prefabs/battle/mat_es_sphere.tres" id="5_cs3g6"]
+
+[node name="enemy_selector" type="Node3D"]
+script = ExtResource("1_iauht")
+rim_selected_color = Color(0, 0.392157, 0.556863, 1)
+pad_selected_color = Color(0, 0.443137, 0.509804, 0.509804)
+sphere_selected_color = Color(0.65098, 1, 1, 1)
+rim_hovered_color = Color(0.56, 0.56, 0.56, 1)
+pad_hovered_color = Color(0.51, 0.51, 0.51, 0.509804)
+sphere_hovered_color = Color(1, 1, 1, 1)
+
+[node name="enemy_selector" parent="." instance=ExtResource("2_t55q6")]
+
+[node name="rim" parent="enemy_selector" index="0"]
+surface_material_override/0 = ExtResource("3_vpeht")
+
+[node name="pad" parent="enemy_selector" index="1"]
+surface_material_override/0 = ExtResource("4_fj67a")
+
+[node name="sphere" parent="enemy_selector" index="2"]
+surface_material_override/0 = ExtResource("5_cs3g6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[editable path="enemy_selector"]

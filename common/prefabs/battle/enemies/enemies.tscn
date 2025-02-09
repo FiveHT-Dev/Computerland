@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://ollllldaokle"]
+
+[ext_resource type="Script" path="res://common/prefabs/battle/battle_enemies.gd" id="1_ika65"]
+
+[node name="enemies" type="Node3D"]
+script = ExtResource("1_ika65")
+
+[node name="enemy_slot_1" type="Marker3D" parent="."]
+
+[node name="enemy_slot_0" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+
+[node name="enemy_slot_2" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)

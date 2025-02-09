@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://1lvj4yjbvpwy"]
+[gd_scene load_steps=25 format=3 uid="uid://1lvj4yjbvpwy"]
 
 [ext_resource type="ArrayMesh" uid="uid://dch4eupnkm5jt" path="res://common/graphics/models/obj/tiles/tile_floor.obj" id="1_oix1a"]
 [ext_resource type="Shader" path="res://common/graphics/shaders/gdshaders/gray_textured_transparent.gdshader" id="3_1ir6c"]
@@ -8,8 +8,11 @@
 [ext_resource type="Texture2D" uid="uid://cjl5i64bl2s4w" path="res://common/graphics/textures/32/32_tex_road_2.jpg" id="7_nxynr"]
 [ext_resource type="Texture2D" uid="uid://sykxdm6tjslp" path="res://common/graphics/textures/32/32_graytex_road_3.jpg" id="8_tjs6f"]
 [ext_resource type="Texture2D" uid="uid://mtwh1e8gfau5" path="res://common/graphics/textures/32/32_graytex_road_4.jpg" id="9_5xu6n"]
+[ext_resource type="Material" uid="uid://dk3n2h3t67yx3" path="res://audio/audio_surface_mats/DIRT.tres" id="12_mya2d"]
 [ext_resource type="Texture2D" uid="uid://clqxkmfkqept" path="res://common/graphics/textures/32/32_graytex_trans_roadedge_1.png" id="12_sk4bo"]
+[ext_resource type="Texture2D" uid="uid://xtvdc0ei7k3d" path="res://common/graphics/textures/32/32_graytex_trans_path_1.png" id="12_udsvw"]
 [ext_resource type="Texture2D" uid="uid://cs14fcnh02h1c" path="res://common/graphics/textures/32/32_graytex_trans_roadcorner_1.png" id="13_adoew"]
+[ext_resource type="Texture2D" uid="uid://dbjhelixs8mb1" path="res://common/graphics/textures/32/32_graytex_trans_path_2.png" id="14_it0f4"]
 [ext_resource type="Texture2D" uid="uid://qjb8f2sngfov" path="res://common/graphics/textures/32/32_graytex_trans_roadcorner_2.png" id="14_jo2v0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v1xat"]
@@ -99,6 +102,30 @@ shader_parameter/uv_offset = null
 shader_parameter/invert = false
 shader_parameter/tex = ExtResource("9_5xu6n")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bnnsr"]
+render_priority = 0
+next_pass = ExtResource("12_mya2d")
+shader = ExtResource("3_1ir6c")
+shader_parameter/modulate = Color(0.600722, 0.538475, 0.407282, 1)
+shader_parameter/uv_scale = Vector2(2, 2)
+shader_parameter/uv_offset = null
+shader_parameter/brightness = 0.5
+shader_parameter/contrast = 1.0
+shader_parameter/invert = false
+shader_parameter/tex = ExtResource("12_udsvw")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_26dqa"]
+render_priority = 0
+next_pass = ExtResource("12_mya2d")
+shader = ExtResource("3_1ir6c")
+shader_parameter/modulate = Color(0.600722, 0.538475, 0.407282, 1)
+shader_parameter/uv_scale = Vector2(2, 2)
+shader_parameter/uv_offset = null
+shader_parameter/brightness = 0.5
+shader_parameter/contrast = 1.0
+shader_parameter/invert = false
+shader_parameter/tex = ExtResource("14_it0f4")
+
 [node name="tiles_road" type="Node3D"]
 
 [node name="road_edge" type="MeshInstance3D" parent="."]
@@ -162,10 +189,30 @@ surface_material_override/0 = SubResource("ShaderMaterial_ebu87")
 shape = SubResource("ConcavePolygonShape3D_e2hv8")
 
 [node name="road_crosswalk" type="MeshInstance3D" parent="."]
+visible = false
 mesh = ExtResource("1_oix1a")
 surface_material_override/0 = SubResource("ShaderMaterial_227dg")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="road_crosswalk"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="road_crosswalk/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_e2hv8")
+
+[node name="road_path_straight" type="MeshInstance3D" parent="."]
+visible = false
+mesh = ExtResource("1_oix1a")
+surface_material_override/0 = SubResource("ShaderMaterial_bnnsr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="road_path_straight"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="road_path_straight/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_e2hv8")
+
+[node name="road_path_corner" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_oix1a")
+surface_material_override/0 = SubResource("ShaderMaterial_26dqa")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="road_path_corner"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="road_path_corner/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_e2hv8")
